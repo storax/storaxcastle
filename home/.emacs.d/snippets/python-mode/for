@@ -1,0 +1,7 @@
+# -*- utf-8 mode: snippet -*-
+# name: for loop
+# key: for
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+for ${1:var} in ${2:collection}:
+    $0

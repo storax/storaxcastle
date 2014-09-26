@@ -1,0 +1,26 @@
+# -*- utf-8 mode: snippet -*-
+# contributor: Mads D. Kristensen <madsdk@gmail.com>
+# name: prop
+# key: prop
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# contributor: David Zuber <zuber.david@gmx.de>
+# --
+@property
+def ${1:prop}(self):
+    """Return $1
+
+    :returns: $1
+    :rtype: $2
+    :raises: ${3:None}
+    """
+    return self._$1
+
+@$1.setter
+def $1(self, ${4:value}):
+    """Set $1
+
+    :param $4: The value for $1
+    :type $4: $2
+    :raises: ${5:None}
+    """
+    self._$1 = $4$0

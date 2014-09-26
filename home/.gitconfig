@@ -1,0 +1,10 @@
+[user]
+	name = David Zuber
+	email = zuber.david@gmx.de
+[core]
+	editor = emacs
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status

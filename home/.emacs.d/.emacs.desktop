@@ -1,0 +1,18 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Fri Sep 26 23:20:38 2014
+;; Desktop file format version 206
+;; Emacs version 24.3.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("print" "conne" "print" "self.no" "nod" "QNEConnec" "QNECon" "self.por" "node" "portwi" "qnen" "PortWi" "itemList" "get" "margin" "print"))
+(setq regexp-search-ring '("def" "def.*" "(.*)" "def.*" "world\\.sa\\..*(.*?)" "world.sa" "world.sa.*(.*?)" "world.sa.*(.*?))" "world.sa.*(.*?)" "world.sa.*(.*)\\" "world.sa.*(.*)" "'.*'" "'.+'" "'.*'"))
+(setq register-alist (list (list 49 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook (list 'lambda '() (list 'set-marker mk nil (get-buffer " *temp*")))) mk))))
+(setq file-name-history '("/home/dzuber/.homesick/repos/storaxcastle/bla.py" "/home/dzuber/.homesick/repos/storaxcastle/.homesick_subdir" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/node.qss" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnodeseditor.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnenodewidget.py" "o:/Maya2014/Scripts/python/iconChooser.py" "p:/IMAGESTORM/2013/IS_Pipeline/05_production/sandboxes/dzuber/src/istools/settimeline/settimeline.py" "o:/Maya2014/Scripts/python/objexporter.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnewidget.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qneconnectionitem.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnodeseditor.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnenodewidget.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qneconnectionitem.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/grapheditor/gemainwin.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qneconnectionitem.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnenodewidget.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qneconnectionitem.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qneportwidget.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnewidget.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnodeseditor.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnemainwindow.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/core/qnenode.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/core/errors.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/core/qneconnection.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/core/qneport.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnenodewidget.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/gui/qnenodelayout.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/core/qnenode.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/assembler3/core/__init__.py" "c:/Users/David.Zuber/Documents/repos/Processing/src/playground/test.py"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
