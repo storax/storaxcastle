@@ -6,6 +6,9 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
 
+# folder of all of your autocomplete functions
+fpath=(~/.zsh-completions $fpath)
+
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
