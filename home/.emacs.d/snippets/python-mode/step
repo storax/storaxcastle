@@ -1,8 +1,0 @@
-# -*- coding: utf-8 -*-
-# name: step
-# contributor: David Zuber
-# key: step
-# --
-@step(u'${1:Steptext in feature}')
-def ${2:name}(step, $3):
-    $4

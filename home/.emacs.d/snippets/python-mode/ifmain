@@ -1,7 +1,0 @@
-# -*- utf-8 mode: snippet -*-
-# name: if __name__ == '__main__': ...
-# key: ifmain
-# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
-# --
-if __name__ == '__main__':
-    $0
