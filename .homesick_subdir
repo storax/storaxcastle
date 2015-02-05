@@ -3,3 +3,4 @@
 .gconf/apps/guake/style/background
 .emacs.d
 .config/autostart
+.config/xfce4/terminal

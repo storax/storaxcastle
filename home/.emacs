@@ -82,8 +82,6 @@
 ;;Show Linenumbers
 (global-linum-mode 1)
 
-(require 'autopair)
-
 (require 'auto-complete-config)
 (ac-config-default)
 
