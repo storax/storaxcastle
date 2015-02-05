@@ -2,3 +2,4 @@
 .gconf/apps/guake/general
 .gconf/apps/guake/style/background
 .emacs.d
+.config/autostart
