@@ -4,3 +4,4 @@
 .emacs.d
 .config/autostart
 .config/xfce4/terminal
+.bash-completions
