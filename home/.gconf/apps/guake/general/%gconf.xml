@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <gconf>
-	<entry name="use_login_shell" mtime="1423000113" type="bool" value="true"/>
 	<entry name="compat_delete" mtime="1423000099" type="string">
 		<stringvalue>delete-sequence</stringvalue>
 	</entry>
