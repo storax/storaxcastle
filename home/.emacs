@@ -21,6 +21,7 @@
 (defvar storax/packages '(auto-complete
 			  dabbrev
 			  elpy
+			  expand-region
 			  flymake-cursor
 			  fold-dwim
                           magit
@@ -106,6 +107,7 @@
 
 
 ;;;; Modes
+(global-subword-mode 1)
 (smartparens-global-mode 1)
 (ido-mode t)
 (elpy-enable)
@@ -127,6 +129,10 @@
 
 ;;Magit
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;;Expand Region
+(global-set-key (kbd "C-.") 'er/expand-region)
+(global-set-key (kbd "C-,") 'er/contract-region)
 
 ;;Copy Searchresult with M-w
 (defun hack-isearch-kill ()
