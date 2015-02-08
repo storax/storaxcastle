@@ -126,7 +126,7 @@
 (define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
 
 ;;Magit
-(global-set-key (kbd "C-x C-g") 'magit-status)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;;Copy Searchresult with M-w
 (defun hack-isearch-kill ()
