@@ -24,6 +24,7 @@
 			  flymake-cursor
 			  fold-dwim
                           magit
+			  magit-gitflow
                           marmalade
                           org
                           smartparens
@@ -208,3 +209,5 @@
 (add-hook 'find-file-hook 'cwebber/safer-flymake-find-file-hook)
 (add-hook 'auto-save-hook 'my-desktop-save)
 (add-hook 'python-mode-hook         'hs-minor-mode)
+(require 'magit-gitflow)
+(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
