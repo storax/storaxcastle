@@ -125,6 +125,9 @@
 (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
 (define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
 
+;;Magit
+(global-set-key (kbd "C-x C-g") 'magit-status)
+
 ;;Copy Searchresult with M-w
 (defun hack-isearch-kill ()
    "Push current matching string into kill ring."
