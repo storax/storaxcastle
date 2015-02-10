@@ -18,6 +18,11 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Develop/Python/
 source /usr/local/bin/virtualenvwrapper.sh
 
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+pyenv virtualenvwrapper
+
 source ~/antigen.zsh
 
 # Load the oh-my-zsh's library.
