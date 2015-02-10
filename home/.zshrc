@@ -16,8 +16,10 @@ source ~/.bash-completions/*
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Develop/Python/
-source /usr/local/bin/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 
+# build python with enable shared
+export PYTHON_CONFIGURE_OPTS="--enable-shared"
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
