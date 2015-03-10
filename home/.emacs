@@ -18,8 +18,7 @@
 
 
 
-(defvar storax/packages '(auto-complete
-			  dabbrev
+(defvar storax/packages '(dabbrev
 			  elpy
 			  expand-region
 			  flymake-cursor
@@ -45,12 +44,13 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
+
+(setq custom-file "~/.emacs-custom.el")
+(load custom-file)
+
+
 
 ;;;; Window and Visual Settings
-;; Fullscreen
-(custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
-
 ;; No spashscreen, scratch message and default python mode
 (setq inhibit-splash-screen t
       initial-scratch-message nil
@@ -111,9 +111,13 @@
 (smartparens-global-mode 1)
 (ido-mode t)
 (elpy-enable)
+(setq elpy-modules '(elpy-module-eldoc
+		     elpy-module-flymake
+		     elpy-module-pyvenv
+		     elpy-module-highlight-indentation
+		     elpy-module-yasnippet
+		     elpy-module-sane-defaults))
 (global-linum-mode 1)
-(require 'auto-complete-config)
-(ac-config-default)
 (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
@@ -214,9 +218,44 @@
 
 
 
+;;;; Yas-Snippet Menu
+;;; use popup menu for yas-choose-value
+(require 'popup)
+
+;; add some shotcuts in popup menu mode
+(define-key popup-menu-keymap (kbd "M-n") 'popup-next)
+(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+(define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
+
+(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
+  (when (featurep 'popup)
+    (popup-menu*
+     (mapcar
+      (lambda (choice)
+        (popup-make-item
+         (or (and display-fn (funcall display-fn choice))
+             choice)
+         :value choice))
+      choices)
+     :prompt prompt
+     ;; start isearch mode immediately
+     :isearch t
+     )))
+
+(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
+
+
 ;;;; Hooks
 (add-hook 'find-file-hook 'cwebber/safer-flymake-find-file-hook)
 (add-hook 'auto-save-hook 'my-desktop-save)
 (add-hook 'python-mode-hook         'hs-minor-mode)
 (require 'magit-gitflow)
 (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
