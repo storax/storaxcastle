@@ -127,6 +127,11 @@
 
 
 ;;;; Key bindings
+;;Python mode move around code blocks
+(global-set-key (kbd "M-p") 'python-nav-backward-block)
+(global-set-key (kbd "M-n") 'python-nav-forward-block)
+
+
 ;;C-Tab für autovervollstaendigung
 (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
 (define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
