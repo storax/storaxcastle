@@ -19,7 +19,7 @@ export PROJECT_HOME=$HOME/Develop/Python/
 # source /usr/local/bin/virtualenvwrapper.sh
 
 # build python with enable shared
-export PYTHON_CONFIGURE_OPTS="--enable-shared"
+export PYTHON_CONFIGURE_OPTS="--enable-unicode=ucs4 --enable-shared"
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
