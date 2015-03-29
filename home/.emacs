@@ -27,6 +27,7 @@
 			  magit-gitflow
                           marmalade
                           org
+			  popup
                           smartparens
                           yaml-mode
                           zenburn-theme)
