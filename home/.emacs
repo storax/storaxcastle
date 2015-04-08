@@ -19,7 +19,7 @@
 (defvar storax/packages '(dabbrev
 			  elpy
 			  expand-region
-			  flymake-cursor
+			  flycheck
 			  fold-dwim
 			  helm
                           magit
@@ -109,7 +109,6 @@
 (ido-mode t)
 (elpy-enable)
 (setq elpy-modules '(elpy-module-eldoc
-		     elpy-module-flymake
 		     elpy-module-pyvenv
 		     elpy-module-highlight-indentation
 		     elpy-module-yasnippet
@@ -121,6 +120,7 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 (setq yas/indent-line nil)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;;; Key bindings
 ;;Python mode move around code blocks
