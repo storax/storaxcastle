@@ -1,11 +1,9 @@
-
 ;;;; Header
 (require 'cl)
 
 (setq user-full-name "David Zuber"
       user-mail-address "zuber.david@gmx.de")
 
-
 ;;;; Packages
 (load "package")
 (package-initialize)
@@ -23,9 +21,11 @@
 			  expand-region
 			  flymake-cursor
 			  fold-dwim
+			  helm
                           magit
 			  magit-gitflow
                           marmalade
+			  multi-term
                           org
 			  popup
                           smartparens
@@ -50,7 +50,6 @@
 (load custom-file)
 
 
-
 ;;;; Window and Visual Settings
 ;; No spashscreen, scratch message and default python mode
 (setq inhibit-splash-screen t
@@ -89,7 +88,6 @@
 (when (not indicate-empty-lines)
   (toggle-indicate-empty-lines))
 
-
 ;;;; Custom Variables
 ;; Tab with to 4, no tabs
 (setq tab-width 4
@@ -98,7 +96,6 @@
 ;; No backup files
 (setq make-backup-files nil)
 
-
 ;;;; Aliases
 ;; answer with y instead of yes
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -106,7 +103,6 @@
  ;; replace a string in the current region
 (defalias 'rs 'replace-string)
 
-
 ;;;; Modes
 (global-subword-mode 1)
 (smartparens-global-mode 1)
@@ -126,7 +122,6 @@
 (yas-global-mode 1)
 (setq yas/indent-line nil)
 
-
 ;;;; Key bindings
 ;;Python mode move around code blocks
 (global-set-key (kbd "M-p") 'python-nav-backward-block)
@@ -200,7 +195,6 @@
 (global-set-key [M-down] 'move-text-down)
 
 
-
 ;;;; Save Desktop
 (require 'desktop)
   (desktop-save-mode 1)
@@ -210,7 +204,6 @@
     (if (eq (desktop-owner) (emacs-pid))
         (desktop-save desktop-dirname)))
 
-
 ;;;; Safe flymake find file hook
 (defun cwebber/safer-flymake-find-file-hook ()
   "Don't barf if we can't open this flymake file"
@@ -223,7 +216,6 @@
         "Couldn't enable flymake; permission denied on %s" flymake-filename)))))
 
 
-
 ;;;; Yas-Snippet Menu
 ;;; use popup menu for yas-choose-value
 (require 'popup)
@@ -252,7 +244,6 @@
 
 (setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
 
-
 ;;;; Hooks
 (add-hook 'find-file-hook 'cwebber/safer-flymake-find-file-hook)
 (add-hook 'auto-save-hook 'my-desktop-save)
@@ -265,3 +256,27 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+;;;; Helm
+(require 'helm-config)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-h C-i") 'helm-imenu)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
+
+;; Edit 
+(defun edit-dotemacs (p)
+  (interactive "P")
+  (find-file-existing "~/.emacs")
+  (widen)
+  (helm-imenu)
+  (if p (init-narrow-to-section)))
+
+;; Display sections in imenu
+(defun imenu-elisp-sections ()
+  (setq imenu-prev-index-position-function nil)
+  (add-to-list 'imenu-generic-expression '("Sections" "^;;;; \\(.+\\)$" 1) t))
+ 
+(add-hook 'emacs-lisp-mode-hook 'imenu-elisp-sections)
