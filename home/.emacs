@@ -280,3 +280,14 @@
   (add-to-list 'imenu-generic-expression '("Sections" "^;;;; \\(.+\\)$" 1) t))
  
 (add-hook 'emacs-lisp-mode-hook 'imenu-elisp-sections)
+
+;; Faster Python Imenu
+; user this simpler regexp to get candidates
+(setq fastpy-imenu-generic-expression `((nil "\\(^\\s-*\\(def\\|class\\)\\s-[^:]*\\)" 1)))
+; function for overwriting the neccessary functions/vars
+(defun setup-fast-pyimenu ()
+  (setq imenu-prev-index-position-function nil)
+  (setq imenu-generic-expression fastpy-imenu-generic-expression)
+  (setq imenu-create-index-function imenu-default-create-index-function))
+; add hook to python mode so we overwrite the imenu logic
+(add-hook 'python-mode-hook 'setup-fast-pyimenu)
