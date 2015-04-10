@@ -205,6 +205,7 @@
         (desktop-save desktop-dirname)))
 
 ;;;; Safe flymake find file hook
+(require 'flymake)
 (defun cwebber/safer-flymake-find-file-hook ()
   "Don't barf if we can't open this flymake file"
   (let ((flymake-filename
@@ -267,16 +268,15 @@
 (global-set-key (kbd "C-x b") 'helm-mini)
 
 ;; Edit 
-(defun edit-dotemacs (p)
-  (interactive "P")
+(defun edit-dotemacs ()
+  (interactive)
   (find-file-existing "~/.emacs")
   (widen)
-  (helm-imenu)
-  (if p (init-narrow-to-section)))
+  (helm-imenu))
 
-;; Display sections in imenu
+;; Display sections in imenu for elisp mode
 (defun imenu-elisp-sections ()
   (setq imenu-prev-index-position-function nil)
   (add-to-list 'imenu-generic-expression '("Sections" "^;;;; \\(.+\\)$" 1) t))
- 
+
 (add-hook 'emacs-lisp-mode-hook 'imenu-elisp-sections)
