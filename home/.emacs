@@ -16,7 +16,8 @@
 
 
 
-(defvar storax/packages '(dabbrev
+(defvar storax/packages '(ace-jump-mode
+			  dabbrev
 			  elpy
 			  expand-region
 			  flycheck
@@ -194,6 +195,10 @@
 (global-set-key [M-up] 'move-text-up)
 (global-set-key [M-down] 'move-text-down)
 
+;; Ace Jump Mode
+(define-key global-map (kbd "C-c C-SPC") 'ace-jump-word-mode)
+(define-key global-map (kbd "C-c C-c C-SPC") 'ace-jump-char-mode)
+(define-key global-map (kbd "C-c C-c C-c C-SPC") 'ace-jump-line-mode)
 
 ;;;; Save Desktop
 (require 'desktop)
