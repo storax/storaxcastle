@@ -196,9 +196,9 @@
 (global-set-key [M-down] 'move-text-down)
 
 ;; Ace Jump Mode
-(define-key global-map (kbd "C-c C-SPC") 'ace-jump-word-mode)
-(define-key global-map (kbd "C-c C-c C-SPC") 'ace-jump-char-mode)
-(define-key global-map (kbd "C-c C-c C-c C-SPC") 'ace-jump-line-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-word-mode)
+(define-key global-map (kbd "C-c c SPC") 'ace-jump-char-mode)
+(define-key global-map (kbd "C-c c c SPC") 'ace-jump-line-mode)
 
 ;;;; Save Desktop
 (require 'desktop)
