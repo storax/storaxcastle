@@ -97,6 +97,9 @@
 ;; No backup files
 (setq make-backup-files nil)
 
+;; Magit Readme buffer
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;;;; Aliases
 ;; answer with y instead of yes
 (defalias 'yes-or-no-p 'y-or-n-p)
