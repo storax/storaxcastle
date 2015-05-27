@@ -14,11 +14,10 @@
 
 (setq package-archive-enable-alist '(("melpa" deft magit)))
 
-
-
 (defvar storax/packages '(ace-jump-mode
 			  dabbrev
 			  elpy
+			  epc
 			  expand-region
 			  flycheck
 			  fold-dwim
@@ -46,6 +45,8 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
+(add-to-list 'load-path "~/.emacs.d/emacs-webkit")
+(require 'webkit)
 
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
