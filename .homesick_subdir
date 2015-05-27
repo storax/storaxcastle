@@ -6,3 +6,4 @@
 .config/xfce4/terminal
 .bash-completions
 .virtualenvs
+.config/pip
