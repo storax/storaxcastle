@@ -7,3 +7,4 @@
 .bash-completions
 .virtualenvs
 .config/pip
+.ssh
