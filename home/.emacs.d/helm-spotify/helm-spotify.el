@@ -122,7 +122,6 @@
 ;;;###autoload
 (defun helm-spotify ()
   "Bring up a Spotify search interface in helm."
-  (shell-command "pgrep \"spotify\" || spotify &")
   (interactive)
   (helm :sources '(helm-source-spotify-track-search)
 	:buffer "*helm-spotify*"))
@@ -132,6 +131,11 @@
   "Toggle Spotify Shuffling."
   (interactive)
   (spotify-toggle-shuffle))
+
+(defun start-spotify ()
+  "Start spotify."
+  (interactive)
+  (shell-command "pgrep \"spotify\" > /dev/null || spotify &"))
 
 (provide 'helm-spotify)
 ;;; helm-spotify.el ends here
