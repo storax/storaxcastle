@@ -45,9 +45,6 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
-(add-to-list 'load-path "~/.emacs.d/emacs-webkit")
-(require 'webkit)
-
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
 
