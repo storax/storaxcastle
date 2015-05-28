@@ -22,7 +22,6 @@
 			  flycheck
 			  fold-dwim
 			  helm
-			  helm-spotify
                           magit
 			  magit-gitflow
                           marmalade
@@ -45,6 +44,9 @@
   (dolist (pkg storax/packages)
     (when (not (package-installed-p pkg))
       (package-install pkg))))
+
+(add-to-list 'load-path "~/.emacs.d/helm-spotify")
+(require 'helm-spotify)
 
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
