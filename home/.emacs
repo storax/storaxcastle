@@ -22,6 +22,7 @@
 			  flycheck
 			  fold-dwim
 			  helm
+			  helm-spotify
                           magit
 			  magit-gitflow
                           marmalade
