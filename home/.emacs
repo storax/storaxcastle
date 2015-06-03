@@ -1,12 +1,11 @@
 ;;;; Header
 (require 'cl)
-
-(setq user-full-name "David Zuber"
+s Cetq user-full-name "David Zuber"
       user-mail-address "zuber.david@gmx.de")
 
-;;;; Packages
+;;;; Packac S
 (load "package")
-(package-initialize)
+(package-initializeC-c )
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
@@ -16,16 +15,19 @@
 
 (defvar storax/packages '(ace-jump-mode
 			  dabbrev
+			  drag-stuff
 			  elpy
 			  epc
 			  expand-region
 			  flycheck
 			  fold-dwim
 			  helm
+			  iedit
                           magit
 			  magit-gitflow
                           marmalade
 			  multi-term
+			  multiple-cursors
                           org
 			  popup
                           smartparens
@@ -47,6 +49,10 @@
 
 (add-to-list 'load-path "~/.emacs.d/helm-spotify")
 (require 'helm-spotify)
+
+;; Sets iedit keybindings
+(require 'iedit)
+(require 'multiple-cursors)
 
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
@@ -160,44 +166,19 @@
 (global-set-key (kbd "C-c C-e") 'fold-dwim-show-all)
 (load-library "hideshow")
 
+;;Multiple Cursors
+(global-set-key (kbd "C-c m") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c C->") 'mc/skip-next-like-this)
+(global-set-key (kbd "C-M->") 'mc/unmark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/skip-previous-like-this)
+(global-set-key (kbd "C-M-<") 'mc/unmark-previous-like-this)
+(global-set-key (kbd "C-c C-c C-<") 'mc/mark-all-like-this)
+
 ;; MOVE TEXT AROUND
-(defun move-text-internal (arg)
-  (cond
-   ((and mark-active transient-mark-mode)
-    (if (> (point) (mark))
-        (exchange-point-and-mark))
-    (let ((column (current-column))
-          (text (delete-and-extract-region (point) (mark))))
-      (forward-line arg)
-      (move-to-column column t)
-      (set-mark (point))
-      (insert text)
-      (exchange-point-and-mark)
-      (setq deactivate-mark nil)))
-   (t
-    (let ((column (current-column)))
-      (beginning-of-line)
-      (when (or (> arg 0) (not (bobp)))
-        (forward-line)
-        (when (or (< arg 0) (not (eobp)))
-          (transpose-lines arg))
-        (forward-line -1))
-      (move-to-column column t)))))
-
-(defun move-text-down (arg)
-  "Move region (transient-mark-mode active) or current line
-  arg lines down."
-  (interactive "*p")
-  (move-text-internal arg))
-
-(defun move-text-up (arg)
-  "Move region (transient-mark-mode active) or current line
-  arg lines up."
-  (interactive "*p")
-  (move-text-internal (- arg)))
-
-(global-set-key [M-up] 'move-text-up)
-(global-set-key [M-down] 'move-text-down)
+(require 'drag-stuff)
+(drag-stuff-global-mode t)
 
 ;; Ace Jump Mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-word-mode)
