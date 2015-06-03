@@ -2,7 +2,7 @@
 	name = David Zuber
 	email = zuber.david@gmx.de
 [core]
-	editor = emacsclient -t -a=""
+	editor = emacsclient -t -a=\"\"
 [alias]
 	co = checkout
 	br = branch
