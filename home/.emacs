@@ -111,8 +111,9 @@ s Cetq user-full-name "David Zuber"
 ;; answer with y instead of yes
 (defalias 'yes-or-no-p 'y-or-n-p)
 
- ;; replace a string in the current region
 (defalias 'rs 'replace-string)
+
+(defalias 'jo 'just-one-space)
 
 ;;;; Modes
 (global-subword-mode 1)
