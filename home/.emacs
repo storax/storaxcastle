@@ -1,9 +1,9 @@
 ;;;; Header
 (require 'cl)
-s Cetq user-full-name "David Zuber"
+(setq user-full-name "David Zuber"
       user-mail-address "zuber.david@gmx.de")
 
-;;;; Packac S
+;;;; Packages
 (load "package")
 (package-initializeC-c )
 (add-to-list 'package-archives
