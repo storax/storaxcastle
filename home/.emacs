@@ -50,10 +50,6 @@
 (add-to-list 'load-path "~/.emacs.d/helm-spotify")
 (require 'helm-spotify)
 
-;; Sets iedit keybindings
-(require 'iedit)
-(require 'multiple-cursors)
-
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
 
@@ -108,11 +104,8 @@
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;;;; Aliases
-;; answer with y instead of yes
 (defalias 'yes-or-no-p 'y-or-n-p)
-
 (defalias 'rs 'replace-string)
-
 (defalias 'jo 'just-one-space)
 
 ;;;; Modes
@@ -138,7 +131,6 @@
 ;;Python mode move around code blocks
 (global-set-key (kbd "M-p") 'python-nav-backward-block)
 (global-set-key (kbd "M-n") 'python-nav-forward-block)
-
 
 ;;C-Tab für autovervollstaendigung
 (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
@@ -168,6 +160,7 @@
 (load-library "hideshow")
 
 ;;Multiple Cursors
+(require 'multiple-cursors)
 (global-set-key (kbd "C-c m") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-c C->") 'mc/skip-to-next-like-this)
@@ -175,11 +168,14 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/skip-to-previous-like-this)
 (global-set-key (kbd "C-M-<") 'mc/unmark-previous-like-this)
-(global-set-key (kbd "C-c C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-c C-c C->") 'mc/mark-all-like-this)
 
 ;; MOVE TEXT AROUND
 (require 'drag-stuff)
 (drag-stuff-global-mode t)
+
+;; Sets iedit keybindings
+(require 'iedit)
 
 ;; Ace Jump Mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-word-mode)
