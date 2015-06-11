@@ -97,6 +97,9 @@
 ;; No backup files
 (setq make-backup-files nil)
 
+;; Magit
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;;;; Aliases
 ;; answer with y instead of yes
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -256,6 +259,8 @@
 (add-hook 'python-mode-hook         'hs-minor-mode)
 (require 'magit-gitflow)
 (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+(add-hook 'term-mode-hook (lambda()
+        (setq yas-dont-activate t)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
