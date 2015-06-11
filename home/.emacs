@@ -1,6 +1,5 @@
 ;;;; Header
 (require 'cl)
-
 (setq user-full-name "David Zuber"
       user-mail-address "zuber.david@gmx.de")
 
@@ -14,19 +13,21 @@
 
 (setq package-archive-enable-alist '(("melpa" deft magit)))
 
-
-
 (defvar storax/packages '(ace-jump-mode
 			  dabbrev
+			  drag-stuff
 			  elpy
+			  epc
 			  expand-region
 			  flycheck
 			  fold-dwim
 			  helm
+			  iedit
                           magit
 			  magit-gitflow
                           marmalade
 			  multi-term
+			  multiple-cursors
                           org
 			  popup
                           smartparens
@@ -46,6 +47,8 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
+(add-to-list 'load-path "~/.emacs.d/helm-spotify")
+(require 'helm-spotify)
 
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
@@ -97,15 +100,13 @@
 ;; No backup files
 (setq make-backup-files nil)
 
-;; Magit
+;; Magit Readme buffer
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;;;; Aliases
-;; answer with y instead of yes
 (defalias 'yes-or-no-p 'y-or-n-p)
-
- ;; replace a string in the current region
 (defalias 'rs 'replace-string)
+(defalias 'jo 'just-one-space)
 
 ;;;; Modes
 (global-subword-mode 1)
@@ -130,7 +131,6 @@
 ;;Python mode move around code blocks
 (global-set-key (kbd "M-p") 'python-nav-backward-block)
 (global-set-key (kbd "M-n") 'python-nav-forward-block)
-
 
 ;;C-Tab für autovervollstaendigung
 (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
@@ -159,44 +159,23 @@
 (global-set-key (kbd "C-c C-e") 'fold-dwim-show-all)
 (load-library "hideshow")
 
+;;Multiple Cursors
+(require 'multiple-cursors)
+(global-set-key (kbd "C-c m") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c C->") 'mc/skip-to-next-like-this)
+(global-set-key (kbd "C-M->") 'mc/unmark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/skip-to-previous-like-this)
+(global-set-key (kbd "C-M-<") 'mc/unmark-previous-like-this)
+(global-set-key (kbd "C-c C-c C->") 'mc/mark-all-like-this)
+
 ;; MOVE TEXT AROUND
-(defun move-text-internal (arg)
-  (cond
-   ((and mark-active transient-mark-mode)
-    (if (> (point) (mark))
-        (exchange-point-and-mark))
-    (let ((column (current-column))
-          (text (delete-and-extract-region (point) (mark))))
-      (forward-line arg)
-      (move-to-column column t)
-      (set-mark (point))
-      (insert text)
-      (exchange-point-and-mark)
-      (setq deactivate-mark nil)))
-   (t
-    (let ((column (current-column)))
-      (beginning-of-line)
-      (when (or (> arg 0) (not (bobp)))
-        (forward-line)
-        (when (or (< arg 0) (not (eobp)))
-          (transpose-lines arg))
-        (forward-line -1))
-      (move-to-column column t)))))
+(require 'drag-stuff)
+(drag-stuff-global-mode t)
 
-(defun move-text-down (arg)
-  "Move region (transient-mark-mode active) or current line
-  arg lines down."
-  (interactive "*p")
-  (move-text-internal arg))
-
-(defun move-text-up (arg)
-  "Move region (transient-mark-mode active) or current line
-  arg lines up."
-  (interactive "*p")
-  (move-text-internal (- arg)))
-
-(global-set-key [M-up] 'move-text-up)
-(global-set-key [M-down] 'move-text-down)
+;; Sets iedit keybindings
+(require 'iedit)
 
 ;; Ace Jump Mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-word-mode)
@@ -290,14 +269,3 @@
   (add-to-list 'imenu-generic-expression '("Sections" "^;;;; \\(.+\\)$" 1) t))
 
 (add-hook 'emacs-lisp-mode-hook 'imenu-elisp-sections)
-
-;; Faster Python Imenu
-; user this simpler regexp to get candidates
-(setq fastpy-imenu-generic-expression `((nil "\\(^\\s-*\\(def\\|class\\)\\s-[^:]*\\)" 1)))
-; function for overwriting the neccessary functions/vars
-(defun setup-fast-pyimenu ()
-  (setq imenu-prev-index-position-function nil)
-  (setq imenu-generic-expression fastpy-imenu-generic-expression)
-  (setq imenu-create-index-function imenu-default-create-index-function))
-; add hook to python mode so we overwrite the imenu logic
-(add-hook 'python-mode-hook 'setup-fast-pyimenu)

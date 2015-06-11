@@ -50,6 +50,7 @@ antigen theme kphoen
 # Tell antigen that you're done.
 antigen apply
 
-
 # added by travis gem
 [ -f /home/vagrant/.travis/travis.sh ] && source /home/vagrant/.travis/travis.sh
+
+[ -f ~/.aliases ] && source ~/.aliases
