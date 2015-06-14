@@ -49,6 +49,7 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
+(add-to-list 'load-path "~/.emacs.d/minimap")
 (add-to-list 'load-path "~/.emacs.d/helm-spotify")
 (require 'helm-spotify)
 
@@ -128,6 +129,7 @@
 (yas-global-mode 1)
 (setq yas/indent-line nil)
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(require 'minimap)
 
 ;;;; Key bindings
 ;;Python mode move around code blocks
