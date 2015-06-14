@@ -34,6 +34,7 @@
 			  popup
                           smartparens
 			  sx
+			  xkcd
                           yaml-mode
                           zenburn-theme)
   "Default packages")
