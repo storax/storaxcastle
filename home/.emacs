@@ -33,6 +33,7 @@
                           org
 			  popup
                           smartparens
+			  sx
                           yaml-mode
                           zenburn-theme)
   "Default packages")
