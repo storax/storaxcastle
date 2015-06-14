@@ -40,6 +40,7 @@ antigen bundle git-flow
 antigen bundle pip
 antigen bundle sudo
 antigen bundle vagrant
+antigen-bundle oknowton/zsh-dwim
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
