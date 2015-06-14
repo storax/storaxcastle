@@ -26,6 +26,7 @@
                           magit
 			  magit-gitflow
                           marmalade
+			  multi
 			  multi-term
 			  multiple-cursors
                           org
