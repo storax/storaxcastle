@@ -1,4 +1,4 @@
-alias hornet="ssh -X hpcmscdz@hornet.hww.de"
+alias hornet="ssh -X -R 42420:bitbucket.org:22 -R 42421:github.com:22 hpcmscdz@hornet.hww.de"
 
 _scpcray1() { scp $1 hpcmscdz@hornet.hww.de:$1 }
 _scpcray2() { scp $1 hpcmscdz@hornet.hww.de:$2 }
