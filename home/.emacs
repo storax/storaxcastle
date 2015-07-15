@@ -108,6 +108,9 @@
 ;; Magit Readme buffer
 (setq magit-last-seen-setup-instructions "1.4.0")
 
+;; When following sysmlinks always go to the destination
+(setq vc-follow-symlinks t)
+
 ;;;; Aliases
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'rs 'replace-string)
@@ -190,8 +193,6 @@
 
 ;; Helm-Swoop
 (require 'helm-swoop)
-
-;; Change the keybinds to whatever you like :)
 (global-set-key (kbd "M-i") 'helm-swoop)
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
 (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
