@@ -6,3 +6,4 @@ _scpcray2() { scp $1 hpcmscdz@hornet.hww.de:$2 }
 alias scpcray1=_scpcray1
 alias scpcray2=_scpcray2
 alias xo=xdg-open
+alias covclean="rm -f .coverage.*"
