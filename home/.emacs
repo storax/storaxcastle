@@ -14,6 +14,7 @@
 (setq package-archive-enable-alist '(("melpa" deft magit)))
 
 (defvar storax/packages '(ace-jump-mode
+			  auctex
 			  dabbrev
 			  drag-stuff
 			  elpy
@@ -32,6 +33,7 @@
 			  multiple-cursors
                           org
 			  popup
+			  pdf-tools
                           smartparens
 			  sx
 			  xkcd
@@ -54,10 +56,16 @@
 (add-to-list 'load-path "~/.emacs.d/minimap")
 (add-to-list 'load-path "~/.emacs.d/helm-spotify")
 (require 'helm-spotify)
+(setq redisplay-dont-pause t
+  scroll-margin 7
+  scroll-step 1
+  scroll-conservatively 10000
+  scroll-preserve-screen-position 1)
 
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
 
+(pdf-tools-install)
 
 ;;;; Window and Visual Settings
 ;; No spashscreen, scratch message and default python mode
@@ -73,7 +81,7 @@
 ;; Choose theme depending on window or terminal
 (if window-system
     (load-theme 'zenburn t)
-  (load-theme 'wombat t))
+    (load-theme 'wombat t))
 
 ;; Font settings
 (when window-system
@@ -110,6 +118,11 @@
 
 ;; When following sysmlinks always go to the destination
 (setq vc-follow-symlinks t)
+
+;; Latex PDF mode
+(require 'tex)
+(TeX-global-PDF-mode t)
+(setq TeX-source-correlate-start-server t)
 
 ;;;; Aliases
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -209,6 +222,19 @@
 (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
 
+;; Latex umlauts
+(defun latex-ae () (interactive) (insert "\\\"a"))
+(defun latex-oe () (interactive) (insert "\\\"o"))
+(defun latex-ue () (interactive) (insert "\\\"u"))
+(defun latex-ss () (interactive) (insert "{\\ss}"))
+
+(defun latex-bindings-my ()
+  (define-key LaTeX-mode-map (kbd "C-' C-a") 'latex-ae)
+  (define-key LaTeX-mode-map (kbd "C-' C-o") 'latex-oe)
+  (define-key LaTeX-mode-map (kbd "C-' C-u") 'latex-ue)
+  (define-key LaTeX-mode-map (kbd "C-' C-s") 'latex-ss)
+  )
+(add-hook 'LaTeX-mode-hook	'latex-bindings-my)
 
 ;;;; Save Desktop
 (require 'desktop)
@@ -262,19 +288,23 @@
 
 ;;;; Hooks
 (add-hook 'find-file-hook 'cwebber/safer-flymake-find-file-hook)
+(add-hook 'pdf-view-mode-hook 'auto-revert-mode)
 (add-hook 'auto-save-hook 'my-desktop-save)
 (add-hook 'python-mode-hook         'hs-minor-mode)
 (require 'magit-gitflow)
 (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
 (add-hook 'term-mode-hook (lambda()
         (setq yas-dont-activate t)))
+;; use special hook for tex-default-command, as it is a local variable
+(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+(add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
 
 ;;;; Helm
 (require 'helm-config)
