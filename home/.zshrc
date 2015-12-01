@@ -55,3 +55,6 @@ antigen apply
 [ -f /home/vagrant/.travis/travis.sh ] && source /home/vagrant/.travis/travis.sh
 
 [ -f ~/.aliases ] && source ~/.aliases
+
+# added by travis gem
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
