@@ -15,7 +15,7 @@ bashcompinit
 source ~/.bash-completions/*
 
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Develop/Python/
+export PROJECT_HOME=$HOME/projects/
 # source /usr/local/bin/virtualenvwrapper.sh
 
 # build python with enable shared
