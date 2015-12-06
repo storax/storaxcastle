@@ -5,7 +5,6 @@ cd ~/.ssh
 declare -a hosts=(
     github
     bitbucket
-    hlrs
 )
 
 for host in "${hosts[@]}"
