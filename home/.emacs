@@ -17,26 +17,27 @@
 			  auctex
 			  dabbrev
 			  drag-stuff
-			  elpy
-			  epc
-			  expand-region
-			  flycheck
-			  fold-dwim
-			  helm
-			  helm-swoop
-			  iedit
+                          elpy
+                          epc
+                          expand-region
+                          flycheck
+                          fold-dwim
+                          helm
+                          helm-swoop
+                          iedit
                           magit
-			  magit-gitflow
+                          magit-gitflow
                           marmalade
-			  multi
-			  multi-term
-			  multiple-cursors
+                          multi
+                          multi-term
+                          multiple-cursors
                           org
-			  popup
-			  pdf-tools
+                          pdf-tools
+                          popup
+                          requests
                           smartparens
-			  sx
-			  xkcd
+                          sx
+                          xkcd
                           yaml-mode
                           zenburn-theme)
   "Default packages")
