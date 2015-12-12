@@ -34,7 +34,7 @@
                           org
                           pdf-tools
                           popup
-                          requests
+                          request
                           smartparens
                           sx
                           xkcd
