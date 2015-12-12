@@ -155,9 +155,24 @@
 (global-set-key (kbd "M-p") 'python-nav-backward-block)
 (global-set-key (kbd "M-n") 'python-nav-forward-block)
 
+;;Python indent right
+(defun shift-or-indent (&optional ARG)
+  (interactive "P")
+  (if mark-active
+      (python-indent-shift-right (region-beginning)
+				 (region-end))
+    (indent-for-tab-command ARG)))
+(define-key python-mode-map (kbd "<tab>") 'shift-or-indent)
 ;;C-Tab für autovervollstaendigung
-(global-set-key (kbd "C-<tab>") 'dabbrev-expand)
+(defun dabbrev-or-indent-left ()
+  (interactive)
+  (if mark-active
+      (python-indent-shift-left (region-beginning)
+				(region-end))
+    (dabbrev-expand)))
+(define-key python-mode-map (kbd "C-<tab>") 'dabbrev-or-indent-left)
 (define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
+(global-set-key (kbd "C-<tab>") 'dabbrev-expand)
 
 ;;Magit
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -291,7 +306,7 @@
 (add-hook 'find-file-hook 'cwebber/safer-flymake-find-file-hook)
 (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
 (add-hook 'auto-save-hook 'my-desktop-save)
-(add-hook 'python-mode-hook         'hs-minor-mode)
+(add-hook 'python-mode-hook 'hs-minor-mode)
 (require 'magit-gitflow)
 (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
 (add-hook 'term-mode-hook (lambda()

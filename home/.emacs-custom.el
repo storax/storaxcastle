@@ -10,10 +10,11 @@
  '(helm-ff-skip-boring-files t)
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(minimap-recenter-type (quote free))
- '(minimap-window-location (quote right)))
+ '(minimap-window-location (quote right))
+ '(yas-fallback-behavior (quote call-other-command)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(font-latex-sectioning-5-face ((t (:inherit fixed-pitch :foreground "#CC9393" :weight bold)))))
+ '(font-latex-sectioning-5-face ((t (:inherit fixed-pitch :foreground "#CC9393" :weight bold))) t))
