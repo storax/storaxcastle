@@ -156,6 +156,8 @@
 (global-set-key (kbd "M-n") 'python-nav-forward-block)
 
 ;;Python indent right
+;;set in python-mode. yas fallback has to be call-other-command.
+;;the default python-indent-region sucks IMO
 (defun shift-or-indent (&optional ARG)
   (interactive "P")
   (if mark-active
@@ -164,6 +166,8 @@
     (indent-for-tab-command ARG)))
 (define-key python-mode-map (kbd "<tab>") 'shift-or-indent)
 ;;C-Tab für autovervollstaendigung
+;;If region is active shift region left (in python mode)
+;;if not dabbrev expand
 (defun dabbrev-or-indent-left ()
   (interactive)
   (if mark-active
