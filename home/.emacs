@@ -1,324 +1,82 @@
-;;;; Header
-(require 'cl)
+;;; .emacs --- Emacs Init File
+
+;;; Commentary:
+
+;; This config is inspired by many others configs.
+;; Thanks and sorry I forgot where I got half of the stuff.
+;; The only source I remember, because I am currently copy pasting from it is
+;; http://www.mygooglest.com/fni/dot-emacs.html
+;; Thanks for the input!
+
+;;; Code:
+
+;;----------------------------------------------------------------------------
+;; Prerequisites
+;;----------------------------------------------------------------------------
+(message "* --[ Loading my Emacs init file ]--")
+
+;; Personal Info
 (setq user-full-name "David Zuber"
       user-mail-address "zuber.david@gmx.de")
 
-;;;; Packages
-(load "package")
-(package-initialize)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; uptimes
+(setq emacs-load-start-time (current-time))
 
-(setq package-archive-enable-alist '(("melpa" deft magit)))
+;; turn on Common Lisp support
+(require 'cl)  ; provides useful things like `loop' and `setf'
 
-(defvar storax/packages '(ace-jump-mode
-			  auctex
-			  dabbrev
-			  drag-stuff
-                          elpy
-                          epc
-                          expand-region
-                          flycheck
-                          fold-dwim
-                          helm
-                          helm-swoop
-                          iedit
-                          magit
-                          magit-gitflow
-                          marmalade
-                          multi
-                          multi-term
-                          multiple-cursors
-                          org
-                          pdf-tools
-                          popup
-                          request
-                          smartparens
-                          sx
-                          xkcd
-                          yaml-mode
-                          zenburn-theme)
-  "Default packages")
+;; Dir with all the actual configs
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(require 'init-benchmarking) ;; Measure startup time
 
-(defun storax/packages-installed-p ()
-  (loop for pkg in storax/packages
-        when (not (package-installed-p pkg)) do (return nil)
-        finally (return t)))
+;;----------------------------------------------------------------------------
+;; Temporarily reduce garbage collection during startup
+;;----------------------------------------------------------------------------
+(defconst sanityinc/initial-gc-cons-threshold gc-cons-threshold
+  "Initial value of `gc-cons-threshold' at start-up time.")
+(setq gc-cons-threshold (* 128 1024 1024))
+(add-hook 'after-init-hook
+          (lambda () (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
 
-(unless (storax/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg storax/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
+;;----------------------------------------------------------------------------
+;; Bootstrapping config
+;;----------------------------------------------------------------------------
+(setq custom-file (expand-file-name ".emacs-custom.el" "~/"))
+(require 'init-utils)
+;; Package Installing - calls package-initialize
+(require 'init-elpa)
 
-(add-to-list 'load-path "~/.emacs.d/minimap")
-(add-to-list 'load-path "~/.emacs.d/helm-spotify")
-(require 'helm-spotify)
-(setq redisplay-dont-pause t
-  scroll-margin 7
-  scroll-step 1
-  scroll-conservatively 10000
-  scroll-preserve-screen-position 1)
+;;----------------------------------------------------------------------------
+;; Load configs for specific modes and features
+;;----------------------------------------------------------------------------
+(require 'init-basic)
+(require 'init-window)
+(require 'init-theme)
+(require 'init-fonts)
+(require 'init-desktop)
+(require 'init-ido)
+(require 'init-isearch)
+(require 'init-dabbrev)
+(require 'init-expand-region)
+(require 'init-folding)
+(require 'init-multiple-cursors)
+(require 'init-drag-stuff)
+(require 'init-iedit)
+(require 'init-ace-jump)
+(require 'init-helm)
+(require 'init-elisp)
+(require 'init-smartparens)
+(require 'init-yasnippet)
+(require 'init-flycheck)
+(require 'init-elpy)
+(require 'init-magit)
+(require 'init-latex)
+(require 'init-minimap)
+(require 'init-spotify)
 
-(setq custom-file "~/.emacs-custom.el")
-(load custom-file)
-
-(pdf-tools-install)
-
-;;;; Window and Visual Settings
-;; No spashscreen, scratch message and default python mode
-(setq inhibit-splash-screen t
-      initial-scratch-message nil
-      initial-major-mode 'python-mode)
-
-;; Hide tool and menu bar
-(when window-system
-  (tool-bar-mode -1)
-  (menu-bar-mode -1))
-
-;; Choose theme depending on window or terminal
-(if window-system
-    (load-theme 'zenburn t)
-    (load-theme 'wombat t))
-
-;; Font settings
-(when window-system
-  (setq frame-title-format '(buffer-file-name "%f" ("%b")))
-  (set-face-attribute 'default nil
-                      :family "Inconsolata"
-                      :height 135
-                      :weight 'normal
-                      :width 'normal)
-
-  (when (functionp 'set-fontset-font)
-    (set-fontset-font "fontset-default"
-                      'unicode
-                      (font-spec :family "DejaVu Sans Mono"
-                                 :width 'normal
-                                 :size 12.4
-                                 :weight 'normal))))
-
-;; Show little dashes to indicate empy lines
-(setq-default indicate-empty-lines t)
-(when (not indicate-empty-lines)
-  (toggle-indicate-empty-lines))
-
-;;;; Custom Variables
-;; Tab with to 4, no tabs
-(setq tab-width 4
-      indent-tabs-mode nil)
-
-;; No backup files
-(setq make-backup-files nil)
-
-;; Magit Readme buffer
-(setq magit-last-seen-setup-instructions "1.4.0")
-
-;; When following sysmlinks always go to the destination
-(setq vc-follow-symlinks t)
-
-;; Latex PDF mode
-(require 'tex)
-(TeX-global-PDF-mode t)
-(setq TeX-source-correlate-start-server t)
-
-;;;; Aliases
-(defalias 'yes-or-no-p 'y-or-n-p)
-(defalias 'rs 'replace-string)
-(defalias 'jo 'just-one-space)
-
-;;;; Modes
-(global-subword-mode 1)
-(smartparens-global-mode 1)
-(ido-mode t)
-(elpy-enable)
-(setq elpy-modules '(elpy-module-eldoc
-		     elpy-module-pyvenv
-		     elpy-module-highlight-indentation
-		     elpy-module-yasnippet
-		     elpy-module-sane-defaults))
-(global-linum-mode 1)
-(add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
-(require 'yasnippet)
-(yas-global-mode 1)
-(setq yas/indent-line nil)
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(require 'minimap)
-
-;;;; Key bindings
-;;Python mode move around code blocks
-(global-set-key (kbd "M-p") 'python-nav-backward-block)
-(global-set-key (kbd "M-n") 'python-nav-forward-block)
-
-;;Python indent right
-;;set in python-mode. yas fallback has to be call-other-command.
-;;the default python-indent-region sucks IMO
-(defun shift-or-indent (&optional ARG)
-  (interactive "P")
-  (if mark-active
-      (python-indent-shift-right (region-beginning)
-				 (region-end))
-    (indent-for-tab-command ARG)))
-(define-key python-mode-map (kbd "<tab>") 'shift-or-indent)
-;;C-Tab für autovervollstaendigung
-;;If region is active shift region left (in python mode)
-;;if not dabbrev expand
-(defun dabbrev-or-indent-left ()
-  (interactive)
-  (if mark-active
-      (python-indent-shift-left (region-beginning)
-				(region-end))
-    (dabbrev-expand)))
-(define-key python-mode-map (kbd "C-<tab>") 'dabbrev-or-indent-left)
-(define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
-(global-set-key (kbd "C-<tab>") 'dabbrev-expand)
-
-;;Magit
-(global-set-key (kbd "C-x g") 'magit-status)
-
-;;Expand Region
-(global-set-key (kbd "C-.") 'er/expand-region)
-(global-set-key (kbd "C-,") 'er/contract-region)
-
-;;Copy Searchresult with M-w
-(defun hack-isearch-kill ()
-   "Push current matching string into kill ring."
-   (interactive)
-   (kill-new (buffer-substring (point) isearch-other-end))
-   (isearch-done))
-(define-key isearch-mode-map (kbd "M-w") 'hack-isearch-kill)
-
-;;Folding
-(require 'fold-dwim)
-(global-set-key (kbd "C-c C-h") 'fold-dwim-hide-all)
-(global-set-key (kbd "C-c TAB") 'fold-dwim-toggle-selective-display)
-(global-set-key (kbd "C-c C-b") 'fold-dwim-toggle)
-(global-set-key (kbd "C-c C-e") 'fold-dwim-show-all)
-(load-library "hideshow")
-
-;;Multiple Cursors
-(require 'multiple-cursors)
-(global-set-key (kbd "C-c m") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c C->") 'mc/skip-to-next-like-this)
-(global-set-key (kbd "C-M->") 'mc/unmark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/skip-to-previous-like-this)
-(global-set-key (kbd "C-M-<") 'mc/unmark-previous-like-this)
-(global-set-key (kbd "C-c C-c C->") 'mc/mark-all-like-this)
-
-;; MOVE TEXT AROUND
-(require 'drag-stuff)
-(drag-stuff-global-mode t)
-
-;; Sets iedit keybindings
-(require 'iedit)
-
-;; Ace Jump Mode
-(define-key global-map (kbd "C-c SPC") 'ace-jump-word-mode)
-(define-key global-map (kbd "C-c c SPC") 'ace-jump-char-mode)
-(define-key global-map (kbd "C-c c c SPC") 'ace-jump-line-mode)
-
-;; Helm-Swoop
-(require 'helm-swoop)
-(global-set-key (kbd "M-i") 'helm-swoop)
-(global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
-(global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
-(global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
-
-;; When doing isearch, hand the word over to helm-swoop
-(define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
-;; From helm-swoop to helm-multi-swoop-all
-(define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
-
-;; Move up and down like isearch
-(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
-(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
-(define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
-(define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
-
-;; Latex umlauts
-(defun latex-ae () (interactive) (insert "\\\"a"))
-(defun latex-oe () (interactive) (insert "\\\"o"))
-(defun latex-ue () (interactive) (insert "\\\"u"))
-(defun latex-ss () (interactive) (insert "{\\ss}"))
-
-(defun latex-bindings-my ()
-  (define-key LaTeX-mode-map (kbd "C-' C-a") 'latex-ae)
-  (define-key LaTeX-mode-map (kbd "C-' C-o") 'latex-oe)
-  (define-key LaTeX-mode-map (kbd "C-' C-u") 'latex-ue)
-  (define-key LaTeX-mode-map (kbd "C-' C-s") 'latex-ss)
-  )
-(add-hook 'LaTeX-mode-hook	'latex-bindings-my)
-
-;;;; Save Desktop
-(require 'desktop)
-  (desktop-save-mode 1)
-  (defun my-desktop-save ()
-    (interactive)
-    ;; Don't call desktop-save-in-desktop-dir, as it prints a message.
-    (if (eq (desktop-owner) (emacs-pid))
-        (desktop-save desktop-dirname)))
-
-;;;; Safe flymake find file hook
-(require 'flymake)
-(defun cwebber/safer-flymake-find-file-hook ()
-  "Don't barf if we can't open this flymake file"
-  (let ((flymake-filename
-         (flymake-create-temp-inplace (buffer-file-name) "flymake")))
-    (if (file-writable-p flymake-filename)
-        (flymake-find-file-hook)
-      (message
-       (format
-        "Couldn't enable flymake; permission denied on %s" flymake-filename)))))
-
-
-;;;; Yas-Snippet Menu
-;;; use popup menu for yas-choose-value
-(require 'popup)
-
-;; add some shotcuts in popup menu mode
-(define-key popup-menu-keymap (kbd "M-n") 'popup-next)
-(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
-(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
-(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
-(define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
-
-(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
-  (when (featurep 'popup)
-    (popup-menu*
-     (mapcar
-      (lambda (choice)
-        (popup-make-item
-         (or (and display-fn (funcall display-fn choice))
-             choice)
-         :value choice))
-      choices)
-     :prompt prompt
-     ;; start isearch mode immediately
-     :isearch t
-     )))
-
-(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
-
-;;;; Hooks
-(add-hook 'find-file-hook 'cwebber/safer-flymake-find-file-hook)
-(add-hook 'pdf-view-mode-hook 'auto-revert-mode)
-(add-hook 'auto-save-hook 'my-desktop-save)
-(add-hook 'python-mode-hook 'hs-minor-mode)
-(require 'magit-gitflow)
-(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
-(add-hook 'term-mode-hook (lambda()
-        (setq yas-dont-activate t)))
-;; use special hook for tex-default-command, as it is a local variable
-(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
-(add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
-
+;;----------------------------------------------------------------------------
+;; Custom Faces added by Custom
+;;----------------------------------------------------------------------------
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -326,24 +84,23 @@
  ;; If there is more than one, they won't work right.
  )
 
-;;;; Helm
-(require 'helm-config)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-h C-i") 'helm-imenu)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x b") 'helm-mini)
+;;----------------------------------------------------------------------------
+;; Allow access from emacsclient
+;;----------------------------------------------------------------------------
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
-;; Edit 
-(defun edit-dotemacs ()
-  (interactive)
-  (find-file-existing "~/.emacs")
-  (widen)
-  (helm-imenu))
+;;----------------------------------------------------------------------------
+;; Variables customized via the interactive 'customize' interface
+;;----------------------------------------------------------------------------
+(when (file-exists-p custom-file)
+  (load custom-file))
 
-;; Display sections in imenu for elisp mode
-(defun imenu-elisp-sections ()
-  (setq imenu-prev-index-position-function nil)
-  (add-to-list 'imenu-generic-expression '("Sections" "^;;;; \\(.+\\)$" 1) t))
+(add-hook 'after-init-hook
+          (lambda ()
+            (message "* --[ Init completed in %.2fms ]--"
+                     (sanityinc/time-subtract-millis after-init-time before-init-time))))
 
-(add-hook 'emacs-lisp-mode-hook 'imenu-elisp-sections)
+(provide '.emacs)
+;;; .emacs ends here
