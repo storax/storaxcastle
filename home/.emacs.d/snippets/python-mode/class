@@ -2,20 +2,20 @@
 # name: Class with sphinx doc
 # key: class
 # group: Definitions
-# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# expand-env: ((yas-indent-line nil) (yas-wrap-around-region 'nil))
 # contributor: Orestis Markou
 # contributor: Nishio Hirokazu
 # contributor: Yasser GonzÃ¡lez FernÃ¡ndez <yglez@uh.cu>
 # contributor: Michael Markert <markert.michael@googlemail.com>
 # contributor: David Zuber <zuber.david@gmx.de>
 # --
-class ${1:ClassName}(${2:object}):
-    """$3
-    """
+class ${1:$(if (setq curcol (+ (current-column) 2)) nil)}${1:ClassName}(${2:object}):
+    $>"""$3
+    $>"""
 
-    def __init__(self, $4):
-        """$5
-        ${4:$(let ((indent (concat "\n" (make-string (current-column) 32)))
+    $>def __init__(self, $4):
+        $>"""$5
+${4:$(let ((indent (concat "\n" (make-string curcol 32)))
                    (args (mapcar 'car
                                  (mapcar '(lambda (x) (split-string x "="))
                                          (split-string (replace-regexp-in-string "[[:blank:]]*" "" yas-text)
@@ -29,10 +29,10 @@ class ${1:ClassName}(${2:object}):
               (concat indent params))
          )
         }
-        :raises: ${6:None}
-        """
-        super($1, self).__init__($7)
-        ${4:$(let ((indent (concat "\n" (make-string (current-column) 32)))
+        $>:raises: ${6:None}
+        $>"""
+        $>super($1, self).__init__($7)
+        $>${4:$(let ((indent (concat "\n" (make-string curcol 32)))
                    (args (mapcar 'car
                                  (mapcar '(lambda (x) (split-string x "="))
                                          (split-string (replace-regexp-in-string "[[:blank:]]*" "" yas-text)
@@ -42,4 +42,4 @@ class ${1:ClassName}(${2:object}):
                    args
                    indent))
         }
-        $0
+        $>$0
