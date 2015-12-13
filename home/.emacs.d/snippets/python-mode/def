@@ -2,13 +2,14 @@
 # name: Function with sphinx doc
 # key: def
 # group: Definitions
-# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# expand-env: ((yas-indent-line 'nil) (yas-wrap-around-region 'nil))
 # contributor: Michael Markert <markert.michael@googlemail.com>
 # contributor: David Zuber <zuber.david@gmx.de>
+# This seems hacky. It is. I hate lisp. This is the only way i found to get indentation right
 # --
-def ${1:name}($2):
-    """$3
-    ${2:$(let ((indent (concat "\n" (make-string (current-column) 32)))
+def ${1:$(if (setq curcol (current-column)) nil)}${1:name}($2):
+    $>"""$3
+${2:$(let ((indent (concat "\n" (make-string curcol 32)))
                (args (mapcar 'car
                               (mapcar '(lambda (x) (split-string x "="))
                                        (split-string (replace-regexp-in-string "[[:blank:]]*" "" yas-text)
@@ -20,10 +21,9 @@ def ${1:name}($2):
                            indent))
           (unless (string= "" params) 
               (concat indent params))
-         )
-    }
-    :returns: ${4:None}
-    :rtype: ${5:None}
-    :raises: ${6:None}
-    """
-    $0
+)}
+    $>:returns: ${4:None}
+    $>:rtype: ${5:None}
+    $>:raises: ${6:None}
+    $>"""
+    $>$0
