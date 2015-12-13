@@ -15,6 +15,8 @@
 
 ;; When following sysmlinks always go to the destination
 (setq vc-follow-symlinks t)
+(setq require-final-newline t)
+(setq undo-limit 10000)
 
 ;;;; Global Builtin Modes
 (global-hl-line-mode t)
@@ -31,5 +33,12 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'rs 'replace-string)
 (defalias 'jo 'just-one-space)
+(defalias 'qrr 'query-replace-regexp)
+
+;;;; Allow disabled Commands
+(put 'narrow-to-region 'disabled nil)
+
+;;;; Global Keybindings
+(global-set-key (kbd "C-c C-t") 'comment-or-uncomment-region)
 
 (provide 'init-basic)
