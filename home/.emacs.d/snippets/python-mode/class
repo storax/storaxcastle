@@ -1,6 +1,6 @@
 # -*- utf-8 mode: snippet -*-
 # name: Class with sphinx doc
-# key: class
+# key: classs
 # group: Definitions
 # expand-env: ((yas-indent-line nil) (yas-wrap-around-region 'nil))
 # contributor: Orestis Markou
