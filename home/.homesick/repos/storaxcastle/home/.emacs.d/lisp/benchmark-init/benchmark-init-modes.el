@@ -154,20 +154,20 @@
 	(duradj (benchmark-init/node-duration-adjusted node)))
     (if (benchmark-init/node-root-p node)
     (insert padding "["
-	    (propertize (format "%s" name)
-			'face 'benchmark-init/name-face)
-	    " " (propertize (format "%s" type)
-			    'face 'benchmark-init/type-face)
-	    " " (propertize (format "%dms (%dms)" (round duration) (round duradj))
-			    'face 'benchmark-init/duration-face)
-	    "]\n")
-    (insert padding "["
 	(propertize (format "%s" name)
 		'face 'benchmark-init/name-face)
 	" " (propertize (format "%s" type)
 		    'face 'benchmark-init/type-face)
 	" " (propertize (format "%dms" (round duradj))
 		    'face 'benchmark-init/duration-face)
+	"]\n")
+    (insert padding "["
+	(propertize (format "%s" name)
+		    'face 'benchmark-init/name-face)
+	" " (propertize (format "%s" type)
+			'face 'benchmark-init/type-face)
+	" " (propertize (format "%dms (%dms)" (round duration) (round duradj))
+			'face 'benchmark-init/duration-face)
 	"]\n"))))
 
 (defun benchmark-init/print-nodes (nodes padding)
