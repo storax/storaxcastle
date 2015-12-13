@@ -40,5 +40,7 @@
 
 ;;;; Global Keybindings
 (global-set-key (kbd "C-c C-t") 'comment-or-uncomment-region)
+(when window-system
+  (global-unset-key "\C-z")) ; iconify-or-deiconify-frame (C-x C-z)
 
 (provide 'init-basic)

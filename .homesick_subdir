@@ -8,3 +8,4 @@
 .virtualenvs
 .config/pip
 .ssh
+.homesick/repos/storaxcastle/home/.emacs.d/lisp
