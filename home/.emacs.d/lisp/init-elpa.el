@@ -38,6 +38,7 @@
                           request
                           smartparens
                           sx
+			  whitespace-cleanup-mode
                           xkcd
                           yaml-mode
                           zenburn-theme)

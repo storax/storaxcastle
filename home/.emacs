@@ -67,6 +67,7 @@
 (require 'init-helm)
 (require 'init-elisp)
 (require 'init-smartparens)
+(require 'init-whitespace)
 (require 'init-yasnippet)
 (require 'init-flycheck)
 (require 'init-elpy)
