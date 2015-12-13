@@ -34,6 +34,11 @@
 (define-key python-mode-map (kbd "<tab>") 'shift-or-indent)
 (define-key python-mode-map (kbd "C-<tab>") 'dabbrev-or-indent-left)
 
+(require 'init-flycheck)
+(define-key elpy-mode-map (kbd "C-c C-p") 'my-previous-error-wrapped)
+(define-key elpy-mode-map (kbd "C-c C-n") 'my-next-error-wrapped)
+
+
 ;;; Hooks
 (add-hook 'python-mode-hook 'hs-minor-mode)
 
