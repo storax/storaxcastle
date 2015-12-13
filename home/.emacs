@@ -4,8 +4,9 @@
 
 ;; This config is inspired by many others configs.
 ;; Thanks and sorry I forgot where I got half of the stuff.
-;; The only source I remember, because I am currently copy pasting from it is
+;; Some credits i remember:
 ;; http://www.mygooglest.com/fni/dot-emacs.html
+;; https://github.com/purcell/emacs.d
 ;; Thanks for the input!
 
 ;;; Code:
