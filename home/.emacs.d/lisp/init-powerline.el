@@ -52,7 +52,11 @@
 (eval-after-load "helm-mode" '(diminish 'helm-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
 (eval-after-load "drag-stuff" '(diminish 'drag-stuff-mode))
+(eval-after-load "hideshow" '(diminish 'hs-minor-mode))
+(eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode))
+(eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-current-column-mode))
 
+;; Custom theme with flycheck color
 (defun my-powerline-center-theme ()
   "Setup a mode-line with major and minor modes centered."
   (interactive)
@@ -70,7 +74,7 @@
 					 ((flycheck-has-current-errors-p 'info)
 					  'flycheck-color-mode-line-info-face-active)
 					 ((flycheck-running-p)
-					  'flycheck-color-mode-line-info-face-active)
+					  'powerline-active1)
 					 ('powerline-active1))
 				   (cond ((flycheck-has-current-errors-p 'error)
 					  'flycheck-color-mode-line-error-face-inactive)
@@ -79,7 +83,7 @@
 					 ((flycheck-has-current-errors-p 'info)
 					  'flycheck-color-mode-line-info-face-inactive)
 					 ((flycheck-running-p)
-					  'flycheck-color-mode-line-info-face-inactive)
+					  'powerline-inactive1)
 					 ('powerline-inactive1))))
 			  (separator-left (intern (format "powerline-%s-%s"
 							  (powerline-current-separator)
@@ -108,7 +112,7 @@
 					  (powerline-raw erc-modified-channels-object face2 'l))
 					(powerline-major-mode face2 'l)
 					(powerline-process face2)
-					(powerline-raw " :" face2)
+					(powerline-raw ":" face2)
 					(powerline-minor-modes face2 'l)
 					(powerline-raw " " face2)
 					(funcall separator-right face2 face1))))
