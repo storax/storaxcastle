@@ -1,5 +1,26 @@
 (require-package 'powerline)
+(require-package 'octicons)
 (require 'powerline)
+(require 'octicons)
+(defface powerline-octicons-active '((t (:background "grey22" :width condensed :family 'github-octicons :inherit mode-line)))
+  "Powerline face vc active."
+  :group 'powerline)
+
+(defface powerline-octicons-inactive '((t (:background "grey11" :width condensed :family 'github-octicons :inherit mode-line-inactive)))
+  "Powerline face vc inactive."
+  :group 'powerline)
+
+
+(defpowerline powerline-vc
+  (when (and (buffer-file-name (current-buffer)) vc-mode)
+    (if window-system
+      (let ((backend (vc-backend (buffer-file-name (current-buffer)))))
+	(when backend
+	  (format " %s %s %s"
+		  backend
+		  (char-to-string #xe0a0)
+		  (vc-working-revision (buffer-file-name (current-buffer)) backend))))
+      (format-mode-line '(vc-mode vc-mode)))))
 
 (defun my-powerline-center-theme ()
   "Setup a mode-line with major and minor modes centered."
@@ -11,6 +32,7 @@
 			  (mode-line (if active 'mode-line 'mode-line-inactive))
 			  (face1 (if active 'powerline-active1 'powerline-inactive1))
 			  (face2 (if active 'powerline-active2 'powerline-inactive2))
+			  (face-vc (if active 'powerline-octicons-active 'powerline-octicons-inactive))
 			  (separator-left (intern (format "powerline-%s-%s"
 							  (powerline-current-separator)
 							  (car powerline-default-separator-dir))))
@@ -23,7 +45,7 @@
 				     (powerline-raw " ")
 				     (funcall separator-left mode-line face1)
 				     (powerline-narrow face1 'l)
-				     (powerline-vc face1))) ;; MODIFY TO ADD ICON
+				     (powerline-vc face-vc)))
 			  (rhs (list (powerline-raw global-mode-string face1 'r)
 				     (powerline-raw "%4l" face1 'r)
 				     (powerline-raw ":" face1)
