@@ -22,8 +22,6 @@
                           expand-region
                           flycheck
                           fold-dwim
-                          helm
-                          helm-swoop
                           iedit
                           magit
                           magit-gitflow

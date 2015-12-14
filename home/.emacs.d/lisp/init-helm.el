@@ -1,5 +1,23 @@
 ;;;; Helm
+(add-to-list 'load-path (expand-file-name "helm" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "helm-swoop" user-emacs-directory))
+
 (require 'helm-config)
+
+;;; Helm Variables
+(when (executable-find "curl")
+  (setq helm-google-suggest-use-curl-p t))
+
+(setq helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t)
+
+;;; Helm activate modes
+(helm-mode 1)
+(helm-adaptive-mode 1)
+(helm-push-mark-mode 1)
+
+;;; Key Bindings
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-h C-i") 'helm-imenu)
