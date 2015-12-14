@@ -2,11 +2,11 @@
 (require-package 'octicons)
 (require 'powerline)
 (require 'octicons)
-(defface powerline-octicons-active '((t (:background "grey22" :width condensed :family 'github-octicons :inherit mode-line)))
+(defface powerline-octicons-active '((t (:inherit mode-line :background "grey22" :width condensed :family "github-octicons")))
   "Powerline face vc active."
   :group 'powerline)
 
-(defface powerline-octicons-inactive '((t (:background "grey11" :width condensed :family 'github-octicons :inherit mode-line-inactive)))
+(defface powerline-octicons-inactive '((t (:inherit mode-line-inactive :background "#4F4F4F" :width condensed :family "github-octicons")))
   "Powerline face vc inactive."
   :group 'powerline)
 
