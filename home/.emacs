@@ -86,16 +86,6 @@
 (require-package 'yaml-mode)
 
 ;;----------------------------------------------------------------------------
-;; Custom Faces added by Custom
-;;----------------------------------------------------------------------------
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
 ;;----------------------------------------------------------------------------
 (require 'server)
