@@ -38,9 +38,11 @@
     (if window-system
       (let ((backend (vc-backend (buffer-file-name (current-buffer)))))
 	(when backend
-	  (format " %s %s"
-		  (char-to-string #xf020)
-		  (vc-working-revision (buffer-file-name (current-buffer)) backend))))
+	  (if (string= backend "Git")
+	      (format " %s %s" (char-to-string #xf020)
+		      (vc-working-revision (buffer-file-name (current-buffer)) backend))
+	    (format " %s:%s" backend
+		    (vc-working-revision (buffer-file-name (current-buffer)) backend)))))
       (format-mode-line '(vc-mode vc-mode)))))
 
 ;; Hide some minor modes
