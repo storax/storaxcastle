@@ -1,5 +1,4 @@
 (require-package 'auctex)
-(require-package 'pdf-tools)
 
 (pdf-tools-install)
 
