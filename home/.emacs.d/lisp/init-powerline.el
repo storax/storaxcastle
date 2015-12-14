@@ -1,6 +1,22 @@
 (require-package 'powerline)
 (require 'powerline)
 
+;;;; Customization
+(defface flycheck-color-mode-line-error-face
+  '((t :foreground "#efefef" :weight normal :background "#FF6E64"))
+  "Face for the modeline in buffers with Flycheck errors."
+  :group 'flycheck-faces)
+
+(defface flycheck-color-mode-line-warning-face
+  '((t :foreground "#efefef" :weight normal :background "#DEB542"))
+  "Face for the modeline in buffers with only Flycheck warnings."
+  :group 'flycheck-faces)
+
+(defface flycheck-color-mode-line-info-face
+  '((t :foreground "#efefef" :weight normal :background "#69B7F0"))
+  "Face for the modeline in buffers with only Flycheck info."
+  :group 'flycheck-faces)
+
 (defpowerline powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
     (if window-system
@@ -20,7 +36,16 @@
 		   (let* ((active (powerline-selected-window-active))
 			  (mode-line (if active 'mode-line 'mode-line-inactive))
 			  (face1 (if active 'powerline-active1 'powerline-inactive1))
-			  (face2 (if active 'powerline-active2 'powerline-inactive2))
+;;			  (face2 (if active 'powerline-active2 'powerline-inactive2))
+			  (face2 (cond ((flycheck-has-current-errors-p 'error)
+					  'flycheck-color-mode-line-error-face)
+					 ((flycheck-has-current-errors-p 'warning)
+					  'flycheck-color-mode-line-warning-face)
+					 ((flycheck-has-current-errors-p 'info)
+					  'flycheck-color-mode-line-info-face)
+					 (active
+					  'powerline-active1)
+					 ('powerline-inactive1)))
 			  (separator-left (intern (format "powerline-%s-%s"
 							  (powerline-current-separator)
 							  (car powerline-default-separator-dir))))
@@ -65,4 +90,5 @@
 ;; (powerline-nano-theme)
 (my-powerline-center-theme)
 
+(powerline-raw global-mode-string)
 (provide 'init-powerline)

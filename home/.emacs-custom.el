@@ -44,6 +44,9 @@
      ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
      ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
      ("latexmk" "latexmk -pdflatex='pdflatex -file-line-error -synctex=1' -pdf -interaction=nonstopmode %t" TeX-run-command t t :help "Run latexmk command"))))
+ '(custom-safe-themes
+   (quote
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "f5eb916f6bd4e743206913e6f28051249de8ccfd070eae47b5bde31ee813d55f" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(flymake-allowed-file-name-masks
    (quote
     (("\\.py\\'" elpy-flymake-python-init)
