@@ -32,6 +32,7 @@
   "Face for the modeline in buffers with only Flycheck info."
   :group 'flycheck-faces)
 
+;; Custom Version Control indicator
 (defpowerline powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
     (if window-system
@@ -51,7 +52,6 @@
 		   (let* ((active (powerline-selected-window-active))
 			  (mode-line (if active 'mode-line 'mode-line-inactive))
 			  (face1 (if active 'powerline-active1 'powerline-inactive1))
-;;			  (face2 (if active 'powerline-active2 'powerline-inactive2))
 			  (face2 (if active
 				     (cond ((flycheck-has-current-errors-p 'error)
 					  'flycheck-color-mode-line-error-face-active)
