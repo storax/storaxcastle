@@ -22,7 +22,6 @@
 (global-hl-line-mode t)
 (global-subword-mode 1)
 (global-linum-mode 1)
-(column-number-mode t)
 
 ;;;; Builtin Auto Modes
 (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
