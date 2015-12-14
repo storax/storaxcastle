@@ -8,13 +8,16 @@
 (when (executable-find "curl")
   (setq helm-google-suggest-use-curl-p t))
 
+(when (executable-find "ack-grep")
+  (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
+	helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
+
 (setq helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
       helm-ff-file-name-history-use-recentf t
       helm-dabbrev-cycle-threshold 5
       helm-kill-ring-threshold 1
       ido-use-virtual-buffers t ; Needed in helm-buffers-list
-
 )
 
 ;;; Helm activate modes
@@ -31,6 +34,7 @@
 (global-set-key (kbd "C-x C-h C-i") 'helm-imenu)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 
 ;; Helm-Swoop
 (require 'helm-swoop)
