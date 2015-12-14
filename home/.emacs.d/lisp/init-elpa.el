@@ -18,7 +18,6 @@
 			  auctex
 			  dabbrev
 			  drag-stuff
-                          elpy
                           epc
                           expand-region
                           flycheck

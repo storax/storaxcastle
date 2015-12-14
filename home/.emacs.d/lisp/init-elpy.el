@@ -1,3 +1,6 @@
+(add-to-list 'load-path (expand-file-name "elpy" user-emacs-directory))
+
+(require 'elpy)
 (elpy-enable)
 
 ;; Only use these modules
