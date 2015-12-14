@@ -2,18 +2,33 @@
 (require 'powerline)
 
 ;;;; Customization
-(defface flycheck-color-mode-line-error-face
+(defface flycheck-color-mode-line-error-face-active
   '((t :foreground "#efefef" :weight normal :background "#990A1B"))
   "Face for the modeline in buffers with Flycheck errors."
   :group 'flycheck-faces)
 
-(defface flycheck-color-mode-line-warning-face
+(defface flycheck-color-mode-line-warning-face-active
   '((t :foreground "#efefef" :weight normal :background "#7B6000"))
   "Face for the modeline in buffers with only Flycheck warnings."
   :group 'flycheck-faces)
 
-(defface flycheck-color-mode-line-info-face
+(defface flycheck-color-mode-line-info-face-active
   '((t :foreground "#efefef" :weight normal :background "#00629D"))
+  "Face for the modeline in buffers with only Flycheck info."
+  :group 'flycheck-faces)
+
+(defface flycheck-color-mode-line-error-face-inactive
+  '((t :foreground "#efefef" :weight normal :background "#FF6E64"))
+  "Face for the modeline in buffers with Flycheck errors."
+  :group 'flycheck-faces)
+
+(defface flycheck-color-mode-line-warning-face-inactive
+  '((t :foreground "#efefef" :weight normal :background "#DEB542"))
+  "Face for the modeline in buffers with only Flycheck warnings."
+  :group 'flycheck-faces)
+
+(defface flycheck-color-mode-line-info-face-inactive
+  '((t :foreground "#efefef" :weight normal :background "#69B7F0"))
   "Face for the modeline in buffers with only Flycheck info."
   :group 'flycheck-faces)
 
@@ -37,15 +52,21 @@
 			  (mode-line (if active 'mode-line 'mode-line-inactive))
 			  (face1 (if active 'powerline-active1 'powerline-inactive1))
 ;;			  (face2 (if active 'powerline-active2 'powerline-inactive2))
-			  (face2 (cond ((flycheck-has-current-errors-p 'error)
-					  'flycheck-color-mode-line-error-face)
+			  (face2 (if active
+				     (cond ((flycheck-has-current-errors-p 'error)
+					  'flycheck-color-mode-line-error-face-active)
 					 ((flycheck-has-current-errors-p 'warning)
-					  'flycheck-color-mode-line-warning-face)
+					  'flycheck-color-mode-line-warning-face-active)
 					 ((flycheck-has-current-errors-p 'info)
-					  'flycheck-color-mode-line-info-face)
-					 (active
-					  'powerline-active1)
-					 ('powerline-inactive1)))
+					  'flycheck-color-mode-line-info-face-active)
+					 ('powerline-active1))
+				   (cond ((flycheck-has-current-errors-p 'error)
+					  'flycheck-color-mode-line-error-face-inactive)
+					 ((flycheck-has-current-errors-p 'warning)
+					  'flycheck-color-mode-line-warning-face-inactive)
+					 ((flycheck-has-current-errors-p 'info)
+					  'flycheck-color-mode-line-info-face-inactive)
+					 ('powerline-inactive1))))
 			  (separator-left (intern (format "powerline-%s-%s"
 							  (powerline-current-separator)
 							  (car powerline-default-separator-dir))))
