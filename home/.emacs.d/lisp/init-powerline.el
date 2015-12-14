@@ -55,6 +55,7 @@
 (eval-after-load "hideshow" '(diminish 'hs-minor-mode))
 (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode))
 (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-current-column-mode))
+(eval-after-load "subword" '(diminish 'subword-mode))
 
 ;; Custom theme with flycheck color
 (defun my-powerline-center-theme ()
