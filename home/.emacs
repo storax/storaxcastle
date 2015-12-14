@@ -55,6 +55,7 @@
 (require 'init-basic)
 (require 'init-window)
 (require 'init-theme)
+(require 'init-powerline)
 (require 'init-fonts)
 (require 'init-desktop)
 (require 'init-recentf)
