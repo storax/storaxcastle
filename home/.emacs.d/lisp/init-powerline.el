@@ -18,17 +18,17 @@
   :group 'flycheck-faces)
 
 (defface flycheck-color-mode-line-error-face-inactive
-  '((t :foreground "#efefef" :weight normal :background "#FF6E64"))
+  '((t :foreground "#efefef" :weight normal :background "#B22222"))
   "Face for the modeline in buffers with Flycheck errors."
   :group 'flycheck-faces)
 
 (defface flycheck-color-mode-line-warning-face-inactive
-  '((t :foreground "#efefef" :weight normal :background "#DEB542"))
+  '((t :foreground "#efefef" :weight normal :background "#8B7000"))
   "Face for the modeline in buffers with only Flycheck warnings."
   :group 'flycheck-faces)
 
 (defface flycheck-color-mode-line-info-face-inactive
-  '((t :foreground "#efefef" :weight normal :background "#69B7F0"))
+  '((t :foreground "#efefef" :weight normal :background "#0072AD"))
   "Face for the modeline in buffers with only Flycheck info."
   :group 'flycheck-faces)
 
