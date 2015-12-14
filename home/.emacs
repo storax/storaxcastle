@@ -57,6 +57,7 @@
 (require 'init-theme)
 (require 'init-fonts)
 (require 'init-desktop)
+(require 'init-recentf)
 (require 'init-ido)
 (require 'init-isearch)
 (require 'init-dabbrev)
