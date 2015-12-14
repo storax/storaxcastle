@@ -43,6 +43,14 @@
 		  (vc-working-revision (buffer-file-name (current-buffer)) backend))))
       (format-mode-line '(vc-mode vc-mode)))))
 
+;; Hide some minor modes
+(require-package 'diminish)
+(require 'diminish)
+(eval-after-load "whitespace-cleanup-mode" '(diminish 'whitespace-cleanup-mode))
+(eval-after-load "helm-mode" '(diminish 'helm-mode))
+(eval-after-load "smartparens" '(diminish 'smartparens-mode))
+(eval-after-load "drag-stuff" '(diminish 'drag-stuff-mode))
+
 (defun my-powerline-center-theme ()
   "Setup a mode-line with major and minor modes centered."
   (interactive)
