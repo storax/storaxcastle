@@ -10,12 +10,20 @@
 
 (setq helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t)
+      helm-ff-file-name-history-use-recentf t
+      helm-dabbrev-cycle-threshold 5
+      helm-kill-ring-threshold 1
+      ido-use-virtual-buffers t ; Needed in helm-buffers-list
+
+)
 
 ;;; Helm activate modes
 (helm-mode 1)
 (helm-adaptive-mode 1)
 (helm-push-mark-mode 1)
+
+;;; Custom Helm Functions
+
 
 ;;; Key Bindings
 (global-set-key (kbd "M-x") 'helm-M-x)
@@ -26,7 +34,8 @@
 
 ;; Helm-Swoop
 (require 'helm-swoop)
-(global-set-key (kbd "M-i") 'helm-swoop)
+(global-set-key (kbd "C-s") 'helm-swoop)
+(global-set-key (kbd "C-r") 'helm-swoop)
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
 (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
 (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
