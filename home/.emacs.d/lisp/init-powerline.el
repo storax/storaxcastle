@@ -1,24 +1,13 @@
 (require-package 'powerline)
-(require-package 'octicons)
 (require 'powerline)
-(require 'octicons)
-(defface powerline-octicons-active '((t (:inherit mode-line :background "grey22" :width condensed :family "github-octicons")))
-  "Powerline face vc active."
-  :group 'powerline)
-
-(defface powerline-octicons-inactive '((t (:inherit mode-line-inactive :background "#4F4F4F" :width condensed :family "github-octicons")))
-  "Powerline face vc inactive."
-  :group 'powerline)
-
 
 (defpowerline powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
     (if window-system
       (let ((backend (vc-backend (buffer-file-name (current-buffer)))))
 	(when backend
-	  (format " %s %s %s"
-		  backend
-		  (char-to-string #xe0a0)
+	  (format " %s %s"
+		  (char-to-string #xf020)
 		  (vc-working-revision (buffer-file-name (current-buffer)) backend))))
       (format-mode-line '(vc-mode vc-mode)))))
 
@@ -32,7 +21,6 @@
 			  (mode-line (if active 'mode-line 'mode-line-inactive))
 			  (face1 (if active 'powerline-active1 'powerline-inactive1))
 			  (face2 (if active 'powerline-active2 'powerline-inactive2))
-			  (face-vc (if active 'powerline-octicons-active 'powerline-octicons-inactive))
 			  (separator-left (intern (format "powerline-%s-%s"
 							  (powerline-current-separator)
 							  (car powerline-default-separator-dir))))
@@ -45,7 +33,7 @@
 				     (powerline-raw " ")
 				     (funcall separator-left mode-line face1)
 				     (powerline-narrow face1 'l)
-				     (powerline-vc face-vc)))
+				     (powerline-vc face1)))
 			  (rhs (list (powerline-raw global-mode-string face1 'r)
 				     (powerline-raw "%4l" face1 'r)
 				     (powerline-raw ":" face1)
