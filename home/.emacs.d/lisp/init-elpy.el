@@ -1,5 +1,8 @@
 (add-to-list 'load-path (expand-file-name "elpy" user-emacs-directory))
-
+(require-package 'company)
+(require-package 'find-file-in-project)
+(require-package 'highlight-indentation)
+(require-package 'pyvenv)
 (require 'elpy)
 (elpy-enable)
 
