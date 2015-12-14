@@ -1,3 +1,5 @@
+(require-package 'whitespace-cleanup-mode)
+
 (setq-default show-trailing-whitespace t)
 
 ;;; Whitespace

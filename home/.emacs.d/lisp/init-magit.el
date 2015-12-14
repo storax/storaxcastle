@@ -1,3 +1,6 @@
+(require-package 'magit)
+(require-package 'magit-gitflow)
+
 ;;Magit
 (global-set-key (kbd "C-x g") 'magit-status)
 

@@ -6,6 +6,7 @@
 
 ;;;; Yas-Snippet Menu
 ;;; use popup menu for yas-choose-value
+(require-package 'popup)
 (require 'popup)
 
 ;; add some shotcuts in popup menu mode

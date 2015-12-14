@@ -1,3 +1,5 @@
+(require-package 'fold-dwim)
+
 (require 'fold-dwim)
 (global-set-key (kbd "C-c C-h") 'fold-dwim-hide-all)
 (global-set-key (kbd "C-c TAB") 'fold-dwim-toggle-selective-display)

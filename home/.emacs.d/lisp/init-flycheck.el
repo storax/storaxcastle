@@ -1,3 +1,5 @@
+(require-package 'flycheck)
+
 ;;;; Safe flymake find file hook
 ;;(require 'flymake)
 ;;(defun cwebber/safer-flymake-find-file-hook ()

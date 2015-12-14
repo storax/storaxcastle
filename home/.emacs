@@ -50,6 +50,8 @@
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific modes and features
 ;;----------------------------------------------------------------------------
+(require-package 'marmalade)
+(require-package 'epc)
 (require 'init-basic)
 (require 'init-window)
 (require 'init-theme)
@@ -75,6 +77,12 @@
 (require 'init-latex)
 (require 'init-minimap)
 (require 'init-spotify)
+(require-package 'multi)
+(require-package 'multi-term)
+(require-package 'org)
+(require-package 'xkcd)
+(require-package 'sx)
+(require-package 'yaml-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Custom Faces added by Custom
