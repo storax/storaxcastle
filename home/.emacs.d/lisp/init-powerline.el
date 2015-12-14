@@ -43,10 +43,6 @@
 		  (vc-working-revision (buffer-file-name (current-buffer)) backend))))
       (format-mode-line '(vc-mode vc-mode)))))
 
-(defpowerline powerline-flycheck
-  (when flycheck-mode
-  (format-mode-line '((flycheck-mode flycheck-mode-line)))))
-
 (defun my-powerline-center-theme ()
   "Setup a mode-line with major and minor modes centered."
   (interactive)
@@ -103,8 +99,7 @@
 					(powerline-major-mode face2 'l)
 					(powerline-process face2)
 					(powerline-raw " :" face2)
-					(powerline-flycheck face2)
-;;					(powerline-minor-modes face2 'l)
+					(powerline-minor-modes face2 'l)
 					(powerline-raw " " face2)
 					(funcall separator-right face2 face1))))
 		     (concat (powerline-render lhs)
