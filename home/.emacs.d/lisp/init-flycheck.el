@@ -81,6 +81,31 @@ forwards, if negative)."
       flycheck-idle-change-delay 0.8
       flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
 
+;; Modeline config
+(setq flycheck-mode-line
+      '(:eval
+	(pcase flycheck-last-status-change
+	  (`not-checked nil)
+	  (`no-checker (propertize " -" 'face 'warning))
+	  (`running (propertize " ✷" 'face 'success))
+	  (`errored (propertize (format " %s" (char-to-string #x2717)) 'face 'error))
+	  (`finished
+	   (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
+		  (no-errors (cdr (assq 'error error-counts)))
+		  (no-warnings (cdr (assq 'warning error-counts)))
+		  (face (cond (no-errors 'error)
+			      (no-warnings 'warning)
+			      (t 'success))))
+	     (propertize (if (and no-errors no-warnings)
+			     (format " %s%s/%s"
+				     (char-to-string #x2717)
+				     (or no-errors 0)
+				     (or no-warnings 0))
+			   (format " %s" (char-to-string #x2713)))
+			 'face face)))
+	  (`interrupted " -")
+	  (`suspicious '(propertize " ?" 'face 'warning)))))
+
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (provide 'init-flycheck)
