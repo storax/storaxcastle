@@ -32,6 +32,16 @@
   "Face for the modeline in buffers with only Flycheck info."
   :group 'flycheck-faces)
 
+(defface powerline-octicon-active
+  '((t :foundry "github" :family "octicons" :inherit powerline-active1))
+  "Face for the modeline in buffers with only Flycheck info."
+  :group 'flycheck-faces)
+
+(defface powerline-octicon-inactive
+  '((t :foundry "github" :family "octicons" :inherit powerline-inactive1))
+  "Face for the modeline in buffers with only Flycheck info."
+  :group 'flycheck-faces)
+
 ;; Custom Version Control indicator
 (defpowerline powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
@@ -44,6 +54,12 @@
 	    (format " %s:%s" backend
 		    (vc-working-revision (buffer-file-name (current-buffer)) backend)))))
       (format-mode-line '(vc-mode vc-mode)))))
+;; Github logo
+(defpowerline powerline-github
+  (when (or (string-match "magit" (format "%s" major-mode)) (and (buffer-file-name (current-buffer)) vc-mode))
+    (if (string-match "github.com" (car (magit-git-lines "config" "--get" "remote.origin.url")))
+	(char-to-string #xf00a))))
+
 
 ;; Hide some minor modes
 (require-package 'diminish)
@@ -86,6 +102,7 @@
 					 ((flycheck-running-p)
 					  'powerline-inactive2)
 					 ('powerline-inactive2))))
+			  (face3 (if active 'powerline-octicon-active 'powerline-octicon-inactive))
 			  (separator-left (intern (format "powerline-%s-%s"
 							  (powerline-current-separator)
 							  (car powerline-default-separator-dir))))
@@ -98,6 +115,8 @@
 				     (powerline-raw " ")
 				     (funcall separator-left mode-line face1)
 				     (powerline-narrow face1 'l)
+				     (powerline-raw " " face1)
+				     (powerline-github face3)
 				     (powerline-vc face1)))
 			  (rhs (list (powerline-raw global-mode-string face1 'r)
 				     (powerline-raw "%4l" face1 'r)
