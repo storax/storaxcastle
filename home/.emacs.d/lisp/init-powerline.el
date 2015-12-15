@@ -34,28 +34,36 @@
 
 ;;;; Custom Functions
 (defun dz-string-from-file (file)
+  "Read a file"
   (with-temp-buffer (insert-file-contents file) (buffer-string)))
 
-(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
-(defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
-
 (defun dz-color-svg (image color1)
+  "Hacky stuff. The svgs have %s for fill color."
   (format image color1))
 
 (defun dz-create-image (image color1)
+  "Creates a image out of the a image data and colors it.
+  ascent 90 seems to work best. mask is for transparent background"
   (create-image (dz-color-svg image color1) 'svg t :ascent 90 :mask 'heuristic))
 
 (defun dz-create-image-with-face (image face)
+  "Read the font color and appy it to the image"
   (dz-create-image image (face-attribute face :foreground nil t)))
 
+;; Icons
+(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
+(defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
+
 ;; Save the current remote url in each buffer
-(defvar remoteurl)
-(setq remoteurl "")
+(defvar remoteurl "")
 
 (defun setremoteurl ()
+  "Save the current remote url"
   (make-local-variable 'remoteurl)
   (setq remoteurl (magit-get "remote" "origin" "url")))
 
+;; Kinda like each time we open a file we set the remoteurl
+;; then we can display an icon in the modeline accordingly
 (add-hook 'after-change-major-mode-hook 'setremoteurl)
 
 ;; Github or Bitbucket logo
