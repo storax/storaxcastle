@@ -84,7 +84,7 @@
 (require 'init-magit)
 (require 'init-powerline)
 (require 'init-latex)
-(require 'init-minimap)
+;(require 'init-minimap)
 (require 'init-spotify)
 (require-package 'multi-term)
 (require-package 'org)
