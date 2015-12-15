@@ -98,10 +98,10 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
-;; (add-hook 'after-init-hook
-;;           (lambda ()
-;;             (message "* --[ Init completed in %.2fms ]--"
-;;                      (sanityinc/time-subtract-millis after-init-time before-init-time))))
+(add-hook 'after-init-hook
+          (lambda ()
+            (message "* --[ Init completed in %.2fms ]--"
+                     (benchmark-init/node-duration-adjusted benchmark-init/durations-tree))))
 
 (provide '.emacs)
 ;;; .emacs ends here
