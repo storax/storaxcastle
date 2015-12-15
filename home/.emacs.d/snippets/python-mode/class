@@ -2,7 +2,7 @@
 # name: Class with sphinx doc
 # key: class
 # group: Definitions
-# expand-env: ((yas-indent-line nil) (yas-wrap-around-region 'nil))
+# expand-env: ((yas-indent-line 'nil) (yas-wrap-around-region 'nil) (curcol 0))
 # contributor: Orestis Markou
 # contributor: Nishio Hirokazu
 # contributor: Yasser GonzÃ¡lez FernÃ¡ndez <yglez@uh.cu>

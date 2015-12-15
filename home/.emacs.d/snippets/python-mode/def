@@ -2,7 +2,7 @@
 # name: Function with sphinx doc
 # key: def
 # group: Definitions
-# expand-env: ((yas-indent-line 'nil) (yas-wrap-around-region 'nil))
+# expand-env: ((yas-indent-line 'nil) (yas-wrap-around-region 'nil) (curcol 0))
 # contributor: Michael Markert <markert.michael@googlemail.com>
 # contributor: David Zuber <zuber.david@gmx.de>
 # This seems hacky. It is. I hate lisp. This is the only way i found to get indentation right

@@ -2,7 +2,7 @@
 # name: Method with sphinx doc
 # key: defm
 # group: Definitions
-# expand-env: ((yas-indent-line 'nil) (yas-wrap-around-region 'nil))
+# expand-env: ((yas-indent-line 'nil) (yas-wrap-around-region 'nil) (curcol 0))
 # contributor: Michael Markert <markert.michael@googlemail.com>
 # contributor: David Zuber <zuber.david@gmx.de>
 # --
