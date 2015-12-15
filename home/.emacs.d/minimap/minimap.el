@@ -578,6 +578,7 @@ active region."
   "Synchronize overlays between base and minimap buffer.
 Apply semantic overlays or face enlargement if necessary."
   (interactive)
+  (when (get-buffer (minimap-buffer-name))
   (let ((baseov (overlays-in (point-min) (point-max)))
         (semantic (and (boundp 'semantic-version)
                        (semantic-active-p)))
@@ -609,7 +610,7 @@ Apply semantic overlays or face enlargement if necessary."
     ;; Semantic overlays
     (when (and semantic
                minimap-display-semantic-overlays)
-      (minimap-apply-semantic-overlays)))
+      (minimap-apply-semantic-overlays))))
   (minimap-update t))
 
 (defun minimap-get-sync-properties (ov)
