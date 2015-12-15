@@ -37,7 +37,7 @@
   (with-temp-buffer (insert-file-contents file) (buffer-string)))
 
 (defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
-(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
+(defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
 
 (defun dz-color-svg (image color1)
   (format image color1))
