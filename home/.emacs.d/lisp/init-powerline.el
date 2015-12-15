@@ -43,6 +43,14 @@
   :group 'flycheck-faces)
 
 ;;;; Custom Functions
+;; Read svg image
+(defvar dz-icon-folder
+  (expand-file-name "icons" user-emacs-directory))
+
+(defvar dz-mark-github
+  (create-image (expand-file-name "mark-github.svg" dz-icon-folder)))
+
+;; Save the current remote url in each buffer
 (setq remoteurl "")
 
 (defun setremoteurl ()
