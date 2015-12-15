@@ -81,7 +81,7 @@ forwards, if negative)."
 (defun flycheck-use-my-load-path ()
   (setq-default flycheck-emacs-lisp-load-path load-path))
 
-(add-hook after-init-hook 'flycheck-emacs-lisp-load-path)
+(add-hook 'after-init-hook 'flycheck-use-my-load-path)
 
 ;; Override default flycheck triggers
 (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled)
