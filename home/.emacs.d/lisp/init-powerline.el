@@ -42,6 +42,20 @@
   "Face for the modeline in buffers with only Flycheck info."
   :group 'flycheck-faces)
 
+;;;; Custom Function
+
+;; Read svg image
+(defun dz-string-from-file (file)
+  (with-temp-buffer (insert-file-contents file) (buffer-string)))
+
+(defvar dz-icon-folder
+  (expand-file-name "icons" user-emacs-directory))
+
+(defvar dz-mark-github
+  (concat "data:image/svg+xml;base64,"
+	  (dz-string-from-file
+	   (expand-file-name "mark-github.svg" dz-icon-folder))))
+
 ;; Custom Version Control indicator
 (defpowerline powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
@@ -54,12 +68,12 @@
 	    (format " %s:%s" backend
 		    (vc-working-revision (buffer-file-name (current-buffer)) backend)))))
       (format-mode-line '(vc-mode vc-mode)))))
+
 ;; Github logo
 (defpowerline powerline-github
   (when (or (string-match "magit" (format "%s" major-mode)) (and (buffer-file-name (current-buffer)) vc-mode))
-    (if (string-match "github.com" (car (magit-git-lines "config" "--get" "remote.origin.url")))
+    (if (string-match "github.com" (magit-get "remote" "origin" "url"))
 	(char-to-string #xf00a))))
-
 
 ;; Hide some minor modes
 (require-package 'diminish)
@@ -149,5 +163,4 @@
 ;; (powerline-nano-theme)
 (my-powerline-center-theme)
 
-(powerline-raw global-mode-string)
 (provide 'init-powerline)
