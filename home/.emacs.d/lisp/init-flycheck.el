@@ -96,7 +96,7 @@ forwards, if negative)."
 		  (face (cond (no-errors 'error)
 			      (no-warnings 'warning)
 			      (t 'success))))
-	     (propertize (if (and no-errors no-warnings)
+	     (propertize (if (or no-errors no-warnings)
 			     (format " %s%s/%s"
 				     (char-to-string #x2717)
 				     (or no-errors 0)
