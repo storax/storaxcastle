@@ -43,6 +43,8 @@
   :group 'flycheck-faces)
 
 ;;;; Custom Functions
+
+(defvar dz-github-mark (create-image "~/.emacs.d/icons/mark-github.svg"))
 ;; Save the current remote url in each buffer
 (setq remoteurl "")
 
@@ -56,8 +58,7 @@
 (defpowerline powerline-github
   (when (or (string-match "magit" (format "%s" major-mode)) (and (buffer-file-name (current-buffer)) vc-mode))
     (if (string-match "github.com" remoteurl)
-	(char-to-string #xf00a))))
-
+	(propertize " " 'display dz-github-mark))))
 
 ;; Custom Version Control indicator
 (defpowerline powerline-vc
