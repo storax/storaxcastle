@@ -1,3 +1,4 @@
+(require 'cl)
 (require-package 'powerline)
 (require 'powerline)
 
@@ -41,10 +42,10 @@
   "Hacky stuff. The svgs have %s for fill color."
   (format image color1))
 
-(defun dz-create-image (image color1)
+(defun dz-create-image (img color1 &optional (acc 90))
   "Creates a image out of the a image data and colors it.
   ascent 90 seems to work best. mask is for transparent background"
-  (create-image (dz-color-svg image color1) 'svg t :ascent 90 :mask 'heuristic))
+  (create-image (dz-color-svg img color1) 'svg t :ascent acc :mask 'heuristic))
 
 (defun dz-create-image-with-face (image face)
   "Read the font color and appy it to the image"
