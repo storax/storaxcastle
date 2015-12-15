@@ -32,19 +32,21 @@
   "Face for the modeline in buffers with only Flycheck info."
   :group 'flycheck-faces)
 
-(defface powerline-octicon-active
-  '((t :foundry "github" :family "octicons" :inherit powerline-active1))
-  "Face for the modeline in buffers with only Flycheck info."
-  :group 'flycheck-faces)
-
-(defface powerline-octicon-inactive
-  '((t :foundry "github" :family "octicons" :inherit powerline-inactive1))
-  "Face for the modeline in buffers with only Flycheck info."
-  :group 'flycheck-faces)
-
 ;;;; Custom Functions
+(defun dz-string-from-file (file)
+  (with-temp-buffer (insert-file-contents file) (buffer-string)))
 
-(defvar dz-github-mark (create-image "~/.emacs.d/icons/mark-github.svg" nil nil :ascent 90 :mask 'heuristic))
+(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
+
+(defun dz-color-svg (image color1)
+  (format image color1))
+
+(defun dz-create-image (image color1)
+  (create-image (dz-color-svg image color1) 'svg t :ascent 90 :mask 'heuristic))
+
+(defun dz-create-image-with-face (image face)
+  (dz-create-image image (face-attribute face :foreground nil t)))
+
 ;; Save the current remote url in each buffer
 (defvar remoteurl)
 (setq remoteurl "")
@@ -55,11 +57,11 @@
 
 (add-hook 'after-change-major-mode-hook 'setremoteurl)
 
-;; Github logo
-(defpowerline powerline-github
+;; Github or Bitbucket logo
+(defpowerline powerline-remote
   (when (or (string-match "magit" (format "%s" major-mode)) (and (buffer-file-name (current-buffer)) vc-mode))
     (if (string-match "github.com" remoteurl)
-	(propertize " " 'display dz-github-mark))))
+	(propertize " " 'display (dz-create-image-with-face dz-github-mark-data face)))))
 
 ;; Custom Version Control indicator
 (defpowerline powerline-vc
@@ -115,7 +117,6 @@
 					 ((flycheck-running-p)
 					  'powerline-inactive2)
 					 ('powerline-inactive2))))
-			  (face3 (if active 'powerline-octicon-active 'powerline-octicon-inactive))
 			  (separator-left (intern (format "powerline-%s-%s"
 							  (powerline-current-separator)
 							  (car powerline-default-separator-dir))))
@@ -129,7 +130,7 @@
 				     (funcall separator-left mode-line face1)
 				     (powerline-narrow face1 'l)
 				     (powerline-raw " " face1)
-				     (powerline-github face3)
+				     (powerline-remote face1)
 				     (powerline-vc face1)))
 			  (rhs (list (powerline-raw global-mode-string face1 'r)
 				     (powerline-raw "%4l" face1 'r)
