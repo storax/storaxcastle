@@ -42,7 +42,7 @@
   "Hacky stuff. The svgs have %s for fill color."
   (format image color1))
 
-(defun dz-create-image (img color1 &optional (acc 90))
+(cl-defun dz-create-image (img color1 &optional (acc 90))
   "Creates a image out of the a image data and colors it.
   ascent 90 seems to work best. mask is for transparent background"
   (create-image (dz-color-svg img color1) 'svg t :ascent acc :mask 'heuristic))
