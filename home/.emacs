@@ -14,17 +14,22 @@
 ;;----------------------------------------------------------------------------
 ;; Prerequisites
 ;;----------------------------------------------------------------------------
-(message "* --[ Loading my Emacs init file ]--")
+(defun log-init-message (msg)
+  "Fabulous formatting of MSG."
+  (message (format "###* -----[ %s ]----- *###" msg)))
+
+(log-init-message "Loading my Emacs init file")
 
 ;; Personal Info
 (setq user-full-name "David Zuber"
       user-mail-address "zuber.david@gmx.de")
 
 ;; uptimes
+(defvar emacs-load-start-time)
 (setq emacs-load-start-time (current-time))
 
 ;; turn on Common Lisp support
-(require 'cl)  ; provides useful things like `loop' and `setf'
+(require 'cl-lib)  ; provides useful things like `loop' and `setf'
 
 ;; Dir with all the actual configs
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
