@@ -31,7 +31,7 @@
      :isearch t
      )))
 
-(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
+(setq yas-prompt-functions nil)
 
 ;;; Hooks
 (add-hook 'term-mode-hook (lambda()
