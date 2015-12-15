@@ -42,20 +42,7 @@
   "Face for the modeline in buffers with only Flycheck info."
   :group 'flycheck-faces)
 
-;;;; Custom Function
-
-;; Read svg image
-(defun dz-string-from-file (file)
-  (with-temp-buffer (insert-file-contents file) (buffer-string)))
-
-(defvar dz-icon-folder
-  (expand-file-name "icons" user-emacs-directory))
-
-(defvar dz-mark-github
-  (concat "data:image/svg+xml;base64,"
-	  (dz-string-from-file
-	   (expand-file-name "mark-github.svg" dz-icon-folder))))
-
+;;;; Custom Functions
 ;; Custom Version Control indicator
 (defpowerline powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
@@ -69,12 +56,6 @@
 		    (vc-working-revision (buffer-file-name (current-buffer)) backend)))))
       (format-mode-line '(vc-mode vc-mode)))))
 
-;; Github logo
-(defpowerline powerline-github
-  (when (or (string-match "magit" (format "%s" major-mode)) (and (buffer-file-name (current-buffer)) vc-mode))
-    (if (string-match "github.com" (magit-get "remote" "origin" "url"))
-	(char-to-string #xf00a))))
-
 ;; Hide some minor modes
 (require-package 'diminish)
 (require 'diminish)
@@ -87,7 +68,7 @@
 (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-current-column-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
 
-;; Custom theme with flycheck color
+;;;; Custom theme with flycheck color
 (defun my-powerline-center-theme ()
   "Setup a mode-line with major and minor modes centered."
   (interactive)
@@ -116,7 +97,6 @@
 					 ((flycheck-running-p)
 					  'powerline-inactive2)
 					 ('powerline-inactive2))))
-			  (face3 (if active 'powerline-octicon-active 'powerline-octicon-inactive))
 			  (separator-left (intern (format "powerline-%s-%s"
 							  (powerline-current-separator)
 							  (car powerline-default-separator-dir))))
@@ -130,7 +110,6 @@
 				     (funcall separator-left mode-line face1)
 				     (powerline-narrow face1 'l)
 				     (powerline-raw " " face1)
-				     (powerline-github face3)
 				     (powerline-vc face1)))
 			  (rhs (list (powerline-raw global-mode-string face1 'r)
 				     (powerline-raw "%4l" face1 'r)
