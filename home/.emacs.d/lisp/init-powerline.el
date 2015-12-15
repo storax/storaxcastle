@@ -44,7 +44,7 @@
 
 ;;;; Custom Functions
 
-(defvar dz-github-mark (create-image "~/.emacs.d/icons/mark-github.svg" nil nil :ascent 90))
+(defvar dz-github-mark (create-image "~/.emacs.d/icons/mark-github.svg" nil nil :ascent 90 :mask 'heuristic))
 ;; Save the current remote url in each buffer
 (defvar remoteurl)
 (setq remoteurl "")
