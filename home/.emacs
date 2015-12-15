@@ -47,6 +47,7 @@
 ;;----------------------------------------------------------------------------
 ;; Bootstrapping config
 ;;----------------------------------------------------------------------------
+(log-init-message "Bootstrapping config")
 (setq custom-file (expand-file-name ".emacs-custom.el" "~/"))
 (require 'init-utils)
 ;; Package Installing - calls package-initialize
@@ -55,6 +56,7 @@
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific modes and features
 ;;----------------------------------------------------------------------------
+(log-init-message "Loading features")
 (require-package 'marmalade)
 (require-package 'epc)
 (require 'init-basic)
@@ -93,6 +95,7 @@
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
 ;;----------------------------------------------------------------------------
+(log-init-message "Running server")
 (require 'server)
 (unless (server-running-p)
   (server-start))
@@ -100,6 +103,7 @@
 ;;----------------------------------------------------------------------------
 ;; Variables customized via the interactive 'customize' interface
 ;;----------------------------------------------------------------------------
+(log-init-message "Loading custom file")
 (when (file-exists-p custom-file)
   (load custom-file))
 
