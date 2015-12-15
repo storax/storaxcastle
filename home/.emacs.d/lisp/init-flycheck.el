@@ -15,6 +15,7 @@
 (require 'compile)
 (require 'flycheck)
 
+;;; Flashing mode line and cycle navigation
 (defvar my-modeline-flash-color "#af00d7")
 
 (defun my-indicate-error-nav-wrapped (direction)
@@ -75,6 +76,12 @@ forwards, if negative)."
 (global-set-key (kbd "C-c C-p") 'my-previous-error-wrapped)
 (global-set-key (kbd "C-c C-n") 'my-next-error-wrapped)
 
+
+;;; Fix lisp checker to use load path
+(defun flycheck-use-my-load-path ()
+  (setq-default flycheck-emacs-lisp-load-path load-path))
+
+(add-hook after-init-hook 'flycheck-emacs-lisp-load-path)
 
 ;; Override default flycheck triggers
 (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled)
