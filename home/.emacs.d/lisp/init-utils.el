@@ -85,10 +85,12 @@
         (error "Cannot open tramp file")
       (browse-url (concat "file://" file-name)))))
 
-;; Edit 
+;;----------------------------------------------------------------------------
+;; Edit the dotemacs file
+;;----------------------------------------------------------------------------
 (defun edit-dotemacs ()
   (interactive)
-  (find-file-existing "~/.emacs")
+  (find-file-existing user-init-file)
   (widen)
   (helm-imenu))
 
