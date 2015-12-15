@@ -43,6 +43,21 @@
   :group 'flycheck-faces)
 
 ;;;; Custom Functions
+(setq remoteurl "")
+
+(defun setremoteurl ()
+  (make-local-variable 'remoteurl)
+  (setq remoteurl (magit-get "remote" "origin" "url")))
+
+(add-hook 'after-change-major-mode-hook 'setremoteurl)
+
+;; Github logo
+(defpowerline powerline-github
+  (when (or (string-match "magit" (format "%s" major-mode)) (and (buffer-file-name (current-buffer)) vc-mode))
+    (if (string-match "github.com" remoteurl)
+	(char-to-string #xf00a))))
+
+
 ;; Custom Version Control indicator
 (defpowerline powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
@@ -97,6 +112,7 @@
 					 ((flycheck-running-p)
 					  'powerline-inactive2)
 					 ('powerline-inactive2))))
+			  (face3 (if active 'powerline-octicon-active 'powerline-octicon-inactive))
 			  (separator-left (intern (format "powerline-%s-%s"
 							  (powerline-current-separator)
 							  (car powerline-default-separator-dir))))
@@ -110,6 +126,7 @@
 				     (funcall separator-left mode-line face1)
 				     (powerline-narrow face1 'l)
 				     (powerline-raw " " face1)
+				     (powerline-github face3)
 				     (powerline-vc face1)))
 			  (rhs (list (powerline-raw global-mode-string face1 'r)
 				     (powerline-raw "%4l" face1 'r)
