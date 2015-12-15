@@ -14,9 +14,9 @@
 ;;----------------------------------------------------------------------------
 ;; Prerequisites
 ;;----------------------------------------------------------------------------
-(defun log-init-message (msg)
-  "Fabulous formatting of MSG."
-  (message (format "###* -----[ %s ]----- *###" msg)))
+(defun log-init-message (msg &rest args)
+  "Fabulous formatting of MSG and ARGS"
+  (message (format "###* =====[ %s ]===== *###" (apply #'format msg args))))
 
 (log-init-message "Loading my Emacs init file")
 
@@ -105,7 +105,7 @@
 
 (add-hook 'after-init-hook
           (lambda ()
-            (message "* --[ Init completed in %.2fms ]--"
+            (log-init-message "Init completed in %.2fms"
                      (benchmark-init/node-duration-adjusted benchmark-init/durations-tree))))
 
 (provide '.emacs)
