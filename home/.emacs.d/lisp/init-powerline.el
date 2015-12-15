@@ -1,4 +1,4 @@
-(require 'cl)
+(require 'cl-lib)
 (require-package 'powerline)
 (require 'powerline)
 
