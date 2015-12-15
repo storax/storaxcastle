@@ -37,6 +37,7 @@
   (with-temp-buffer (insert-file-contents file) (buffer-string)))
 
 (defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
+(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
 
 (defun dz-color-svg (image color1)
   (format image color1))
@@ -60,8 +61,10 @@
 ;; Github or Bitbucket logo
 (defpowerline powerline-remote
   (when (or (string-match "magit" (format "%s" major-mode)) (and (buffer-file-name (current-buffer)) vc-mode))
-    (if (string-match "github.com" remoteurl)
-	(propertize " " 'display (dz-create-image-with-face dz-github-mark-data face)))))
+    (cond ((string-match "github.com" remoteurl)
+	   (propertize " " 'display (dz-create-image-with-face dz-github-mark-data face)))
+	  ((string-match "bitbucket.org" remoteurl)
+	   (propertize " " 'display (dz-create-image-with-face dz-bitbucket-mark-data face))))))
 
 ;; Custom Version Control indicator
 (defpowerline powerline-vc
