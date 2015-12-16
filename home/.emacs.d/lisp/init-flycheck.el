@@ -105,10 +105,9 @@ forwards, if negative)."
 			      (t 'success))))
 	     (if (or no-errors no-warnings)
 		 (format " %s%s/%s"
-			 (char-to-string #x2717)
+			 (char-to-string #x00D7)
 			 (or no-errors 0)
-			 (or no-warnings 0))
-	       (format " %s" (char-to-string #x2713)))))
+			 (or no-warnings 0)))))
 	  (`interrupted " -")
 	  (`suspicious " ?"))))
 
