@@ -75,6 +75,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-latex-sectioning-5-face ((t (:inherit fixed-pitch :foreground "#CC9393" :weight bold))))
+ '(mode-line ((t (:background "#2B2B2B" :foreground "#8FB28F" :box nil :overline "dim gray"))))
+ '(mode-line-inactive ((t (:background "#383838" :foreground "#5F7F5F" :box nil :overline "dim gray"))))
  '(powerline-inactive1 ((t (:inherit mode-line-inactive :background "#4F4F4F" :foreground "#7F9F7F"))))
  '(powerline-inactive2 ((t (:inherit mode-line-inactive :background "#6F6F6F" :foreground "#9FC29F"))))
  '(region ((t (:background "#222222"))))
