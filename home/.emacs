@@ -85,6 +85,7 @@
 (require 'init-powerline)
 (require 'init-latex)
 (require 'init-compilation)
+(require 'init-projectile)
 ;(require 'init-minimap)
 (require 'init-spotify)
 (require-package 'multi-term)
