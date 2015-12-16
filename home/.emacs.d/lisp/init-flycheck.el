@@ -93,9 +93,9 @@ forwards, if negative)."
       '(:eval
 	(pcase flycheck-last-status-change
 	  (`not-checked nil)
-	  (`no-checker (propertize " -" 'face 'warning))
-	  (`running (propertize " ✷" 'face 'success))
-	  (`errored (propertize (format " %s" (char-to-string #x2717)) 'face 'error))
+	  (`no-checker " -")
+	  (`running " ✷")
+	  (`errored (format " %s" (char-to-string #x2717)))
 	  (`finished
 	   (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
 		  (no-errors (cdr (assq 'error error-counts)))
@@ -103,15 +103,14 @@ forwards, if negative)."
 		  (face (cond (no-errors 'error)
 			      (no-warnings 'warning)
 			      (t 'success))))
-	     (propertize (if (or no-errors no-warnings)
-			     (format " %s%s/%s"
-				     (char-to-string #x2717)
-				     (or no-errors 0)
-				     (or no-warnings 0))
-			   (format " %s" (char-to-string #x2713)))
-			 'face face)))
+	     (if (or no-errors no-warnings)
+		 (format " %s%s/%s"
+			 (char-to-string #x2717)
+			 (or no-errors 0)
+			 (or no-warnings 0))
+	       (format " %s" (char-to-string #x2713)))))
 	  (`interrupted " -")
-	  (`suspicious '(propertize " ?" 'face 'warning)))))
+	  (`suspicious " ?"))))
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
