@@ -14,6 +14,11 @@
 		     elpy-module-pyvenv
 		     elpy-module-yasnippet))
 
+(setq elpy-rpc-backend "rope")
+
+;;; Test runner
+(setq elpy-test-runner 'elpy-test-pytest-runner)
+
 ;;Python indent right
 ;;set in python-mode. yas fallback has to be call-other-command.
 ;;the default python-indent-region sucks IMO
