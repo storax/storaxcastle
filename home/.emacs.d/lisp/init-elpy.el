@@ -95,7 +95,7 @@ This requires the tox package to be installed and pytest as test suite in tox."
 (global-set-key (kbd "M-n") 'python-nav-forward-block)
 (define-key python-mode-map (kbd "<tab>") 'shift-or-indent)
 (define-key python-mode-map (kbd "C-<tab>") 'dabbrev-or-indent-left)
-(define-key elpy-mode-map (kbd "C-c c t") 'elpy-test-tox-pytest-runner-default)
+(define-key elpy-mode-map (kbd "C-c t") 'elpy-test-tox-pytest-runner-default)
 (require 'init-flycheck)
 (define-key elpy-mode-map (kbd "C-c C-p") 'my-previous-error-wrapped)
 (define-key elpy-mode-map (kbd "C-c C-n") 'my-next-error-wrapped)
