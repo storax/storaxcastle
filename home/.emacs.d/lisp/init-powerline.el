@@ -103,6 +103,7 @@
 (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode))
 (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-current-column-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
+(eval-after-load "projectile" '(diminish 'projectile-mode))
 
 ;;;; Custom theme with flycheck color
 (defun my-powerline-center-theme ()
