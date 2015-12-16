@@ -89,7 +89,8 @@
       (format-mode-line '(vc-mode vc-mode)))))
 
 (defpowerline powerline-pyvenv
-  (format " (%s)"(file-name-nondirectory (or pyvenv-virtual-env-name ""))))
+  (if pyvenv-virtual-env-name
+      (format " (%s)"(file-name-nondirectory (or pyvenv-virtual-env-name "")))))
 
 ;; Hide some minor modes
 (require-package 'diminish)
