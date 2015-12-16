@@ -55,13 +55,8 @@ This requires the tox package to be installed."
 (put 'elpy-test-tox-runner 'elpy-test-runner-p t)
 
 (defvar pytest-history (list "-vv"))
-(defun elpy-test-tox-pytest-runner (top file module test)
-  "Test the project using tox and pytest.
 
-This requires the tox package to be installed and pytest as test suite in tox."
-  (interactive (elpy-test-at-point))
-  (let ((toxargs (read-string "Tox arguments: " (car tox-history) 'tox-history))
-	(pytestargs (read-string "py.test arguments: " (car pytest-history) 'pytest-history)))
+(defun run-tox-pytest (toxargs pytestargs top file module test)
   (projectile-with-default-dir (projectile-project-root)
     (cond
      (test
@@ -71,7 +66,26 @@ This requires the tox package to be installed and pytest as test suite in tox."
      (module
       (async-shell-command (format "tox %s -- py.test %s %s" toxargs pytestargs file)))
      (t
-      (async-shell-command (format "tox %s -- py.test %s" toxargs pytestargs)))))))
+      (async-shell-command (format "tox %s -- py.test %s" toxargs pytestargs))))))
+
+(defun elpy-test-tox-pytest-runner (top file module test)
+  "Test the project using tox and pytest.
+
+This requires the tox package to be installed and pytest as test suite in tox."
+  (interactive (elpy-test-at-point))
+  (let ((toxargs (read-string "Tox arguments: " (car tox-history) 'tox-history))
+	(pytestargs (read-string "py.test arguments: " (car pytest-history) 'pytest-history)))
+  (run-tox-pytest toxargs pytestargs top file module test)))
+
+(defun elpy-test-tox-pytest-runner-default (top file module test)
+  "Test the project using tox and pytest.
+
+This requires the tox package to be installed and pytest as test suite in tox."
+  (interactive (elpy-test-at-point))
+  (let ((toxargs (car tox-history))
+	(pytestargs (car pytest-history)))
+  (run-tox-pytest toxargs pytestargs top file module test)))
+
 (put 'elpy-test-tox-pytest-runner 'elpy-test-runner-p t)
 (setq elpy-test-runner 'elpy-test-tox-pytest-runner)
 
@@ -81,10 +95,11 @@ This requires the tox package to be installed and pytest as test suite in tox."
 (global-set-key (kbd "M-n") 'python-nav-forward-block)
 (define-key python-mode-map (kbd "<tab>") 'shift-or-indent)
 (define-key python-mode-map (kbd "C-<tab>") 'dabbrev-or-indent-left)
-
+(define-key elpy-mode-map (kbd "C-c c t") 'elpy-test-tox-pytest-runner-default)
 (require 'init-flycheck)
 (define-key elpy-mode-map (kbd "C-c C-p") 'my-previous-error-wrapped)
 (define-key elpy-mode-map (kbd "C-c C-n") 'my-next-error-wrapped)
+
 
 
 ;;; Hooks
