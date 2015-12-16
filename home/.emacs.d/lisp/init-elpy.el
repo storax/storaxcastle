@@ -39,6 +39,14 @@
 				(region-end))
     (dabbrev-expand)))
 
+
+;;Python testing with tox
+(defvar tox-history)
+(defun tox (args)
+  (interactive (list (read-string "Tox arguments: " (car tox-history) 'tox-history)))
+  (projectile-with-default-dir (projectile-project-root)
+    (async-shell-command (format "tox %s" args))))
+
 ;;; Key bindings
 ;;Python mode move around code blocks
 (global-set-key (kbd "M-p") 'python-nav-backward-block)
