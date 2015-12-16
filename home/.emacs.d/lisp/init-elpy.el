@@ -7,11 +7,12 @@
 (elpy-enable)
 
 ;; Only use these modules
-(setq elpy-modules '(elpy-module-eldoc
-		     elpy-module-pyvenv
+(setq elpy-modules '(elpy-module-sane-defaults
+		     elpy-module-company
+		     elpy-module-eldoc
 		     elpy-module-highlight-indentation
-		     elpy-module-yasnippet
-		     elpy-module-sane-defaults))
+		     elpy-module-pyvenv
+		     elpy-module-yasnippet))
 
 ;;Python indent right
 ;;set in python-mode. yas fallback has to be call-other-command.
