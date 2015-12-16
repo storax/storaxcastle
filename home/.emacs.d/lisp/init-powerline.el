@@ -88,6 +88,9 @@
 		    (vc-working-revision (buffer-file-name (current-buffer)) backend)))))
       (format-mode-line '(vc-mode vc-mode)))))
 
+(defpowerline powerline-pyvenv
+  (format " (%s)"(file-name-nondirectory (or pyvenv-virtual-env-name ""))))
+
 ;; Hide some minor modes
 (require-package 'diminish)
 (require 'diminish)
@@ -159,6 +162,7 @@
 					(powerline-process face2)
 					(powerline-raw ":" face2)
 					(powerline-minor-modes face2 'l)
+					(powerline-pyvenv face2)
 					(powerline-raw " " face2)
 					(funcall separator-right face2 face1))))
 		     (concat (powerline-render lhs)
