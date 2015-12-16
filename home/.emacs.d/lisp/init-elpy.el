@@ -65,10 +65,9 @@ This requires the tox package to be installed and pytest as test suite in tox."
   (projectile-with-default-dir (projectile-project-root)
     (cond
      (test
-      (let ((test-list (split-string test "\\.")))
 	(async-shell-command (concat
-			      (format "tox %s -- py.test %s -k \"%s\" %s " toxargs pytestargs
-			      (mapconcat #'identity test-list " or ") file)))))
+			      (format "tox %s -- py.test %s -k \"%s\" %s "
+				      toxargs pytestargs test file))))
      (module
       (async-shell-command (format "tox %s -- py.test %s %s" toxargs pytestargs file)))
      (t
