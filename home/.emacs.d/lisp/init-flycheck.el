@@ -95,7 +95,7 @@ forwards, if negative)."
 	  (`not-checked nil)
 	  (`no-checker " -")
 	  (`running " ✷")
-	  (`errored (format " %s" (char-to-string #x2717)))
+	  (`errored (format " %s" (char-to-string #x00D7)))
 	  (`finished
 	   (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
 		  (no-errors (cdr (assq 'error error-counts)))
