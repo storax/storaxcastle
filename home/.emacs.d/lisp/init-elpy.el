@@ -16,9 +16,6 @@
 
 (setq elpy-rpc-backend "rope")
 
-;;; Test runner
-(setq elpy-test-runner 'elpy-test-pytest-runner)
-
 ;;Python indent right
 ;;set in python-mode. yas fallback has to be call-other-command.
 ;;the default python-indent-region sucks IMO
@@ -39,13 +36,45 @@
 				(region-end))
     (dabbrev-expand)))
 
-
+;;; Test runner
 ;;Python testing with tox
-(defvar tox-history)
+(defvar tox-history (list))
 (defun tox (args)
   (interactive (list (read-string "Tox arguments: " (car tox-history) 'tox-history)))
   (projectile-with-default-dir (projectile-project-root)
     (async-shell-command (format "tox %s" args))))
+
+(defun elpy-test-tox-runner (top file module test)
+  "Test the project using tox.
+
+This requires the tox package to be installed."
+  (interactive (elpy-test-at-point))
+  (let (toxargs '(read-string "Tox arguments: " (car tox-history) 'tox-history))
+  (projectile-with-default-dir (projectile-project-root)
+    (async-shell-command (format "tox %s" toxargs)))))
+(put 'elpy-test-tox-runner 'elpy-test-runner-p t)
+
+(defvar pytest-history (list "-vv"))
+(defun elpy-test-tox-pytest-runner (top file module test)
+  "Test the project using tox and pytest.
+
+This requires the tox package to be installed and pytest as test suite in tox."
+  (interactive (elpy-test-at-point))
+  (let ((toxargs (read-string "Tox arguments: " (car tox-history) 'tox-history))
+	(pytestargs (read-string "py.test arguments: " (car pytest-history) 'pytest-history)))
+  (projectile-with-default-dir (projectile-project-root)
+    (cond
+     (test
+      (let ((test-list (split-string test "\\.")))
+	(async-shell-command (concat
+			      (format "tox %s -- py.test %s -k \"%s\" %s " toxargs pytestargs
+			      (mapconcat #'identity test-list " or ") file)))))
+     (module
+      (async-shell-command (format "tox %s -- py.test %s %s" toxargs pytestargs file)))
+     (t
+      (async-shell-command (format "tox %s -- py.test %s" toxargs pytestargs)))))))
+(put 'elpy-test-tox-pytest-runner 'elpy-test-runner-p t)
+(setq elpy-test-runner 'elpy-test-tox-pytest-runner)
 
 ;;; Key bindings
 ;;Python mode move around code blocks
