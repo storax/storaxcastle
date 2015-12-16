@@ -1,7 +1,7 @@
 # -*- coding: utf-8 mode: snippet -*-
 # name: Propery
 # key: prop
-# expand-env: ((yas-indent-line 'nil) (yas-wrap-around-region 'nil) (curcol 0))
+# expand-env: ((yas-indent-line 'nil) (yas-wrap-around-region 'nil))
 # contributor: David Zuber <zuber.david@gmx.de>
 # --
 @property
