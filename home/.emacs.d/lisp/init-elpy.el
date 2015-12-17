@@ -8,13 +8,12 @@
 
 ;; Only use these modules
 (setq elpy-modules '(elpy-module-sane-defaults
-		     elpy-module-company
 		     elpy-module-eldoc
 		     elpy-module-highlight-indentation
 		     elpy-module-pyvenv
 		     elpy-module-yasnippet))
 
-(setq elpy-rpc-backend "rope")
+(setq elpy-rpc-backend "jedi")
 
 ;;Python indent right
 ;;set in python-mode. yas fallback has to be call-other-command.
