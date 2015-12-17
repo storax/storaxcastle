@@ -29,12 +29,12 @@
 ;;C-Tab für autovervollstaendigung
 ;;If region is active shift region left (in python mode)
 ;;if not dabbrev expand
-(defun dabbrev-or-indent-left ()
-  (interactive)
+(defun dabbrev-or-indent-left (ARG)
+  (interactive "*P")
   (if mark-active
       (python-indent-shift-left (region-beginning)
 				(region-end))
-    (dabbrev-expand)))
+    (dabbrev-expand arg)))
 
 ;;; Test runner
 ;;Python testing with tox
