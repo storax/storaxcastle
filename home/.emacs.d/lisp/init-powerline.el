@@ -45,12 +45,12 @@
 (cl-defun dz-create-image (img color1 &optional (acc 90))
   "Creates a image out of the a image data and colors it.
   ascent 90 seems to work best. mask is for transparent background"
-  (create-image (dz-color-svg img color1) 'svg t :ascent acc :mask 'heuristic))
+  (create-image (dz-color-svg img color1) nil t :ascent acc :mask 'heuristic))
 
 (cl-defun dz-create-image-plain (file &optional (acc 85))
   "Creates a image.
   mask is for transparent background"
-  (create-image (dz-string-from-file file) 'svg t :ascent acc :mask 'heuristic))
+  (create-image (dz-string-from-file file) nil t :ascent acc :mask 'heuristic))
 
 (defun dz-create-image-with-face (image face)
   "Read the font color and appy it to the image"
