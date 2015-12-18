@@ -1,5 +1,5 @@
 ;; Save travis in each buffer
-(defvar travis "")
+(defvar travis nil)
 
 (defun settravis ()
   "Save travis"
