@@ -62,11 +62,17 @@
 (defun powerline-picture (text img)
   (powerline-wrap-picture text (dz-create-image-plain img)))
 
+(defun powerline-png (text img)
+  (powerline-wrap-picture text (find-image `((:type png :file ,img :ascent 85 :background "#FF0000" :mask 'heuristic)))))
+
+
 ;; Icons
-(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
+(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/maork-github.svg"))
 (defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
 (defvar dz-aqua-left-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-left-mesh.svg"))
 (defvar dz-aqua-right-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-right-mesh.svg"))
+(defvar dz-snowflake-left (powerline-png "  " "~/.emacs.d/icons/snowflake-left.png"))
+(defvar dz-snowflake-right (powerline-png "  " "~/.emacs.d/icons/snowflake-right.png"))
 
 ;; Save the current remote url in each buffer
 (defvar remoteurl "")
@@ -153,7 +159,7 @@
 			  (separator-right (intern (format "powerline-%s-%s"
 							   (powerline-current-separator)
 							   (cdr powerline-default-separator-dir))))
-			  (lhs (list dz-aqua-left-mesh
+			  (lhs (list dz-snowflake-left
 				     (powerline-raw "%*" nil 'l)
 				     (powerline-buffer-size nil 'l)
 				     (powerline-buffer-id nil 'l)
@@ -170,7 +176,7 @@
 				     (funcall separator-right face1 mode-line)
 				     (powerline-raw " ")
 				     (powerline-raw "%6p" nil 'r)
-				     dz-aqua-right-mesh))
+				     dz-snowflake-right))
 			  (center (list (powerline-raw " " face1)
 					(funcall separator-left face1 face2)
 					(when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
