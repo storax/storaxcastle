@@ -158,7 +158,7 @@
 			  (separator-right (intern (format "powerline-%s-%s"
 							   (powerline-current-separator)
 							   (cdr powerline-default-separator-dir))))
-			  (lhs (list dz-snowflake-left
+			  (lhs (list dz-aqua-left-mesh
 				     (powerline-raw "%*" nil 'l)
 				     (powerline-buffer-size nil 'l)
 				     (powerline-buffer-id nil 'l)
@@ -175,7 +175,7 @@
 				     (funcall separator-right face1 mode-line)
 				     (powerline-raw " ")
 				     (powerline-raw "%6p" nil 'r)
-				     dz-snowflake-right))
+				     dz-aqua-right-mesh))
 			  (center (list (powerline-raw " " face1)
 					(funcall separator-left face1 face2)
 					(when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
