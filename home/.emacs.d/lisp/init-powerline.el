@@ -47,6 +47,11 @@
   ascent 90 seems to work best. mask is for transparent background"
   (create-image (dz-color-svg img color1) 'svg t :ascent acc :mask 'heuristic))
 
+(cl-defun dz-create-image-plain (img &optional (acc 85))
+  "Creates a image out of the a image data and colors it.
+  ascent 90 seems to work best. mask is for transparent background"
+  (create-image img 'svg t :ascent acc :mask 'heuristic))
+
 (defun dz-create-image-with-face (image face)
   "Read the font color and appy it to the image"
   (dz-create-image image (face-attribute face :foreground nil t)))
@@ -54,6 +59,7 @@
 ;; Icons
 (defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
 (defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
+(defvar dz-aqua-mesh-data (dz-string-from-file "~/.emacs.d/icons/aqua-mesh.svg"))
 
 ;; Save the current remote url in each buffer
 (defvar remoteurl "")
@@ -66,6 +72,15 @@
 ;; Kinda like each time we open a file we set the remoteurl
 ;; then we can display an icon in the modeline accordingly
 (add-hook 'after-change-major-mode-hook 'setremoteurl)
+
+;; Pretty picture
+(defun powerline-picture (img)
+  (propertize " " 'display (dz-create-image-plain img)))
+
+(defun powerline-aqua-left-picture ()
+  (powerline-picture dz-aqua-mesh-data))
+
+
 
 ;; Github or Bitbucket logo
 (defpowerline powerline-remote
@@ -140,7 +155,8 @@
 			  (separator-right (intern (format "powerline-%s-%s"
 							   (powerline-current-separator)
 							   (cdr powerline-default-separator-dir))))
-			  (lhs (list (powerline-raw "%*" nil 'l)
+			  (lhs (list (powerline-aqua-left-picture)
+				     (powerline-raw "%*" nil 'l)
 				     (powerline-buffer-size nil 'l)
 				     (powerline-buffer-id nil 'l)
 				     (powerline-raw " ")
