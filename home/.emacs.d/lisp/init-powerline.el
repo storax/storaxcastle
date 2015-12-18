@@ -56,16 +56,17 @@
   "Read the font color and appy it to the image"
   (dz-create-image image (face-attribute face :foreground nil t)))
 
-(defun powerline-wrap-picture (img)
-  (propertize " " 'display img))
+(defun powerline-wrap-picture (text img)
+  (propertize text 'display img))
 
-(defun powerline-picture (img)
-  (powerline-wrap-picture (dz-create-image-plain img)))
+(defun powerline-picture (text img)
+  (powerline-wrap-picture text (dz-create-image-plain img)))
 
 ;; Icons
 (defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
 (defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
-(defvar dz-aqua-left-mesh (powerline-picture  "~/.emacs.d/icons/aqua-left-mesh.svg"))
+(defvar dz-aqua-left-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-left-mesh.svg"))
+(defvar dz-aqua-right-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-right-mesh.svg"))
 
 ;; Save the current remote url in each buffer
 (defvar remoteurl "")
@@ -168,7 +169,8 @@
 				     (powerline-raw "%3c" face1 'r)
 				     (funcall separator-right face1 mode-line)
 				     (powerline-raw " ")
-				     (powerline-raw "%6p" nil 'r)))
+				     (powerline-raw "%6p" nil 'r)
+				     dz-aqua-right-mesh))
 			  (center (list (powerline-raw " " face1)
 					(funcall separator-left face1 face2)
 					(when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
