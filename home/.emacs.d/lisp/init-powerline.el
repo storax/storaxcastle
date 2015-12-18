@@ -65,7 +65,7 @@
 ;; Icons
 (defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
 (defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
-(defvar dz-aqua-mesh (powerline-picture  "~/.emacs.d/icons/aqua-mesh.svg"))
+(defvar dz-aqua-left-mesh (powerline-picture  "~/.emacs.d/icons/aqua-left-mesh.svg"))
 
 ;; Save the current remote url in each buffer
 (defvar remoteurl "")
@@ -152,7 +152,7 @@
 			  (separator-right (intern (format "powerline-%s-%s"
 							   (powerline-current-separator)
 							   (cdr powerline-default-separator-dir))))
-			  (lhs (list dz-aqua-mesh
+			  (lhs (list dz-aqua-left-mesh
 				     (powerline-raw "%*" nil 'l)
 				     (powerline-buffer-size nil 'l)
 				     (powerline-buffer-id nil 'l)
