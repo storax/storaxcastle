@@ -63,11 +63,10 @@
   (powerline-wrap-picture text (dz-create-image-plain img)))
 
 (defun powerline-png (text img)
-  (powerline-wrap-picture text (find-image `((:type png :file ,img :ascent 85 :background "#FF0000" :mask 'heuristic)))))
-
+  (powerline-wrap-picture text (find-image `((:type png :file ,img :ascent 85)))))
 
 ;; Icons
-(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/maork-github.svg"))
+(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
 (defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
 (defvar dz-aqua-left-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-left-mesh.svg"))
 (defvar dz-aqua-right-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-right-mesh.svg"))
