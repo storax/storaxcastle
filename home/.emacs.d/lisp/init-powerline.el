@@ -113,7 +113,7 @@
 
 ;; Travis CI
 (defpowerline powerline-travis
-  (if travis (concat dz-travis " ")))
+  (if (travis-get-status) (concat dz-travis " ")))
 
 ;; Hide some minor modes
 (require-package 'diminish)

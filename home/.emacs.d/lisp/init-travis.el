@@ -18,27 +18,35 @@
 
 (defun travis-builds ()
   (let ((ownerrepo (get-owner-repo)))
-    (travis-get-builds (car ownerrepo) (nth 1 ownerrepo))))
+    (if ownerrepo
+	(travis-get-builds (car ownerrepo) (nth 1 ownerrepo)))))
 
 (defun travis-last-build-status ()
   (aref (travis-builds) 0))
 
 ;; Save travis in each buffer
-(defvar travis nil)
+(defvar travis-statuse nil)
 
-(defun setinalist (aliste key value)
-  (let ((cell (assoc key list)))
-    (if cell
-	(setcdr cell value)
-      (add-to-list 'aliste '(key . value)))))
+(defun travis-set-status (key value)
+  (let ((cell (assoc key travis-statuse)))
+    (if (not cell)
+      (add-to-list 'travis-statuse (cons key value)))))
 
+(defun travis-fetch-status ()
+  "Save travis status"
+  (let ((prj (projectile-project-p))
+	(status (assoc (projectile-project-p) travis-statuse)))
+    (if prj
+	(if (not status)
+	    (if (file-exists-p (concat prj ".travis.yml"))
+		(travis-set-status prj (travis-last-build-status))
+	      (travis-set-status prj "NOTRAVIS"))))))
 
-(defun settravis ()
-  "Save travis"
-  (let ((prj (projectile-project-p)))
-	(if (and prj (not (assoc prj travis)))
-	    (setinalist travis prj (travis-last-build-status)))))
-
-(add-hook 'after-change-major-mode-hook 'settravis)
+(defun travis-get-status ()
+  "Get travis status"
+  (let ((status (assoc (projectile-project-p) travis-statuse)))
+    (if (and status (not (equal (cdr status) "NOTRAVIS")))
+	status)))
+;(add-hook 'find-file-hook 'settravis)
 
 (provide 'init-travis)
