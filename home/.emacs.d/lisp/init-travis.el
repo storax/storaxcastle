@@ -20,16 +20,24 @@
   (let ((ownerrepo (get-owner-repo)))
     (travis-get-builds (car ownerrepo) (nth 1 ownerrepo))))
 
+(defun travis-last-build-status ()
+  (aref (travis-builds) 0))
+
 ;; Save travis in each buffer
 (defvar travis nil)
 
+(defun setinalist (aliste key value)
+  (let ((cell (assoc key list)))
+    (if cell
+	(setcdr cell value)
+      (add-to-list 'aliste '(key . value)))))
+
+
 (defun settravis ()
   "Save travis"
-  (make-local-variable 'travis)
   (let ((prj (projectile-project-p)))
-	(if prj
-	    (setq travis (file-exists-p (concat prj ".travis.yml"))))))
-
+	(if (and prj (not (assoc prj travis)))
+	    (setinalist travis prj (travis-last-build-status)))))
 
 (add-hook 'after-change-major-mode-hook 'settravis)
 
