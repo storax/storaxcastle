@@ -48,15 +48,15 @@
   (shell-command (format "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.OpenUri \"string:%s\""
 			 href)))
 
-(defun spotify-next ()
+(defmulti-method spotify-next 'gnu/linux ()
   (interactive)
   (shell-command "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.Next"))
 
-(defun spotify-previous ()
+(defmulti-method spotify-previous 'gnu/linux ()
   (interactive)
   (shell-command "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.Previous"))
 
-(defun spotify-playpause ()
+(defmulti-method spotify-playpause 'gnu/linux ()
   (interactive)
   (shell-command "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.PlayPause"))
 
