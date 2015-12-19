@@ -48,13 +48,25 @@
   (shell-command (format "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.OpenUri \"string:%s\""
 			 href)))
 
+(defmulti spotify-next ()
+  "Play the next spotify song."
+  system-type)
+
 (defmulti-method spotify-next 'gnu/linux ()
   (interactive)
   (shell-command "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.Next"))
 
+(defmulti spotify-previous ()
+  "Play the previous spotify song."
+  system-type)
+
 (defmulti-method spotify-previous 'gnu/linux ()
   (interactive)
   (shell-command "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.Previous"))
+
+(defmulti spotify-playpause ()
+  "Toggle play/pause."
+  system-type)
 
 (defmulti-method spotify-playpause 'gnu/linux ()
   (interactive)
@@ -82,7 +94,7 @@
   system-type)
 
 (defmulti-method spotify-toggle-shuffle 'darwin ()
-  (shell-command 
+  (shell-command
        (format "osascript -e 'tell application %S to set the shuffling to not shuffling'" "Spotify")))
 
 (defun spotify-search (search-term)
