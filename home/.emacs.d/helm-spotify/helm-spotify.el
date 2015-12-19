@@ -48,28 +48,25 @@
   (shell-command (format "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.OpenUri \"string:%s\""
 			 href)))
 
-(defmulti spotify-next ()
+(defmulti spotify--next ()
   "Play the next spotify song."
   system-type)
 
-(defmulti-method spotify-next 'gnu/linux ()
-  (interactive)
+(defmulti-method spotify--next 'gnu/linux ()
   (shell-command "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.Next"))
 
-(defmulti spotify-previous ()
+(defmulti spotify--previous ()
   "Play the previous spotify song."
   system-type)
 
-(defmulti-method spotify-previous 'gnu/linux ()
-  (interactive)
+(defmulti-method spotify--previous 'gnu/linux ()
   (shell-command "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.Previous"))
 
-(defmulti spotify-playpause ()
+(defmulti spotify--playpause ()
   "Toggle play/pause."
   system-type)
 
-(defmulti-method spotify-playpause 'gnu/linux ()
-  (interactive)
+(defmulti-method spotify--playpause 'gnu/linux ()
   (shell-command "dbus-send --session --type=method_call --dest=com.spotify.qt / org.freedesktop.MediaPlayer2.PlayPause"))
 
 
@@ -161,6 +158,22 @@
   "Start spotify."
   (interactive)
   (shell-command "pgrep \"spotify\" > /dev/null || spotify &"))
+
+(defun spotify-next ()
+  "Play the next spotify song."
+  (interactive)
+  (spotify--next))
+
+(defun spotify-previous ()
+  "Play the previous spotify song."
+  (interactive)
+  (spotify--previous))
+
+(defun spotify-playpause ()
+  "Toggle play/pause."
+  (interactive)
+  (spotify--playpause))
+
 
 (provide 'helm-spotify)
 ;;; helm-spotify.el ends here
