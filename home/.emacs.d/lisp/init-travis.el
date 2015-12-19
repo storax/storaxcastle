@@ -47,6 +47,7 @@
   (let ((status (assoc (projectile-project-p) travis-statuse)))
     (if (and status (not (equal (cdr status) "NOTRAVIS")))
 	status)))
-;(add-hook 'find-file-hook 'settravis)
+
+(add-hook 'find-file-hook 'travis-fetch-status)
 
 (provide 'init-travis)
