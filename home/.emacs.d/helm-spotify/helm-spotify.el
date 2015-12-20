@@ -157,7 +157,8 @@
 (defun start-spotify ()
   "Start spotify."
   (interactive)
-  (shell-command "pgrep \"spotify\" > /dev/null || spotify &"))
+  (let ((process-connection-type nil))
+       (async-shell-command "pgrep \"spotify\" > /dev/null || spotify &; exit 0")))
 
 (defun spotify-next ()
   "Play the next spotify song."
