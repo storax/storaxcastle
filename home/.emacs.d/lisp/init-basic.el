@@ -18,6 +18,10 @@
 (setq require-final-newline t)
 (setq undo-limit 10000)
 
+;; String doesnt require to escape all the stuff
+(require 're-builder)
+(setq reb-re-syntax 'string)
+
 ;;;; Global Builtin Modes
 (global-hl-line-mode t)
 (global-subword-mode 1)
