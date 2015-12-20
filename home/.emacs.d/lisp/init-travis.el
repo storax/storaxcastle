@@ -1,19 +1,14 @@
 (require 'url)
-(require 'deferred)
 
 (defun travis-get-builds-deferred (prj owner repository)
   "Get build status deferred."
   (lexical-let ((proj prj))
     (let ((a-url (format "https://api.travis-ci.org/repos/%s/%s/builds" owner repository))
-	  (cb (lambda (buf)
-	      (let ((j (with-current-buffer buf
-			 (goto-char url-http-end-of-headers) (json-read))))
-		(kill-buffer buf)
-		(travis-set-status proj (aref j 0))))))
-    (deferred:$
-      (deferred:url-retrieve a-url)
-      (deferred:nextc it
-	  cb)))))
+	  (cb (lambda (stuff)
+		(goto-char url-http-end-of-headers)
+		(let ((j (json-read)))
+		  (travis-set-status proj (aref j 0))))))
+      (url-retrieve a-url cb))))
 
 (defun get-owner-repo ()
   "Get owner and repo"
