@@ -6,13 +6,10 @@
   (lexical-let ((proj prj))
     (let ((a-url (format "https://api.travis-ci.org/repos/%s/%s/builds" owner repository))
 	  (cb (lambda (buf)
-	    (travis-set-status
-	     proj
-	     (aref
-	      (with-current-buffer buf
-		(goto-char url-http-end-of-headers) (json-read))
-	      0))
-	  (kill-buffer buf))))
+	      (let ((j (with-current-buffer buf
+			 (goto-char url-http-end-of-headers) (json-read))))
+		(kill-buffer buf)
+		(travis-set-status proj (aref j 0))))))
     (deferred:$
       (deferred:url-retrieve a-url)
       (deferred:nextc it
@@ -20,11 +17,11 @@
 
 (defun get-owner-repo ()
   "Get owner and repo"
-  (let ((remote (magit-get "remote" "origin" "url"))
-	(match (string-match "github.com\\(:\\|/\\)\\(.*\\)/\\(.*\\)\\(.git\\)?" (magit-get "remote" "origin" "url"))))
-    (if match
-	(list (substring remote (match-beginning 2) (match-end 2))
-	      (substring remote (match-beginning 3) (match-end 3))))))
+  (let ((remote (magit-get "remote" "origin" "url")))
+	(let ((match (string-match "github.com\\(:\\|/\\)\\(.+\\)/\\([^\\\\.]+\\)\\(\\\\.git\\)?" remote)))
+	  (if match
+	      (list (substring remote (match-beginning 2) (match-end 2))
+		    (substring remote (match-beginning 3) (match-end 3)))))))
 
 ;; Save travis in each buffer
 (defvar travis-statuse nil)
