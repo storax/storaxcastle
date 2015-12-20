@@ -1,12 +1,22 @@
 (require 'url)
+(require 'deferred)
 
-(defun travis-get-builds (owner repository)
-  "Get build status of owner/repository from travis-ci"
-  (let ((a-url (format "https://api.travis-ci.org/repos/%s/%s/builds" owner repository)))
-    (with-current-buffer
-	(url-retrieve-synchronously a-url)
-      (goto-char url-http-end-of-headers)
-      (json-read))))
+(defun travis-get-builds-deferred (prj owner repository)
+  "Get build status deferred."
+  (lexical-let ((proj prj))
+    (let ((a-url (format "https://api.travis-ci.org/repos/%s/%s/builds" owner repository))
+	  (cb (lambda (buf)
+	    (travis-set-status
+	     proj
+	     (aref
+	      (with-current-buffer buf
+		(goto-char url-http-end-of-headers) (json-read))
+	      0))
+	  (kill-buffer buf))))
+    (deferred:$
+      (deferred:url-retrieve a-url)
+      (deferred:nextc it
+	  cb)))))
 
 (defun get-owner-repo ()
   "Get owner and repo"
@@ -15,14 +25,6 @@
     (if match
 	(list (substring remote (match-beginning 2) (match-end 2))
 	      (substring remote (match-beginning 3) (match-end 3))))))
-
-(defun travis-builds ()
-  (let ((ownerrepo (get-owner-repo)))
-    (if ownerrepo
-	(travis-get-builds (car ownerrepo) (nth 1 ownerrepo)))))
-
-(defun travis-last-build-status ()
-  (aref (travis-builds) 0))
 
 ;; Save travis in each buffer
 (defvar travis-statuse nil)
@@ -35,11 +37,12 @@
 (defun travis-fetch-status ()
   "Save travis status"
   (let ((prj (projectile-project-p))
-	(status (assoc (projectile-project-p) travis-statuse)))
+	(status (assoc (projectile-project-p) travis-statuse))
+	(ownerrepo (get-owner-repo)))
     (if prj
 	(if (not status)
 	    (if (file-exists-p (concat prj ".travis.yml"))
-		(travis-set-status prj (travis-last-build-status))
+		(travis-get-builds-deferred prj (car ownerrepo) (nth 1 ownerrepo))
 	      (travis-set-status prj "NOTRAVIS"))))))
 
 (defun travis-get-status ()
@@ -48,6 +51,9 @@
     (if (and status (not (equal (cdr status) "NOTRAVIS")))
 	status)))
 
-(add-hook 'find-file-hook 'travis-fetch-status)
+(defun travis-add-hook ()
+  (add-hook 'find-file-hook 'travis-fetch-status))
+
+(add-hook 'after-init-hook 'travis-add-hook)
 
 (provide 'init-travis)
