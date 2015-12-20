@@ -70,7 +70,6 @@
 (defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
 (defvar dz-aqua-left-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-left-mesh.svg"))
 (defvar dz-aqua-right-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-right-mesh.svg"))
-(defvar dz-travis (powerline-picture "  " "~/.emacs.d/icons/travis.svg"))
 ;(defvar dz-snowflake-left (powerline-png "  " "~/.emacs.d/icons/snowflake-left.png"))
 ;(defvar dz-snowflake-right (powerline-png "  " "~/.emacs.d/icons/snowflake-right.png"))
 
@@ -110,10 +109,6 @@
 (defpowerline powerline-pyvenv
   (if pyvenv-virtual-env-name
       (format " (%s)"(file-name-nondirectory (or pyvenv-virtual-env-name "")))))
-
-;; Travis CI
-(defpowerline powerline-travis
-  (if (travis-get-status) (concat dz-travis " ")))
 
 ;; Hide some minor modes
 (require-package 'diminish)
@@ -171,7 +166,6 @@
 				     (funcall separator-left mode-line face1)
 				     (powerline-narrow face1 'l)
 				     (powerline-raw " " face1)
-				     (powerline-travis face1)
 				     (powerline-remote face1)
 				     (powerline-vc face1)))
 			  (rhs (list (powerline-raw global-mode-string face1 'r)

@@ -80,7 +80,6 @@
 (require 'init-whitespace)
 (require 'init-yasnippet)
 (require 'init-flycheck)
-(require 'init-travis)
 (require 'init-projectile)
 (require 'init-elpy)
 (require 'init-magit)
