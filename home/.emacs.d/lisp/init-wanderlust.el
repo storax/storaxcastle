@@ -15,3 +15,5 @@
 ;(setq wl-smtp-posting-server "your.smtp.example.com")
 ;; NNTP server for news posting. Default: 'nil'
 ;(setq wl-nntp-posting-server "your.nntp.example.com")
+
+(provide 'init-wanderlust)
