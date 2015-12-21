@@ -1,16 +1,16 @@
 # -*- conf-unix -*-
-GMAIL{
-   %INBOX:zuber.david@imap.gmx.net:993!         "In"
-   %[GMX]/Sent:zuber.david@imap.gmx.net:993!  "Sent"
-   %[GMX]/Draft:zuber.david@imap.gmx.net:993! "Draft"
-   %[GMX]/Trash:zuber.david@imap.gmx.net:993! "Trash"
-   %[GMX]/Spam:zuber.david@imap.gmx.net:993!  "Spam"
+GMX{
+   %INBOX:"zuber.david@gmx.de"@imap.gmx.net:993! "In"
+   %Sent:"zuber.david@gmx.de"@imap.gmx.net:993! "Sent"
+   %Draft:"zuber.david@gmx.de"@imap.gmx.net:993! "Draft"
+   %Trash:"zuber.david@gmx.de"@imap.gmx.net:993! "Trash"
+   %Spam:"zuber.david@gmx.de"@imap.gmx.net:993! "Spam"
 }
 
 WEB{
-   %INBOX:zuber.david@imap.web.de:993!         "In"
-   %[GMX]/Sent:zuber.david@imap.web.de:993!  "Sent"
-   %[GMX]/Draft:zuber.david@imap.web.de:993! "Draft"
-   %[GMX]/Trash:zuber.david@imap.web.de:993! "Trash"
-   %[GMX]/Spam:zuber.david@imap.web.de:993!  "Spam"
+   %INBOX:zuber.david@imap.web.de:993! "In"
+   %Sent:zuber.david@imap.web.de:993! "Sent"
+   %Draft:zuber.david@imap.web.de:993! "Draft"
+   %Trash:zuber.david@imap.web.de:993! "Trash"
+   %Spam:zuber.david@imap.web.de:993! "Spam"
 }

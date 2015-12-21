@@ -32,4 +32,4 @@
 	 (wl-smtp-connection-type . 'starttls)
 	 (wl-smtp-posting-port . 587)
 	 (wl-local-domain . "web.de")
-	 (wl-message-id-domain . "smtp.web.de")))))
+	 (wl-message-id-domain . "smtp.web.de"))))
