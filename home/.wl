@@ -17,7 +17,7 @@
 (setq wl-template-alist
       '(("gmx"
 	 (wl-from . "David Zuber <zuber.david@gmx.de>")
-	 (wl-smtp-posting-user . "zuber.david")
+	 (wl-smtp-posting-user . "zuber.david@gmx.de")
 	 (wl-smtp-posting-server . "mail.gmx.net")
 	 (wl-smtp-authenticate-type ."plain")
 	 (wl-smtp-connection-type . 'starttls)
@@ -33,7 +33,6 @@
 	 (wl-smtp-posting-port . 587)
 	 (wl-local-domain . "web.de")
 	 (wl-message-id-domain . "smtp.web.de"))))
-
 
 (setq
   ;elmo-maildir-folder-path "~/Maildir"          ;; where i store my mail
