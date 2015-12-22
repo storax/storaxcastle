@@ -4,13 +4,14 @@ GMX{
    %Sent:"zuber.david@gmx.de"@imap.gmx.net:993! "Sent"
    %Draft:"zuber.david@gmx.de"@imap.gmx.net:993! "Draft"
    %Trash:"zuber.david@gmx.de"@imap.gmx.net:993! "Trash"
-   %Spam:"zuber.david@gmx.de"@imap.gmx.net:993! "Spam"
+   %Spamverdacht:"zuber.david@gmx.de"@imap.gmx.net:993! "Spam"
 }
 
 WEB{
    %INBOX:zuber.david@imap.web.de:993! "In"
+   %Unbekannt:zuber.david@imap.web.de:993! "Unknown"
    %Sent:zuber.david@imap.web.de:993! "Sent"
-   %Draft:zuber.david@imap.web.de:993! "Draft"
+   %Entwurf:zuber.david@imap.web.de:993! "Draft"
    %Trash:zuber.david@imap.web.de:993! "Trash"
-   %Spam:zuber.david@imap.web.de:993! "Spam"
+   %"Unerw%26APw-nscht":zuber.david@imap.web.de:993! "Spam"
 }
