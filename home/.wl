@@ -33,3 +33,44 @@
 	 (wl-smtp-posting-port . 587)
 	 (wl-local-domain . "web.de")
 	 (wl-message-id-domain . "smtp.web.de"))))
+
+
+(setq
+  ;elmo-maildir-folder-path "~/Maildir"          ;; where i store my mail
+  mime-edit-split-message nil                   ;; Dont split attachements in many messages
+  mime-view-buttons-visible nil
+  wl-stay-folder-window t                       ;; show the folder pane (left)
+  wl-folder-window-width 25                     ;; toggle on/off with 'i'
+  wl-summary-showto-folder-regexp ".*Sent.*"    ;; Show to instead of from
+  ;; note: all below are dirs (Maildirs) under elmo-maildir-folder-path
+  ;; the '.'-prefix is for marking them as maildirs
+  wl-fcc-force-as-read t               ;; mark sent messages as read
+
+  ;; check this folder periodically, and update modeline
+  ;wl-biff-check-folder-list '(".todo") ;; check every 180 seconds
+				       ;; (default: wl-biff-check-interval)
+
+  ;; hide many fields from message buffers
+  wl-message-ignored-field-list '("^.*:")
+  wl-message-visible-field-list
+  '("^\\(To\\|Cc\\):"
+    "^Subject:"
+    "^\\(From\\|Reply-To\\):"
+    "^Organization:"
+    "^\\(Posted\\|Date\\):"
+    )
+  wl-message-sort-field-list
+  '("^From"
+    "^Organization:"
+    "^X-Attribution:"
+     "^Subject"
+     "^Date"
+     "^To"
+     "^Cc")
+  wl-summary-line-format
+  "%n%T%P %D.%M.%Y %h:%m %t%[%17(%c %f%) %] %s"
+  mime-view-type-subtype-score-alist
+  '(((text . plain) . 4)
+    ((text . enriched) . 3)
+    ((text . html) . 2)
+    ((text . richtext) . 1)))
