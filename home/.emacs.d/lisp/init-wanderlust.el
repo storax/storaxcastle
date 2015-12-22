@@ -46,4 +46,14 @@
 	    (verify . mc-wl-verify-signature))))
 	mc-modes-alist)))
 
+(defun wlr ()
+  (interactive)
+  (with-selected-frame (make-frame-command)
+    (delete-other-windows)
+    (toggle-frame-maximized)
+    (wl)
+    (wl-folder-jump-folder "%INBOX:\"zuber.david@gmx.de\"@imap.gmx.net:993!")
+    (wl-folder-jump-to-current-entity)
+    (frame-configuration-to-register ?w)))
+
 (provide 'init-wanderlust)
