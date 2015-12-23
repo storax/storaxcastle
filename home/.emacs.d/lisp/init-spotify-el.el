@@ -16,6 +16,15 @@
 (defvar storax/spotify-helm-current-playlist nil
   "Current playlist if viewing tracks of playlist.")
 
+(defvar storax/spotify-helm-last-result nil
+  "Last result of getting tracks if viewing tracks of playlist.")
+(make-variable-buffer-local 'storax/spotify-helm-last-result)
+
+(defvar storax/spotify-helm-current-tracks nil
+  "Current tracks if viewing tracks of playlist.")
+(make-variable-buffer-local 'storax/spotify-helm-current-tracks)
+
+
 (defun storax/start-spotify ()
   "Start spotify."
   (interactive)
@@ -53,16 +62,19 @@
 
 (defun storax/spotify-helm-get-playlist-tracks ()
   "Go to the tracks of the current playlist."
-  (mapcar (lambda (track)
-	    (cons (storax/spotify-format-track-hash (gethash 'track track))
-		  (gethash 'track track)))
-	  (gethash 'items
-  (spotify-api-call "GET"
-		    (car (cdr (split-string
-			  (gethash 'href
-				   (gethash 'tracks
-					    storax/spotify-helm-current-playlist))
-			  spotify-api-endpoint)))))))
+  (let ((href (if storax/spotify-helm-last-result
+		  (gethash 'next storax/spotify-helm-last-result)
+		(gethash 'href (gethash 'tracks storax/spotify-helm-current-playlist)))))
+    (if (and href
+	     (setq storax/spotify-helm-last-result
+		   (spotify-api-call "GET"
+				     (car (cdr (split-string href spotify-api-endpoint))))))
+	(setq storax/spotify-helm-current-tracks (append storax/spotify-helm-current-tracks
+		(mapcar (lambda (track)
+			  (cons (storax/spotify-format-track-hash (gethash 'track track))
+				(gethash 'track track)))
+			(gethash 'items storax/spotify-helm-last-result)))))
+    storax/spotify-helm-current-tracks))
 
 (defun storax/spotify-track-search (search-term)
   "Search spotify for SEARCH-TERM, returning the results as a Lisp structure."
@@ -185,7 +197,8 @@
   "Search Spotify tracks with helm."
   (interactive)
   (helm :sources '(storax/spotify-helm-track-search-source)
-	:buffer "*Spotify: Search tracks*"))
+	:buffer "*Spotify: Search tracks*"
+	:prompt "Tracks: "))
 
 ;;;###autoload
 (defvar storax/spotify-helm-playlist-search-source
@@ -202,7 +215,8 @@
   "Search Spotify playlists with helm."
   (interactive)
   (helm :sources '(storax/spotify-helm-playlist-search-source)
-	:buffer "*Spotify: Search playlists*"))
+	:buffer "*Spotify: Search playlists*"
+	:prompt "Playlists: "))
 
 ;;;###autoload
 (defvar storax/spotify-helm-my-playlists-source
@@ -216,7 +230,8 @@
   "Show my Spotify playlists with helm."
   (interactive)
   (helm :sources '(storax/spotify-helm-my-playlists-source)
-	:buffer "*Spotify: My playlists*"))
+	:buffer "*Spotify: My playlists*"
+	:prompt "Playlists: "))
 
 (defvar storax/spotify-helm-playlist-tracks-source
   '((name . "Spotify")
@@ -228,7 +243,9 @@
   "Show my Spotify playlists with helm."
   (helm :sources '(storax/spotify-helm-playlist-tracks-source)
 	:buffer (format "*Spotify: Tracks of playlists: %s *"
-			(gethash 'name storax/spotify-helm-current-playlist))))
+			(gethash 'name storax/spotify-helm-current-playlist))
+	:promt "Tracks: "
+	:candidate-number-limit nil))
 
 (provide 'init-spotify-el)
 ;;; init-spotify-el ends here
