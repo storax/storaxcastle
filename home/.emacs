@@ -14,19 +14,19 @@
 ;;----------------------------------------------------------------------------
 ;; Prerequisites
 ;;----------------------------------------------------------------------------
-(defun log-init-message (msg &rest args)
-  "Fabulous formatting of MSG and ARGS"
+(defun storax/log-init-message (msg &rest args)
+  "Fabulous formatting of MSG and ARGS."
   (message (format "###* =====[ %s ]===== *###" (apply #'format msg args))))
 
-(log-init-message "Loading my Emacs init file")
+(storax/log-init-message "Loading my Emacs init file")
 
 ;; Personal Info
 (setq user-full-name "David Zuber"
       user-mail-address "zuber.david@gmx.de")
 
 ;; uptimes
-(defvar emacs-load-start-time)
-(setq emacs-load-start-time (current-time))
+(defvar storax/emacs-load-start-time)
+(setq storax/emacs-load-start-time (current-time))
 
 ;; turn on Common Lisp support
 (require 'cl-lib)  ; provides useful things like `loop' and `setf'
@@ -38,16 +38,16 @@
 ;;----------------------------------------------------------------------------
 ;; Temporarily reduce garbage collection during startup
 ;;----------------------------------------------------------------------------
-(defconst sanityinc/initial-gc-cons-threshold gc-cons-threshold
+(defconst storax/initial-gc-cons-threshold gc-cons-threshold
   "Initial value of `gc-cons-threshold' at start-up time.")
 (setq gc-cons-threshold (* 128 1024 1024))
 (add-hook 'after-init-hook
-          (lambda () (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
+          (lambda () (setq gc-cons-threshold storax/initial-gc-cons-threshold)))
 
 ;;----------------------------------------------------------------------------
 ;; Bootstrapping config
 ;;----------------------------------------------------------------------------
-(log-init-message "Bootstrapping config")
+(storax/log-init-message "Bootstrapping config")
 (setq custom-file (expand-file-name ".emacs-custom.el" "~/"))
 (require 'init-utils)
 ;; Package Installing - calls package-initialize
@@ -56,7 +56,7 @@
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific modes and features
 ;;----------------------------------------------------------------------------
-(log-init-message "Loading features")
+(storax/log-init-message "Loading features")
 (require-package 'marmalade)
 (require-package 'epc)
 (require 'init-basic)
@@ -98,7 +98,7 @@
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
 ;;----------------------------------------------------------------------------
-(log-init-message "Running server")
+(storax/log-init-message "Running server")
 (require 'server)
 (unless (server-running-p)
   (server-start))
@@ -106,13 +106,13 @@
 ;;----------------------------------------------------------------------------
 ;; Variables customized via the interactive 'customize' interface
 ;;----------------------------------------------------------------------------
-(log-init-message "Loading custom file")
+(storax/log-init-message "Loading custom file")
 (when (file-exists-p custom-file)
   (load custom-file))
 
 (add-hook 'after-init-hook
           (lambda ()
-            (log-init-message "Init completed in %.2fms"
+            (storax/log-init-message "Init completed in %.2fms"
                      (benchmark-init/node-duration-adjusted benchmark-init/durations-tree))))
 
 (provide '.emacs)
