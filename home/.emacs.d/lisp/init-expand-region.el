@@ -1,7 +1,17 @@
+;;; init-expand-region --- Configure expand region
+
+;;; Commentary:
+
+;;; Code:
+
 (require-package 'expand-region)
 
-;;Expand Region
+;;----------------------------------------------------------------------------
+;; Key Bindings
+;;----------------------------------------------------------------------------
+
 (global-set-key (kbd "C-.") 'er/expand-region)
 (global-set-key (kbd "C-,") 'er/contract-region)
 
 (provide 'init-expand-region)
+;;; init-expand-region ends here

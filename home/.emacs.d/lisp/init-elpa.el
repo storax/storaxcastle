@@ -1,9 +1,13 @@
-;;;; init-elpa --- Find and load the correct package.el
+;;; init-elpa --- Load packages on demmand
+
 ;;; Commentary:
+
 ;;; Code:
 (require 'package)
 
-;;; Standard package repositories
+;;----------------------------------------------------------------------------
+;; Standard package repositories
+;;----------------------------------------------------------------------------
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
@@ -12,19 +16,9 @@
 ;; use it.
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 
-(setq package-archive-enable-alist '(("melpa" deft magit)))
-
-;; If gpg cannot be found, signature checking will fail, so we
-;; conditionally enable it according to whether gpg is available. We
-;; re-run this check once $PATH has been configured
-(defun sanityinc/package-maybe-enable-signatures ()
-  (setq package-check-signature (when (executable-find "gpg") 'allow-unsigned)))
-
-(sanityinc/package-maybe-enable-signatures)
-(after-load 'init-exec-path
-  (sanityinc/package-maybe-enable-signatures))
-
-;;; On-demand installation of packages
+;;----------------------------------------------------------------------------
+;; On-demand installation of packages
+;;----------------------------------------------------------------------------
 
 (defun require-package (package &optional min-version no-refresh)
   "Install given PACKAGE, optionally requiring MIN-VERSION.
@@ -57,3 +51,4 @@ locate PACKAGE."
 (package-initialize)
 
 (provide 'init-elpa)
+;;; init-elpa ends here
