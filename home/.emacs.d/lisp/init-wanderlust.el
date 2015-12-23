@@ -1,3 +1,6 @@
+;;; init-wanderlust --- Configure the mail client
+;;; Commentary:
+;;; Code:
 (require-package 'wanderlust)
 
 ;; autoload configuration
@@ -17,25 +20,42 @@
 ;(setq wl-nntp-posting-server "your.nntp.example.com")
 
 (require 'mailcrypt)
-(load-library "mailcrypt") ; provides "mc-setversion"
+;(load-library "mailcrypt") ; provides "mc-setversion"
 (mc-setversion "gpg")    ; for PGP 2.6 (default); also "5.0" and "gpg"
 
 (add-hook 'wl-summary-mode-hook 'mc-install-read-mode)
 (add-hook 'wl-mail-setup-hook 'mc-install-write-mode)
 
-(defun storax/wl-auto-decrypt-message ()
+(defun storax/wl-decrypt-message ()
+  "Decrypt the current buffer via mc-decrypt and show errors."
+  (interactive)
   (condition-case err
       (mc-decrypt)
   (error (message "%s" (error-message-string err)))))
 
 (add-hook 'mime-view-mode-hook 'storax/wl-auto-decrypt-message)
 
+;; Nicer window config
+(defvar storax/wl-default-initial-folder nil
+  "If not nil jump to this folder when using storax/wlr.")
+(setq storax/wl-default-initial-folder "%INBOX:\"zuber.david@gmx.de\"@imap.gmx.net:993!")
+
+(defvar storax/wl-window-config-register ?w
+  "The register to save the window configuration.")
+
 (defun storax/wlr ()
+  "Show the mail client.
+
+Delete other windows, open wanderlust and jump to a folder.
+Then open summary and save the window configuration to w"
   (interactive)
   (delete-other-windows)
   (wl)
-  (wl-folder-jump-folder "%INBOX:\"zuber.david@gmx.de\"@imap.gmx.net:993!")
+  (if storax/wl-default-initial-folder
+      (wl-folder-jump-folder storax/wl-default-initial-folder))
   (wl-folder-jump-to-current-entity)
-  (window-configuration-to-register ?w))
+  (if storax/wl-window-config-register
+      (window-configuration-to-register storax/wl-window-config-register)))
 
 (provide 'init-wanderlust)
+;;; init-wanderlust.el ends here
