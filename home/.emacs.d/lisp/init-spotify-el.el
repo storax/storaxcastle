@@ -11,6 +11,7 @@
 
 ;; Do not use values larger than 50 for better compatibility across endpoints
 (setq spotify-api-search-limit 50)
+(setq spotify-transport 'dbus)
 
 (defun storax/spotify-connect ()
   "Start a new Spotify session."
