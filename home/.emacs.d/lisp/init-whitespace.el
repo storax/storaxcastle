@@ -6,7 +6,7 @@
 
 (require-package 'whitespace-cleanup-mode)
 
-(defun trailing-whitespace ()
+(defun storax/trailing-whitespace ()
   "Turn on display of trailing whitespace in this buffer."
   (setq show-trailing-whitespace t))
 
@@ -15,7 +15,7 @@
 		yaml-mode-hook
 		rst-mode-hook
 		emacs-lisp-mode-hook))
-  (add-hook hook #'trailing-whitespace))
+  (add-hook hook #'storax/trailing-whitespace))
 
 ;; (defun sanityinc/no-trailing-whitespace ()
 ;;   "Turn off display of trailing whitespace in this buffer."
