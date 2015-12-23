@@ -13,6 +13,13 @@
 (setq spotify-api-search-limit 50)
 (setq spotify-transport 'dbus)
 
+(defun storax/start-spotify ()
+  "Start spotify."
+  (interactive)
+  (let ((process-connection-type nil))
+    (async-shell-command "pgrep \"spotify\" > /dev/null || spotify &; exit 0"))
+  (storax/spotify-connect))
+
 (defun storax/spotify-connect ()
   "Start a new Spotify session."
   (interactive)
