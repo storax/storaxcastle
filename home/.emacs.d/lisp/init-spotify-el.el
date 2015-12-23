@@ -13,6 +13,9 @@
 (setq spotify-api-search-limit 50)
 (setq spotify-transport 'dbus)
 
+(defvar storax/spotify-helm-current-playlist nil
+  "Current playlist if viewing tracks of playlist.")
+
 (defun storax/start-spotify ()
   "Start spotify."
   (interactive)
@@ -30,6 +33,10 @@
   "Get the Spotify app to play the TRACK."
   (spotify-play-track (alist-get '(href) track)))
 
+(defun storax/spotify-play-track-hash (track)
+  "Get the Spotify app to play the TRACK."
+  (spotify-play-track (gethash 'uri track)))
+
 (defun storax/spotify-play-track-album (track)
   "Get the Spotify app to play the album of TRACK."
   (spotify-play-track (alist-get '(album href) track)))
@@ -37,6 +44,24 @@
 (defun storax/spotify-play-playlist (playlist)
   "Get the Spotify app to play the PLAYLIST."
   (spotify-play-track (gethash 'uri playlist)))
+
+(defun storax/spotify-helm-playlist-tracks (playlist)
+  "Go to the tracks of PLAYLIST."
+  (setq storax/spotify-helm-current-playlist playlist)
+  (storax/spotify-helm--playlist-tracks))
+
+(defun storax/spotify-helm-get-playlist-tracks ()
+  "Go to the tracks of the current playlist."
+  (mapcar (lambda (track)
+	    (cons (storax/spotify-format-track-hash (gethash 'track track))
+		  (gethash 'track track)))
+	  (gethash 'items
+  (spotify-api-call "GET"
+		    (car (cdr (split-string
+			  (gethash 'href
+				   (gethash 'tracks
+					    storax/spotify-helm-current-playlist))
+			  spotify-api-endpoint)))))))
 
 (defun storax/spotify-track-search (search-term)
   "Search spotify for SEARCH-TERM, returning the results as a Lisp structure."
@@ -68,6 +93,21 @@
     (format "%s (%dm%0.2ds)\n%s - %s"
 	    track-name
 	    (/ track-length 60) (mod track-length 60)
+	    (mapconcat 'identity artist-names "/")
+	    album-name)))
+
+(defun storax/spotify-format-track-hash (track)
+  "Given a TRACK, return a formatted string suitable for display."
+  (let ((track-name   (gethash 'name track))
+	(track-length (gethash 'duration_ms track))
+	(album-name   (gethash 'name (gethash 'album track)))
+	(artist-names (mapcar (lambda (artist)
+				(gethash 'name artist))
+			      (gethash 'artists track))))
+    (message "%s %dm%0.2ds %s %s %s" track-name (/ track-length 60000) (/ (mod track-length 60000) 1000) album-name (mapconcat 'identity artist-names "/") album-name)
+    (format "%s (%dm%0.2ds)\n%s - %s"
+	    track-name
+	    (/ track-length 60000) (/ (mod track-length 60000) 1000)
 	    (mapconcat 'identity artist-names "/")
 	    album-name)))
 
@@ -117,9 +157,16 @@
     (,(format "Play Album - %s" (alist-get '(album name) track)) . storax/spotify-play-track-album)
     ("Show Track Metadata" . pp)))
 
+(defun storax/spotify-helm-actions-for-track-hash (actions track)
+  "Return a list of helm ACTIONS available for this TRACK."
+  `((,(format "Play Track - %s" (gethash 'name track)) . storax/spotify-play-track-hash)
+    (,(format "Play Album - %s" (gethash 'name (gethash 'album track))) . storax/spotify-play-track-album)
+    ("Show Track Metadata" . pp)))
+
 (defun storax/spotify-helm-actions-for-playlist (actions playlist)
   "Return a list of helm ACTIONS available for this PLAYLIST."
   `((,(format "Play Playlist - %s" (gethash 'name playlist)) . storax/spotify-play-playlist)
+    (,(format "Look at Tracks of - %s" (gethash 'name playlist)) . storax/spotify-helm-playlist-tracks)
     ("Show Track Metadata" . pp)))
 
 ;;;###autoload
@@ -169,6 +216,18 @@
   (interactive)
   (helm :sources '(storax/spotify-helm-my-playlists-source)
 	:buffer "*Spotify: My playlists*"))
+
+(defvar storax/spotify-helm-playlist-tracks-source
+  '((name . "Spotify")
+    (multiline)
+    (candidates-process . storax/spotify-helm-get-playlist-tracks)
+    (action-transformer . storax/spotify-helm-actions-for-track-hash)))
+
+(defun storax/spotify-helm--playlist-tracks ()
+  "Show my Spotify playlists with helm."
+  (helm :sources '(storax/spotify-helm-playlist-tracks-source)
+	:buffer (format "*Spotify: Tracks of playlists: %s *"
+			(gethash 'name storax/spotify-helm-current-playlist))))
 
 
 (provide 'init-spotify-el)
