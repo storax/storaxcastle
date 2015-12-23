@@ -26,6 +26,10 @@
   "Get the Spotify app to play the album of TRACK."
   (spotify-play-track (alist-get '(album href) track)))
 
+(defun storax/spotify-play-playlist (playlist)
+  "Get the Spotify app to play the PLAYLIST."
+  (spotify-play-track (gethash 'uri playlist)))
+
 (defun storax/spotify-track-search (search-term)
   "Search spotify for SEARCH-TERM, returning the results as a Lisp structure."
   (let ((a-url (format "http://ws.spotify.com/search/1/track.json?q=%s" search-term)))
@@ -33,6 +37,12 @@
 	(url-retrieve-synchronously a-url)
       (goto-char url-http-end-of-headers)
       (json-read))))
+
+(defun storax/spotify-playlist-search (search-term)
+  "Search spotify for SEARCH-TERM, returning the results as a Lisp structure."
+  (spotify-api-call "GET"
+		    (format "/search?q=%s&type=playlist&limit=%d&market=from_token"
+		    (url-hexify-string search-term) spotify-api-search-limit)))
 
 (defun storax/spotify-format-track (track)
   "Given a TRACK, return a formatted string suitable for display."
@@ -48,20 +58,45 @@
 	    (mapconcat 'identity artist-names "/")
 	    album-name)))
 
+(defun storax/spotify-format-playlist (playlist)
+  "Given a PLAYLIST, return a formatted string suitable for display."
+  (let ((playlist-name (gethash 'name playlist))
+	(tracks-count (gethash 'total (gethash 'tracks playlist)))
+	(user (gethash 'id (gethash 'owner playlist))))
+    (format "%s\nTracks: %4d | User: %s"
+	    playlist-name
+	    tracks-count
+	    user)))
+
 (defun storax/spotify-track-search-formatted (search-term)
   "Search tracks with SEARCH-TERM and format the result."
   (mapcar (lambda (track)
 	    (cons (storax/spotify-format-track track) track))
-	  (alist-get '(tracks) (storax/spotify-track-search search-term))))
+	  (gethash 'tracks (storax/spotify-track-search search-term))))
+
+(defun storax/spotify-playlist-search-formatted (search-term)
+  "Search playlists with SEARCH-TERM and format the result."
+  (mapcar (lambda (playlist)
+	    (cons (storax/spotify-format-playlist playlist) playlist))
+	  (gethash 'items (gethash 'playlists (storax/spotify-playlist-search search-term)))))
 
 (defun storax/spotify-helm-search-tracks ()
   "Return a formatted list."
   (storax/spotify-track-search-formatted helm-pattern))
 
+(defun storax/spotify-helm-search-playlists ()
+  "Return a formatted list."
+  (storax/spotify-playlist-search-formatted helm-pattern))
+
 (defun storax/spotify-helm-actions-for-track (actions track)
   "Return a list of helm ACTIONS available for this TRACK."
   `((,(format "Play Track - %s" (alist-get '(name) track)) . storax/spotify-play-track)
     (,(format "Play Album - %s" (alist-get '(album name) track)) . storax/spotify-play-track-album)
+    ("Show Track Metadata" . pp)))
+
+(defun storax/spotify-helm-actions-for-playlist (actions playlist)
+  "Return a list of helm ACTIONS available for this PLAYLIST."
+  `((,(format "Play Playlist - %s" (gethash 'name playlist)) . storax/spotify-play-playlist)
     ("Show Track Metadata" . pp)))
 
 ;;;###autoload
@@ -80,6 +115,23 @@
   (interactive)
   (helm :sources '(storax/spotify-helm-track-search-source)
 	:buffer "*Spotify: Search tracks*"))
+
+;;;###autoload
+(defvar storax/spotify-helm-playlist-search-source
+  '((name . "Spotify")
+    (volatile)
+    (delayed)
+    (multiline)
+    (requires-pattern . 2)
+    (candidates-process . storax/spotify-helm-search-playlists)
+    (action-transformer . storax/spotify-helm-actions-for-playlist)))
+
+;;;###autoload
+(defun storax/spotify-helm-playlists()
+  "Search Spotify tracks with helm."
+  (interactive)
+  (helm :sources '(storax/spotify-helm-playlist-search-source)
+	:buffer "*Spotify: Search playlists*"))
 
 (provide 'init-spotify-el)
 ;;; init-spotify-el ends here
