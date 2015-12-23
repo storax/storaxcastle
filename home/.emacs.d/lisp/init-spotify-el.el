@@ -52,6 +52,11 @@
 		    (format "/search?q=%s&type=playlist&limit=%d&market=from_token"
 		    (url-hexify-string search-term) spotify-api-search-limit)))
 
+(defun storax/spotify-my-playlists ()
+  "Get my Spotify playlists, returning the results as a Lisp structure."
+  (spotify-api-call "GET"
+		    (format "/me/playlists?limit=%d" spotify-api-search-limit)))
+
 (defun storax/spotify-format-track (track)
   "Given a TRACK, return a formatted string suitable for display."
   (let ((track-name   (alist-get '(name) track))
@@ -88,6 +93,12 @@
 	    (cons (storax/spotify-format-playlist playlist) playlist))
 	  (gethash 'items (gethash 'playlists (storax/spotify-playlist-search search-term)))))
 
+(defun storax/spotify-my-playlists-formatted ()
+  "Search playlists with SEARCH-TERM and format the result."
+  (mapcar (lambda (playlist)
+	    (cons (storax/spotify-format-playlist playlist) playlist))
+	  (gethash 'items (storax/spotify-my-playlists))))
+
 (defun storax/spotify-helm-search-tracks ()
   "Return a formatted list."
   (storax/spotify-track-search-formatted helm-pattern))
@@ -95,6 +106,10 @@
 (defun storax/spotify-helm-search-playlists ()
   "Return a formatted list."
   (storax/spotify-playlist-search-formatted helm-pattern))
+
+(defun storax/spotify-helm-get-my-playlists ()
+  "Return a formatted list."
+  (storax/spotify-my-playlists-formatted))
 
 (defun storax/spotify-helm-actions-for-track (actions track)
   "Return a list of helm ACTIONS available for this TRACK."
@@ -136,10 +151,25 @@
 
 ;;;###autoload
 (defun storax/spotify-helm-playlists()
-  "Search Spotify tracks with helm."
+  "Search Spotify playlists with helm."
   (interactive)
   (helm :sources '(storax/spotify-helm-playlist-search-source)
 	:buffer "*Spotify: Search playlists*"))
+
+;;;###autoload
+(defvar storax/spotify-helm-my-playlists-source
+  '((name . "Spotify")
+    (multiline)
+    (candidates-process . storax/spotify-helm-get-my-playlists)
+    (action-transformer . storax/spotify-helm-actions-for-playlist)))
+
+;;;###autoload
+(defun storax/spotify-helm-my-playlists ()
+  "Show my Spotify playlists with helm."
+  (interactive)
+  (helm :sources '(storax/spotify-helm-my-playlists-source)
+	:buffer "*Spotify: My playlists*"))
+
 
 (provide 'init-spotify-el)
 ;;; init-spotify-el ends here
