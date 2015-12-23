@@ -21,7 +21,8 @@
   (interactive)
   (let ((process-connection-type nil))
     (async-shell-command "pgrep \"spotify\" > /dev/null || spotify &; exit 0"))
-  (storax/spotify-connect))
+  (storax/spotify-connect)
+  (global-spotify-remote-mode t))
 
 (defun storax/spotify-connect ()
   "Start a new Spotify session."
@@ -228,7 +229,6 @@
   (helm :sources '(storax/spotify-helm-playlist-tracks-source)
 	:buffer (format "*Spotify: Tracks of playlists: %s *"
 			(gethash 'name storax/spotify-helm-current-playlist))))
-
 
 (provide 'init-spotify-el)
 ;;; init-spotify-el ends here
