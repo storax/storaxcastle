@@ -1,3 +1,9 @@
+;;; init-window --- Customize the emacs window
+
+;;; Commentary:
+
+;;; Code:
+
 ;; No spashscreen, scratch message and default python mode
 (setq inhibit-splash-screen t
       initial-scratch-message nil
@@ -14,3 +20,4 @@
   (toggle-indicate-empty-lines))
 
 (provide 'init-window)
+;;; init-window ends here
