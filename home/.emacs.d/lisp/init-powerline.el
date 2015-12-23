@@ -88,6 +88,7 @@ COLOR1 is the color to apply."
 (defvar storax/wl-decrypt-fail-img (storax/string-from-file "~/.emacs.d/icons/wl-decrypt-fail.svg"))
 (defvar storax/wl-verify-success-img (storax/string-from-file "~/.emacs.d/icons/wl-verify-success.svg"))
 (defvar storax/wl-verify-fail-img (storax/string-from-file "~/.emacs.d/icons/wl-verify-fail.svg"))
+(defvar storax/spotify-data (storax/string-from-file "~/.emacs.d/icons/spotify.svg"))
 ;(defvar storax/snowflake-left (powerline-png "  " "~/.emacs.d/icons/snowflake-left.png"))
 ;(defvar storax/snowflake-right (powerline-png "  " "~/.emacs.d/icons/snowflake-right.png"))
 
@@ -141,7 +142,7 @@ COLOR1 is the color to apply."
 ;;----------------------------------------------------------------------------
 (require 'init-wanderlust)
 (defpowerline storax/powerline-pgp-decrypt-wl
-  (if (equal major-mode 'mime-view-mode)
+  (when (equal major-mode 'mime-view-mode)
       (propertize " " 'display (storax/create-image-with-face
       (if storax/wl-decrypt-success
 	storax/wl-decrypt-success-img
@@ -149,13 +150,16 @@ COLOR1 is the color to apply."
       face))))
 
 (defpowerline storax/powerline-pgp-verify-wl
-  (if (equal major-mode 'mime-view-mode)
+  (when (equal major-mode 'mime-view-mode)
       (propertize " " 'display (storax/create-image-with-face
       (if storax/wl-verified-success
 	storax/wl-verify-success-img
 	storax/wl-verify-fail-img)
 		  face))))
 
+(defpowerline storax/powerline-spotify
+  (when spotify-remote-mode
+      (concat (propertize " " 'display (storax/create-image-with-face storax/spotify-data face)) " ")))
 ;;----------------------------------------------------------------------------
 ;; Hide some minor modes
 ;;----------------------------------------------------------------------------
@@ -217,6 +221,7 @@ COLOR1 is the color to apply."
 				     (funcall separator-left mode-line face1)
 				     (powerline-narrow face1 'l)
 				     (powerline-raw " " face1)
+				     (storax/powerline-spotify face1)
 				     (storax/powerline-remote face1)
 				     (storax/powerline-vc face1)
 				     (storax/powerline-pgp-decrypt-wl face1)

@@ -24,20 +24,25 @@
   "Current tracks if viewing tracks of playlist.")
 (make-variable-buffer-local 'storax/spotify-helm-current-tracks)
 
-
 (defun storax/start-spotify ()
   "Start spotify."
   (interactive)
   (let ((process-connection-type nil))
     (async-shell-command "pgrep \"spotify\" > /dev/null || spotify &; exit 0"))
-  (storax/spotify-connect)
-  (global-spotify-remote-mode t))
+  (storax/spotify-connect))
 
 (defun storax/spotify-connect ()
   "Start a new Spotify session."
   (interactive)
   (require 'init-secrets)
-  (spotify-connect))
+  (spotify-connect)
+  (global-spotify-remote-mode t))
+
+(defun storax/spotify-disconnect ()
+  "Start a new Spotify session."
+  (interactive)
+  (spotify-disconnect)
+  (global-spotify-remote-mode -1))
 
 (defun storax/spotify-play-track (track)
   "Get the Spotify app to play the TRACK."
