@@ -1,4 +1,8 @@
-;; Font settings
+;;; init-fonts --- Set the global fonts
+
+;;; Commentary:
+
+;;; Code:
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (set-face-attribute 'default nil
@@ -16,3 +20,4 @@
                                  :weight 'normal))))
 
 (provide 'init-fonts)
+;;; init-fonts ends here
