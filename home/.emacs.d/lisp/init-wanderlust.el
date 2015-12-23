@@ -28,14 +28,21 @@
 (add-hook 'wl-summary-mode-hook 'mc-install-read-mode)
 (add-hook 'wl-mail-setup-hook 'mc-install-write-mode)
 
+(defvar storax/wl-decrypt-success nil "Buffer local indicate if decrypted.")
+(defvar storax/wl-verified-success nil "Buffer local indicate if verified signature.")
+(make-variable-buffer-local 'storax/wl-decrypt-success)
+(make-variable-buffer-local 'storax/wl-verified-success)
+
 (defun storax/wl-decrypt-message ()
   "Decrypt the current buffer via mc-decrypt and show errors."
   (interactive)
   (condition-case err
-      (mc-decrypt)
+      (let ((r (mc-decrypt)))
+	(setq storax/wl-decrypt-success (car r))
+	(setq storax/wl-verified-success (cdr r)))
   (error (message "%s" (error-message-string err)))))
 
-(add-hook 'mime-view-mode-hook 'storax/wl-auto-decrypt-message)
+(add-hook 'mime-view-mode-hook 'storax/wl-decrypt-message)
 
 ;; Nicer window config
 (defvar storax/wl-default-initial-folder nil

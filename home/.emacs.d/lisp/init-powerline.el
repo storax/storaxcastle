@@ -83,7 +83,11 @@ COLOR1 is the color to apply."
 (defvar storax/github-mark-data (storax/string-from-file "~/.emacs.d/icons/mark-github.svg"))
 (defvar storax/bitbucket-mark-data (storax/string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
 (defvar storax/aqua-left-mesh (storax/powerline-picture "  " "~/.emacs.d/icons/aqua-left-mesh.svg"))
-(defvar storax/dz-aqua-right-mesh (storax/powerline-picture "  " "~/.emacs.d/icons/aqua-right-mesh.svg"))
+(defvar storax/aqua-right-mesh (storax/powerline-picture "  " "~/.emacs.d/icons/aqua-right-mesh.svg"))
+(defvar storax/wl-decrypt-success-img (storax/string-from-file "~/.emacs.d/icons/wl-decrypt-success.svg"))
+(defvar storax/wl-decrypt-fail-img (storax/string-from-file "~/.emacs.d/icons/wl-decrypt-fail.svg"))
+(defvar storax/wl-verify-success-img (storax/string-from-file "~/.emacs.d/icons/wl-verify-success.svg"))
+(defvar storax/wl-verify-fail-img (storax/string-from-file "~/.emacs.d/icons/wl-verify-fail.svg"))
 ;(defvar storax/snowflake-left (powerline-png "  " "~/.emacs.d/icons/snowflake-left.png"))
 ;(defvar storax/snowflake-right (powerline-png "  " "~/.emacs.d/icons/snowflake-right.png"))
 
@@ -131,6 +135,26 @@ COLOR1 is the color to apply."
 (defpowerline storax/powerline-pyvenv
   (if pyvenv-virtual-env-name
       (format " (%s)"(file-name-nondirectory (or pyvenv-virtual-env-name "")))))
+
+;;----------------------------------------------------------------------------
+;; Show encryption and signature indicators for mails
+;;----------------------------------------------------------------------------
+(require 'init-wanderlust)
+(defpowerline storax/powerline-pgp-decrypt-wl
+  (if (equal major-mode 'mime-view-mode)
+      (propertize " " 'display (storax/create-image-with-face
+      (if storax/wl-decrypt-success
+	storax/wl-decrypt-success-img
+	storax/wl-decrypt-fail-img)
+      face))))
+
+(defpowerline storax/powerline-pgp-verify-wl
+  (if (equal major-mode 'mime-view-mode)
+      (propertize " " 'display (storax/create-image-with-face
+      (if storax/wl-verified-success
+	storax/wl-verify-success-img
+	storax/wl-verify-fail-img)
+		  face))))
 
 ;;----------------------------------------------------------------------------
 ;; Hide some minor modes
@@ -193,7 +217,9 @@ COLOR1 is the color to apply."
 				     (powerline-narrow face1 'l)
 				     (powerline-raw " " face1)
 				     (storax/powerline-remote face1)
-				     (storax/powerline-vc face1)))
+				     (storax/powerline-vc face1)
+				     (storax/powerline-pgp-decrypt-wl face1)
+				     (storax/powerline-pgp-verify-wl face1)))
 			  (rhs (list (powerline-raw global-mode-string face1 'r)
 				     (powerline-raw "%4l" face1 'r)
 				     (powerline-raw ":" face1)
@@ -201,7 +227,7 @@ COLOR1 is the color to apply."
 				     (funcall separator-right face1 mode-line)
 				     (powerline-raw " ")
 				     (powerline-raw "%6p" nil 'r)
-				     storax/dz-aqua-right-mesh))
+				     storax/aqua-right-mesh))
 			  (center (list (powerline-raw " " face1)
 					(funcall separator-left face1 face2)
 					(when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
