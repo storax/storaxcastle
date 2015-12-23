@@ -170,6 +170,7 @@ COLOR1 is the color to apply."
 (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-current-column-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
 (eval-after-load "projectile" '(diminish 'projectile-mode))
+(eval-after-load "spotify.el" '(diminish 'spotify-remote-mode))
 
 ;;----------------------------------------------------------------------------
 ;; Custom theme with flycheck color
