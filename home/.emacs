@@ -89,6 +89,7 @@
 (require 'init-compilation)
 ;(require 'init-minimap)
 (require 'init-spotify)
+(require 'init-spotify-el)
 (require 'init-wanderlust)
 (require-package 'multi-term)
 (require-package 'org)
