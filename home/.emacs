@@ -67,6 +67,7 @@
 (require 'init-recentf)
 (require 'init-ido)
 (require 'init-isearch)
+(require 'init-popup)
 (require 'init-dabbrev)
 (require 'init-expand-region)
 (require 'init-folding)
