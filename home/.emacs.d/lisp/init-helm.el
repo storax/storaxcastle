@@ -1,4 +1,11 @@
-;;;; Helm
+;;; init-helm --- Configure Helm
+
+;;; Commentary:
+
+;; We use the git version because it is more uptodate
+;; Async is recommended. Dunno why. Works also without
+;;
+;;; Code:
 (add-to-list 'load-path (expand-file-name "helm" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "helm-swoop" user-emacs-directory))
 
@@ -6,8 +13,9 @@
 (require 'helm-config)
 
 ;;; Helm Variables
+(require 'helm-net)
 (when (executable-find "curl")
-  (setq helm-google-suggest-use-curl-p t))
+  (setq helm-net-prefer-curl t))
 
 (when (executable-find "ack-grep")
   (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
