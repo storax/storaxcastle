@@ -1,13 +1,15 @@
+;;; init-yasnippet --- Configure yasnippets
+
+;;; Commentary:
+
+;;; Code:
+
 (add-to-list 'load-path (expand-file-name "yasnippet" user-emacs-directory))
 
 (require 'yasnippet)
 (yas-global-mode 1)
-(setq yas/indent-line nil)
+(setq yas-indent-line nil)
 
-;;;; Yas-Snippet Menu
-;;; use popup menu for yas-choose-value
-(require-package 'popup)
-(require 'popup)
 
 ;; add some shotcuts in popup menu mode
 (define-key popup-menu-keymap (kbd "M-n") 'popup-next)
@@ -16,7 +18,18 @@
 (define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
 (define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
 
-(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
+;;----------------------------------------------------------------------------
+;; use popup menu for yas-choose-value
+;;----------------------------------------------------------------------------
+(require-package 'popup)
+(require 'popup)
+
+(defun storax/yas-popup-isearch-prompt (prompt choices &optional display-fn)
+  "Promt with isearch when there are two yasnippets.
+
+PROMPT is the prompt to use.
+CHOICES are a list of available choices.
+DISPLAY-FN determines if choice is displayed."
   (when (featurep 'popup)
     (popup-menu*
      (mapcar
@@ -33,8 +46,11 @@
 
 (setq yas-prompt-functions nil)
 
-;;; Hooks
+;;----------------------------------------------------------------------------
+;; Hooks
+;;----------------------------------------------------------------------------
 (add-hook 'term-mode-hook (lambda()
         (setq yas-dont-activate t)))
 
 (provide 'init-yasnippet)
+;;; init-yasnippet ends here
