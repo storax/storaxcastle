@@ -32,12 +32,10 @@
 
 (defun storax/wlr ()
   (interactive)
-  (with-selected-frame (make-frame-command)
-    (delete-other-windows)
-    (toggle-frame-maximized)
-    (wl)
-    (wl-folder-jump-folder "%INBOX:\"zuber.david@gmx.de\"@imap.gmx.net:993!")
-    (wl-folder-jump-to-current-entity)
-    (window-configuration-to-register ?w)))
+  (delete-other-windows)
+  (wl)
+  (wl-folder-jump-folder "%INBOX:\"zuber.david@gmx.de\"@imap.gmx.net:993!")
+  (wl-folder-jump-to-current-entity)
+  (window-configuration-to-register ?w))
 
 (provide 'init-wanderlust)
