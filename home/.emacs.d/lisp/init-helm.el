@@ -5,6 +5,7 @@
 ;; We use the git version because it is more uptodate
 ;; Async is recommended. Dunno why. Works also without
 ;;
+
 ;;; Code:
 (add-to-list 'load-path (expand-file-name "helm" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "helm-swoop" user-emacs-directory))
@@ -12,8 +13,10 @@
 (require-package 'async)
 (require 'helm-config)
 
-;;; Helm Variables
-(require 'helm-net)
+;;----------------------------------------------------------------------------
+;; Helm Variables
+;;----------------------------------------------------------------------------
+
 (when (executable-find "curl")
   (setq helm-net-prefer-curl t))
 
@@ -29,15 +32,16 @@
       ido-use-virtual-buffers t ; Needed in helm-buffers-list
 )
 
-;;; Helm activate modes
+;;----------------------------------------------------------------------------
+;; Helm activate modes
+;;----------------------------------------------------------------------------
 (helm-mode 1)
 (helm-adaptive-mode 1)
 (helm-push-mark-mode 1)
 
-;;; Custom Helm Functions
-
-
-;;; Key Bindings
+;;----------------------------------------------------------------------------
+;; Key Bindings
+;;----------------------------------------------------------------------------
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-h C-i") 'helm-imenu)
@@ -46,7 +50,9 @@
 (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 (global-set-key (kbd "C-c h g") 'helm-google-suggest)
 
+;;----------------------------------------------------------------------------
 ;; Helm-Swoop
+;;----------------------------------------------------------------------------
 (require 'helm-swoop)
 (global-set-key (kbd "M-i") 'helm-swoop)
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
@@ -65,3 +71,4 @@
 (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
 
 (provide 'init-helm)
+;;; init-helm ends here
