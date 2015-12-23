@@ -1,8 +1,16 @@
+;;; init-powerline --- Fancy modeline
+
+;;; Commentary:
+
+;;; Code:
 (require 'cl-lib)
 (require-package 'powerline)
 (require 'powerline)
 
-;;;; Customization
+
+;;----------------------------------------------------------------------------
+;; Face customization
+;;----------------------------------------------------------------------------
 (defface flycheck-color-mode-line-error-face-active
   '((t :foreground "#efefef" :weight normal :background "#990A1B"))
   "Face for the modeline in buffers with Flycheck errors."
@@ -33,68 +41,79 @@
   "Face for the modeline in buffers with only Flycheck info."
   :group 'flycheck-faces)
 
-;;;; Custom Functions
-(defun dz-string-from-file (file)
-  "Read a file"
+;;----------------------------------------------------------------------------
+;; Custom Functions for images
+;;----------------------------------------------------------------------------
+(defun storax/string-from-file (file)
+  "Read FILE."
   (with-temp-buffer (insert-file-contents file) (buffer-string)))
 
-(defun dz-color-svg (image color1)
-  "Hacky stuff. The svgs have %s for fill color."
+(defun storax/color-svg (image color1)
+  "Hacky stuff.  The svgs have %s for fill color.
+
+IMAGE is the svg as string.
+COLOR1 is the color to apply."
   (format image color1))
 
-(cl-defun dz-create-image (img color1 &optional (acc 90))
+(cl-defun storax/create-image (img color1 &optional (acc 90))
   "Creates a image out of the a image data and colors it.
   ascent 90 seems to work best. mask is for transparent background"
-  (create-image (dz-color-svg img color1) nil t :ascent acc :mask 'heuristic))
+  (create-image (storax/color-svg img color1) nil t :ascent acc :mask 'heuristic))
 
-(cl-defun dz-create-image-plain (file &optional (acc 85))
+(cl-defun storax/dz-create-image-plain (file &optional (acc 85))
   "Creates a image.
   mask is for transparent background"
-  (create-image (dz-string-from-file file) nil t :ascent acc :mask 'heuristic))
+  (create-image (storax/string-from-file file) nil t :ascent acc :mask 'heuristic))
 
-(defun dz-create-image-with-face (image face)
-  "Read the font color and appy it to the image"
-  (dz-create-image image (face-attribute face :foreground nil t)))
+(defun storax/create-image-with-face (image face)
+  "Color IMAGE with the foreground color of FACE."
+  (storax/create-image image (face-attribute face :foreground nil t)))
 
-(defun powerline-wrap-picture (text img)
+(defun storax/powerline-wrap-picture (text img)
+  "Propertize TEXT to display IMG."
   (propertize text 'display img))
 
-(cl-defun powerline-picture (text img &optional (acc 85))
-  (powerline-wrap-picture text (dz-create-image-plain img acc)))
+(cl-defun storax/powerline-picture (text img &optional (acc 85))
+  (storax/powerline-wrap-picture text (storax/dz-create-image-plain img acc)))
 
-;(defun powerline-png (text img)
-;  (powerline-wrap-picture text (find-image `((:type png :file ,img :ascent 85)))))
+;(defun storax/powerline-png (text img)
+;  (storax/powerline-wrap-picture text (find-image `((:type png :file ,img :ascent 85)))))
 
 ;; Icons
-(defvar dz-github-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-github.svg"))
-(defvar dz-bitbucket-mark-data (dz-string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
-(defvar dz-aqua-left-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-left-mesh.svg"))
-(defvar dz-aqua-right-mesh (powerline-picture "  " "~/.emacs.d/icons/aqua-right-mesh.svg"))
-;(defvar dz-snowflake-left (powerline-png "  " "~/.emacs.d/icons/snowflake-left.png"))
-;(defvar dz-snowflake-right (powerline-png "  " "~/.emacs.d/icons/snowflake-right.png"))
+(defvar storax/github-mark-data (storax/string-from-file "~/.emacs.d/icons/mark-github.svg"))
+(defvar storax/bitbucket-mark-data (storax/string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
+(defvar storax/aqua-left-mesh (storax/powerline-picture "  " "~/.emacs.d/icons/aqua-left-mesh.svg"))
+(defvar storax/dz-aqua-right-mesh (storax/powerline-picture "  " "~/.emacs.d/icons/aqua-right-mesh.svg"))
+;(defvar storax/snowflake-left (powerline-png "  " "~/.emacs.d/icons/snowflake-left.png"))
+;(defvar storax/snowflake-right (powerline-png "  " "~/.emacs.d/icons/snowflake-right.png"))
 
+;;----------------------------------------------------------------------------
+;; Display bitbucket or github logo
+;;----------------------------------------------------------------------------
 ;; Save the current remote url in each buffer
-(defvar remoteurl "")
+(defvar storax/remoteurl "")
 
-(defun setremoteurl ()
-  "Save the current remote url"
-  (make-local-variable 'remoteurl)
-  (setq remoteurl (magit-get "remote" "origin" "url")))
+(defun storax/setremoteurl ()
+  "Save the current remote url."
+  (make-local-variable 'storax/remoteurl)
+  (setq storax/remoteurl (magit-get "remote" "origin" "url")))
 
-;; Kinda like each time we open a file we set the remoteurl
+;; Kinda like each time we open a file we set the storax/remoteurl
 ;; then we can display an icon in the modeline accordingly
-(add-hook 'after-change-major-mode-hook 'setremoteurl)
+(add-hook 'after-change-major-mode-hook 'storax/setremoteurl)
 
 ;; Github or Bitbucket logo
-(defpowerline powerline-remote
+(defpowerline storax/powerline-remote
   (when (or (string-match "magit" (format "%s" major-mode)) (and (buffer-file-name (current-buffer)) vc-mode))
-    (cond ((string-match "github.com" remoteurl)
-	   (propertize " " 'display (dz-create-image-with-face dz-github-mark-data face)))
-	  ((string-match "bitbucket.org" remoteurl)
-	   (propertize " " 'display (dz-create-image-with-face dz-bitbucket-mark-data face))))))
+    (cond ((string-match "github.com" storax/remoteurl)
+	   (propertize " " 'display (storax/create-image-with-face storax/github-mark-data face)))
+	  ((string-match "bitbucket.org" storax/remoteurl)
+	   (propertize " " 'display (storax/create-image-with-face storax/bitbucket-mark-data face))))))
 
+;;----------------------------------------------------------------------------
 ;; Custom Version Control indicator
-(defpowerline powerline-vc
+;;----------------------------------------------------------------------------
+(defpowerline storax/powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
     (if window-system
       (let ((backend (vc-backend (buffer-file-name (current-buffer)))))
@@ -106,11 +125,16 @@
 		    (vc-working-revision (buffer-file-name (current-buffer)) backend)))))
       (format-mode-line '(vc-mode vc-mode)))))
 
-(defpowerline powerline-pyvenv
+;;----------------------------------------------------------------------------
+;; Show pyenv
+;;----------------------------------------------------------------------------
+(defpowerline storax/powerline-pyvenv
   (if pyvenv-virtual-env-name
       (format " (%s)"(file-name-nondirectory (or pyvenv-virtual-env-name "")))))
 
+;;----------------------------------------------------------------------------
 ;; Hide some minor modes
+;;----------------------------------------------------------------------------
 (require-package 'diminish)
 (require 'diminish)
 (eval-after-load "whitespace-cleanup-mode" '(diminish 'whitespace-cleanup-mode))
@@ -123,8 +147,10 @@
 (eval-after-load "subword" '(diminish 'subword-mode))
 (eval-after-load "projectile" '(diminish 'projectile-mode))
 
-;;;; Custom theme with flycheck color
-(defun my-powerline-center-theme ()
+;;----------------------------------------------------------------------------
+;; Custom theme with flycheck color
+;;----------------------------------------------------------------------------
+(defun storax/powerline-center-theme ()
   "Setup a mode-line with major and minor modes centered."
   (interactive)
   (setq-default mode-line-format
@@ -158,7 +184,7 @@
 			  (separator-right (intern (format "powerline-%s-%s"
 							   (powerline-current-separator)
 							   (cdr powerline-default-separator-dir))))
-			  (lhs (list dz-aqua-left-mesh
+			  (lhs (list storax/aqua-left-mesh
 				     (powerline-raw "%*" nil 'l)
 				     (powerline-buffer-size nil 'l)
 				     (powerline-buffer-id nil 'l)
@@ -166,8 +192,8 @@
 				     (funcall separator-left mode-line face1)
 				     (powerline-narrow face1 'l)
 				     (powerline-raw " " face1)
-				     (powerline-remote face1)
-				     (powerline-vc face1)))
+				     (storax/powerline-remote face1)
+				     (storax/powerline-vc face1)))
 			  (rhs (list (powerline-raw global-mode-string face1 'r)
 				     (powerline-raw "%4l" face1 'r)
 				     (powerline-raw ":" face1)
@@ -175,7 +201,7 @@
 				     (funcall separator-right face1 mode-line)
 				     (powerline-raw " ")
 				     (powerline-raw "%6p" nil 'r)
-				     dz-aqua-right-mesh))
+				     storax/dz-aqua-right-mesh))
 			  (center (list (powerline-raw " " face1)
 					(funcall separator-left face1 face2)
 					(when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
@@ -184,7 +210,7 @@
 					(powerline-process face2)
 					(powerline-raw ":" face2)
 					(powerline-minor-modes face2 'l)
-					(powerline-pyvenv face2)
+					(storax/powerline-pyvenv face2)
 					(powerline-raw " " face2)
 					(funcall separator-right face2 face1))))
 		     (concat (powerline-render lhs)
@@ -198,6 +224,7 @@
 ;; (powerline-center-evil-theme)
 ;; (powerline-vim-theme)
 ;; (powerline-nano-theme)
-(my-powerline-center-theme)
+(storax/powerline-center-theme)
 
 (provide 'init-powerline)
+;;; init-powerline ends here
