@@ -1,11 +1,13 @@
+;;; init-whitespace -- Configure whitespace related stuff
+
+;;; Commentary:
+
+;;; Code:
+
 (require-package 'whitespace-cleanup-mode)
 
-;(setq-default show-trailing-whitespace t)
-
-;;; Whitespace
-
 (defun trailing-whitespace ()
-  "Turn on display of trailing whitespace in this buffer"
+  "Turn on display of trailing whitespace in this buffer."
   (setq show-trailing-whitespace t))
 
 (dolist (hook '(python-mode-hook
@@ -35,3 +37,4 @@
 (global-set-key [remap just-one-space] 'cycle-spacing)
 
 (provide 'init-whitespace)
+;;; init-whitespace ends here
