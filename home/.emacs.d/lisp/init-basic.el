@@ -1,7 +1,14 @@
-;;;; Custom Variables
+;;; init-basic --- Customize stuff and thAAAngs
+
+;;; Commentary:
+
+;;; Code:
+
+;;----------------------------------------------------------------------------
+;; Custom Variables
+;;----------------------------------------------------------------------------
 ;; Softer scolling
-(setq redisplay-dont-pause t
-      scroll-margin 7
+(setq scroll-margin 7
       scroll-step 1
       scroll-conservatively 10000
       scroll-preserve-screen-position 1)
@@ -22,28 +29,39 @@
 (require 're-builder)
 (setq reb-re-syntax 'string)
 
-;;;; Global Builtin Modes
+;;----------------------------------------------------------------------------
+;; Global Builtin Modes
+;;----------------------------------------------------------------------------
 (global-hl-line-mode t)
 (global-subword-mode 1)
 (global-linum-mode 1)
 
-;;;; Builtin Auto Modes
+;;----------------------------------------------------------------------------
+;; Builtin Auto Modes
+;;----------------------------------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
-;;;; Aliases
+;;----------------------------------------------------------------------------
+;; Aliases
+;;----------------------------------------------------------------------------
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'rs 'replace-string)
 (defalias 'jo 'just-one-space)
 (defalias 'qrr 'query-replace-regexp)
 
-;;;; Allow disabled Commands
+;;----------------------------------------------------------------------------
+;; Allow disabled Commands
+;;----------------------------------------------------------------------------
 (put 'narrow-to-region 'disabled nil)
 
-;;;; Global Keybindings
+;;----------------------------------------------------------------------------
+;; Global Keybindings
+;;----------------------------------------------------------------------------
 (global-set-key (kbd "C-c C-t") 'comment-or-uncomment-region)
 (when window-system
   (global-unset-key "\C-z")) ; iconify-or-deiconify-frame (C-x C-z)
 
 (provide 'init-basic)
+;;; init-basic.el ends here
