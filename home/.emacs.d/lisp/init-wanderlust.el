@@ -1,5 +1,7 @@
 ;;; init-wanderlust --- Configure the mail client
+
 ;;; Commentary:
+
 ;;; Code:
 (require-package 'wanderlust)
 
