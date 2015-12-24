@@ -158,7 +158,7 @@ COLOR1 is the color to apply."
 		  face))))
 
 (defpowerline storax/powerline-spotify
-  (when spotify-remote-mode
+  (when storax/spotify-connected
       (concat (propertize " " 'display (storax/create-image-with-face storax/spotify-data face)) " ")))
 ;;----------------------------------------------------------------------------
 ;; Hide some minor modes
