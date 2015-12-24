@@ -59,7 +59,7 @@
 
 (defun storax/spotify-play-track-album (track)
   "Get the Spotify app to play the album of TRACK."
-  (spotify-play-track (alist-get '(album href) track)))
+  (spotify-play-track (alist-get 'href (alist-get 'album track))))
 
 (defun storax/spotify-play-playlist (playlist)
   "Get the Spotify app to play the PLAYLIST."
@@ -175,8 +175,8 @@
 
 (defun storax/spotify-helm-actions-for-track (actions track)
   "Return a list of helm ACTIONS available for this TRACK."
-  `((,(format "Play Track - %s" (alist-get '(name) track)) . storax/spotify-play-track)
-    (,(format "Play Album - %s" (alist-get '(album name) track)) . storax/spotify-play-track-album)
+  `((,(format "Play Track - %s" (alist-get 'name track)) . storax/spotify-play-track)
+    (,(format "Play Album - %s" (alist-get 'name '(alist-get 'album track))) . storax/spotify-play-track-album)
     ("Show Track Metadata" . pp)))
 
 (defun storax/spotify-helm-actions-for-track-hash (actions track)
