@@ -51,7 +51,7 @@
 
 (defun storax/spotify-play-track (track)
   "Get the Spotify app to play the TRACK."
-  (spotify-play-track (alist-get '(href) track)))
+  (spotify-play-track (alist-get 'href track)))
 
 (defun storax/spotify-play-track-hash (track)
   "Get the Spotify app to play the TRACK."
