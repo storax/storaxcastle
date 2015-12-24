@@ -102,9 +102,9 @@
 
 (defun storax/spotify-format-track (track)
   "Given a TRACK, return a formatted string suitable for display."
-  (let ((track-name   (alist-get '(name) track))
-	(track-length (alist-get '(length) track))
-	(album-name   (alist-get '(album name) track))
+  (let ((track-name   (alist-get 'name track))
+	(track-length (alist-get 'length track))
+	(album-name   (alist-get 'name (alist-get 'album track)))
 	(artist-names (mapcar (lambda (artist)
 				(alist-get '(name) artist))
 			      (alist-get '(artists) track))))
@@ -122,7 +122,6 @@
 	(artist-names (mapcar (lambda (artist)
 				(gethash 'name artist))
 			      (gethash 'artists track))))
-    (message "%s %dm%0.2ds %s %s %s" track-name (/ track-length 60000) (/ (mod track-length 60000) 1000) album-name (mapconcat 'identity artist-names "/") album-name)
     (format "%s (%dm%0.2ds)\n%s - %s"
 	    track-name
 	    (/ track-length 60000) (/ (mod track-length 60000) 1000)
@@ -143,7 +142,7 @@
   "Search tracks with SEARCH-TERM and format the result."
   (mapcar (lambda (track)
 	    (cons (storax/spotify-format-track track) track))
-	  (gethash 'tracks (storax/spotify-track-search search-term))))
+	  (alist-get 'tracks (storax/spotify-track-search search-term))))
 
 (defun storax/spotify-playlist-search-formatted (search-term)
   "Search playlists with SEARCH-TERM and format the result."
@@ -251,6 +250,10 @@
 			(gethash 'name storax/spotify-helm-current-playlist))
 	:promt "Tracks: "
 	:candidate-number-limit nil))
+
+(define-key spotify-remote-mode-map (kbd "M-p M-h M-t") 'storax/spotify-helm-tracks)
+(define-key spotify-remote-mode-map (kbd "M-p M-h M-p") 'storax/spotify-helm-playlists)
+(define-key spotify-remote-mode-map (kbd "M-p M-h M-m") 'storax/spotify-helm-my-playlists)
 
 (provide 'init-spotify-el)
 ;;; init-spotify-el ends here
