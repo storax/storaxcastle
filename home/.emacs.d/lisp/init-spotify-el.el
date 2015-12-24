@@ -111,12 +111,12 @@
 	(track-length (alist-get 'length track))
 	(album-name   (alist-get 'name (alist-get 'album track)))
 	(artist-names (mapcar (lambda (artist)
-				(alist-get '(name) artist))
-			      (alist-get '(artists) track))))
+				(alist-get 'name artist))
+			      (alist-get 'artists track))))
     (format "%s (%dm%0.2ds)\n%s - %s"
-	    track-name
+	    (propertize track-name 'face '(:foreground "orange"))
 	    (/ track-length 60) (mod track-length 60)
-	    (mapconcat 'identity artist-names "/")
+	    (propertize (mapconcat 'identity artist-names "/") 'face '(:foreground "#FFDEAD"))
 	    album-name)))
 
 (defun storax/spotify-format-track-hash (track)
@@ -128,9 +128,9 @@
 				(gethash 'name artist))
 			      (gethash 'artists track))))
     (format "%s (%dm%0.2ds)\n%s - %s"
-	    track-name
+	    (propertize track-name 'face '(:foreground "orange"))
 	    (/ track-length 60000) (/ (mod track-length 60000) 1000)
-	    (mapconcat 'identity artist-names "/")
+	    (propertize (mapconcat 'identity artist-names "/") 'face '(:foreground "#FFDEAD"))
 	    album-name)))
 
 (defun storax/spotify-format-playlist (playlist)
@@ -139,7 +139,7 @@
 	(tracks-count (gethash 'total (gethash 'tracks playlist)))
 	(user (gethash 'id (gethash 'owner playlist))))
     (format "%s\nTracks: %4d | User: %s"
-	    playlist-name
+	    (propertize playlist-name 'face '(:foreground "orange"))
 	    tracks-count
 	    user)))
 
@@ -256,9 +256,16 @@
 	:promt "Tracks: "
 	:candidate-number-limit nil))
 
-(define-key spotify-remote-mode-map (kbd "M-p M-h M-t") 'storax/spotify-helm-tracks)
-(define-key spotify-remote-mode-map (kbd "M-p M-h M-p") 'storax/spotify-helm-playlists)
-(define-key spotify-remote-mode-map (kbd "M-p M-h M-m") 'storax/spotify-helm-my-playlists)
+
+(define-key spotify-remote-mode-map (kbd "M-s M-i") 'spotify-player-info)
+(define-key spotify-remote-mode-map (kbd "M-s M-s") 'spotify-toggle-shuffle)
+(define-key spotify-remote-mode-map (kbd "M-s M-r") 'spotify-toggle-repeat)
+(define-key spotify-remote-mode-map (kbd "M-s M-p") 'spotify-toggle-play)
+(define-key spotify-remote-mode-map (kbd "M-s M-b") 'spotify-previous-track)
+(define-key spotify-remote-mode-map (kbd "M-s M-f") 'spotify-next-track)
+(define-key spotify-remote-mode-map (kbd "M-s M-h M-t") 'storax/spotify-helm-tracks)
+(define-key spotify-remote-mode-map (kbd "M-s M-h M-p") 'storax/spotify-helm-playlists)
+(define-key spotify-remote-mode-map (kbd "M-s M-h M-m") 'storax/spotify-helm-my-playlists)
 
 (provide 'init-spotify-el)
 ;;; init-spotify-el ends here
