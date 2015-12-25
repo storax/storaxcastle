@@ -12,7 +12,7 @@
       scroll-step 1
       scroll-conservatively 10000
       scroll-preserve-screen-position 1)
-
+(set-scroll-bar-mode 'right)
 ;; Tab with 4 spaces, no tabs
 (setq tab-width 4
       indent-tabs-mode nil)

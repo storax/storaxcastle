@@ -83,7 +83,7 @@ COLOR1 is the color to apply."
 (defvar storax/github-mark-data (storax/string-from-file "~/.emacs.d/icons/mark-github.svg"))
 (defvar storax/bitbucket-mark-data (storax/string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
 (defvar storax/aqua-left-mesh (storax/powerline-picture "  " "~/.emacs.d/icons/aqua-left-mesh.svg"))
-(defvar storax/aqua-right-mesh (storax/powerline-picture "  " "~/.emacs.d/icons/aqua-right-mesh.svg"))
+(defvar storax/aqua-right-mesh (storax/powerline-picture "     " "~/.emacs.d/icons/aqua-right-mesh.svg"))
 (defvar storax/wl-decrypt-success-img (storax/string-from-file "~/.emacs.d/icons/wl-decrypt-success.svg"))
 (defvar storax/wl-decrypt-fail-img (storax/string-from-file "~/.emacs.d/icons/wl-decrypt-fail.svg"))
 (defvar storax/wl-verify-success-img (storax/string-from-file "~/.emacs.d/icons/wl-verify-success.svg"))

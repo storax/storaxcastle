@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="36.3175" height="21" xmlns="http://www.w3.org/2000/svg">
  <metadata id="metadata3039">image/svg+xml</metadata>
- <g>
+ <g transform="translate(4 0)">
   <title>Layer 1</title>
   <path id="svg_1" fill="#076d7f" d="m2,10.5 l6.0625,-10.5 l6.0625,10.5 l-12.125,0 z"/>
   <path id="svg_2" fill="#074b50" d="m2,10.5 l6.0625,10.5 l6.0625,-10.5 l-12.125,0 z"/>
