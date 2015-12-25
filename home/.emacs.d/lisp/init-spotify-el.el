@@ -49,9 +49,14 @@
   (global-spotify-remote-mode -1)
   (setq storax/spotify-connected nil))
 
-(defun storax/spotify-play-track (track)
-  "Get the Spotify app to play the TRACK."
-  (spotify-play-track (alist-get 'href track)))
+(defun storax/spotify-play-or-add-track (track)
+  "Get the Spotify app to play the TRACK.
+
+If marked tracks add them to a playlist."
+  (let ((tracks (helm-marked-candidates)))
+    (if tracks
+	(storax/spotify-add-tracks tracks)
+      (spotify-play-track (alist-get 'href track)))))
 
 (defun storax/spotify-play-track-hash (track)
   "Get the Spotify app to play the TRACK."
@@ -85,6 +90,20 @@
 				(gethash 'track track)))
 			(gethash 'items storax/spotify-helm-last-result)))))
     storax/spotify-helm-current-tracks))
+
+(defun storax/spotify-add-tracks (tracks)
+  "Show playlists and add TRACKS to them."
+  (let ((uristr (mapconcat (lambda (track) (alist-get 'href track)) tracks ",")))
+    (helm :sources '((name . "Spotify")
+		     (multiline)
+		     (candidates-process . storax/spotify-helm-get-my-playlists)
+		     (action-transformer .
+					 (lambda (actions playlist) `((,"Add tracks to playlist" .
+					    (lambda (playlist) (spotify-api-call "POST"
+					     (format "/users/%s/playlists/%s/tracks?uris=%s"
+						     (spotify-current-user-id) (gethash 'id playlist) ',uristr))))))))
+	:buffer "*Spotify: My playlists*"
+	:prompt "Add tracks to playlists: ")))
 
 (defun storax/spotify-track-search (search-term)
   "Search spotify for SEARCH-TERM, returning the results as a Lisp structure."
@@ -175,7 +194,7 @@
 
 (defun storax/spotify-helm-actions-for-track (actions track)
   "Return a list of helm ACTIONS available for this TRACK."
-  `((,(format "Play Track - %s" (alist-get 'name track)) . storax/spotify-play-track)
+  `((,(format "Play Track - %s" (alist-get 'name track)) . storax/spotify-play-or-add-track)
     (,(format "Play Album - %s" (alist-get 'name '(alist-get 'album track))) . storax/spotify-play-track-album)
     ("Show Track Metadata" . pp)))
 
