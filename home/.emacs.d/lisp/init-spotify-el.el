@@ -153,7 +153,8 @@ If marked tracks add them to a playlist."
 	(popularity (string-to-number (alist-get 'popularity track))))
     (format "%s%s%s %2dm %2ds\n%s - %s"
 	    (propertize track-name 'face '(:foreground "orange"))
-	    (make-string (- fill-column (length track-name) 10) 32)
+	    (make-string (if (< (- fill-column (length track-name)) 1) 1
+			   (- fill-column (length track-name))) 32)
 	    (spotify-popularity-bar (* popularity 100))
 	    (/ track-length 60) (mod track-length 60)
 	    (propertize (mapconcat 'identity artist-names "/") 'face '(:foreground "#FFDEAD"))
@@ -170,7 +171,8 @@ If marked tracks add them to a playlist."
 	(popularity (gethash 'popularity track)))
     (format "%s%s%s %2dm %2ds\n%s - %s"
 	    (propertize track-name 'face '(:foreground "orange"))
-	    (make-string (- fill-column (length track-name) 10) 32)
+	    (make-string (if (< (- fill-column (length track-name)) 1) 1
+			   (- fill-column (length track-name))) 32)
 	    (spotify-popularity-bar popularity)
 	    (/ track-length 60000) (/ (mod track-length 60000) 1000)
 	    (propertize (mapconcat 'identity artist-names "/") 'face '(:foreground "#FFDEAD"))
