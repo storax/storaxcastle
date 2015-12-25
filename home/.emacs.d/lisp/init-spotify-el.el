@@ -310,5 +310,7 @@ If marked tracks add them to a playlist."
 (define-key spotify-remote-mode-map (kbd "M-s M-h M-p") 'storax/spotify-helm-playlists)
 (define-key spotify-remote-mode-map (kbd "M-s M-h M-m") 'storax/spotify-helm-my-playlists)
 
+(defalias 'start-spotify 'storax/start-spotify)
+
 (provide 'init-spotify-el)
 ;;; init-spotify-el ends here
