@@ -8,6 +8,13 @@
 (require 'json)
 (require 'helm)
 (add-to-list 'load-path (expand-file-name "spotify.el" user-emacs-directory))
+(defvar url-http-method nil)
+(defvar url-http-data nil)
+(defvar url-http-extra-headers nil)
+(defvar oauth--token-data nil)
+(defvar url-callback-function nil)
+(defvar url-callback-arguments nil)
+
 (require 'spotify)
 
 ;; Do not use values larger than 50 for better compatibility across endpoints
