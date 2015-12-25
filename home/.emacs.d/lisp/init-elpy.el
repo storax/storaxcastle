@@ -13,7 +13,8 @@
 (require-package 'find-file-in-project)
 (require-package 'highlight-indentation)
 (require-package 'pyvenv)
-
+(require-package 'projectile)
+(require 'projectile)
 (require 'elpy)
 (elpy-enable)
 
@@ -127,6 +128,36 @@ TEST is a single test function or nil to test all."
 
 (put 'storax/elpy-test-tox-pytest-runner 'elpy-test-runner-p t)
 (setq elpy-test-runner 'storax/elpy-test-tox-pytest-runner)
+
+
+
+;;----------------------------------------------------------------------------
+;; Guess initial value
+;;----------------------------------------------------------------------------
+(require 'pyvenv)
+(defun storax/pyvenv-guess (pyvenvlist)
+  "Guess a value in the PYVENVLIST based on the current project."
+  (condition-case nil
+      (let ((guess (file-name-base (directory-file-name (projectile-project-root)))))
+	(if (member guess pyvenvlist)
+	    guess
+	  nil))))
+
+(defun pyvenv-workon (name)
+  "Activate the virtual environment names NAME from $WORKON_HOME."
+  (interactive
+   (list
+    (let ((pyvenvlist (pyvenv-virtualenv-list)))
+      (completing-read "Work on: " pyvenvlist
+		     nil t (storax/pyvenv-guess pyvenvlist) 'pyvenv-workon-history nil nil))))
+  (when (not (or (equal name "")
+		 ;; Some completion frameworks can return nil for the
+		 ;; default, see
+		 ;; https://github.com/jorgenschaefer/elpy/issues/144
+		 (equal name nil)))
+    (pyvenv-activate (format "%s/%s"
+			     (pyvenv-workon-home)
+			     name))))
 
 ;;----------------------------------------------------------------------------
 ;; Key bindings
