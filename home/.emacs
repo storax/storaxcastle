@@ -61,6 +61,8 @@
 (require-package 'epc)
 (require 'init-basic)
 (require 'init-window)
+;(require 'init-windmove)
+(require 'init-acewindow)
 (require 'init-theme)
 (require 'init-fonts)
 (require 'init-desktop)
@@ -95,6 +97,7 @@
 (require-package 'xkcd)
 (require-package 'sx)
 (require-package 'yaml-mode)
+(require-package 'free-keys)
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
