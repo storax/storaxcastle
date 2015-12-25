@@ -301,7 +301,13 @@ If marked tracks add them to a playlist."
 	:promt "Tracks: "
 	:candidate-number-limit nil))
 
-
+(define-key spotify-remote-mode-map (kbd "M-p") nil)
+(define-key spotify-remote-mode-map (kbd "M-p M-i") nil)
+(define-key spotify-remote-mode-map (kbd "M-p M-s") nil)
+(define-key spotify-remote-mode-map (kbd "M-p M-r") nil)
+(define-key spotify-remote-mode-map (kbd "M-p M-p") nil)
+(define-key spotify-remote-mode-map (kbd "M-p M-b") nil)
+(define-key spotify-remote-mode-map (kbd "M-p M-f") nil)
 (define-key spotify-remote-mode-map (kbd "M-s M-i") 'spotify-player-info)
 (define-key spotify-remote-mode-map (kbd "M-s M-s") 'spotify-toggle-shuffle)
 (define-key spotify-remote-mode-map (kbd "M-s M-r") 'spotify-toggle-repeat)
