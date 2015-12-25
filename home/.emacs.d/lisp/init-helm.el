@@ -29,7 +29,6 @@
       helm-ff-file-name-history-use-recentf t
       helm-dabbrev-cycle-threshold 5
       helm-kill-ring-threshold 1
-      ido-use-virtual-buffers t ; Needed in helm-buffers-list
 )
 
 ;;----------------------------------------------------------------------------
