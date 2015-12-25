@@ -132,8 +132,8 @@ TEST is a single test function or nil to test all."
 ;; Key bindings
 ;;----------------------------------------------------------------------------
 ;;Python mode move around code blocks
-(global-set-key (kbd "M-p") 'python-nav-backward-block)
-(global-set-key (kbd "M-n") 'python-nav-forward-block)
+(define-key python-mode-map (kbd "M-p") 'python-nav-backward-block)
+(define-key python-mode-map (kbd "M-n") 'python-nav-forward-block)
 
 (define-key python-mode-map (kbd "<tab>") 'storax/shift-or-indent)
 (define-key python-mode-map (kbd "C-<tab>") 'storax/dabbrev-or-indent-left)
