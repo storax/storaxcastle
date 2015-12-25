@@ -30,6 +30,23 @@
 (setq reb-re-syntax 'string)
 
 ;;----------------------------------------------------------------------------
+;; Custom Functions
+;;----------------------------------------------------------------------------
+
+(defun storax/swap-place-in-region ()
+  "Go to the other end of the current region.
+
+Set a mark before moving.
+If a region is active this acts like swap places."
+  (interactive)
+  (let ((next (if (equal (point) (region-beginning))
+		  (region-end)
+		(region-beginning))))
+    (set-mark-command nil)
+    (goto-char next)
+    (setq deactivate-mark nil)))
+
+;;----------------------------------------------------------------------------
 ;; Global Builtin Modes
 ;;----------------------------------------------------------------------------
 (global-hl-line-mode t)
@@ -62,6 +79,8 @@
 (global-set-key (kbd "C-c C-t") 'comment-or-uncomment-region)
 (when window-system
   (global-unset-key "\C-z")) ; iconify-or-deiconify-frame (C-x C-z)
+(global-set-key (kbd "M-.") 'storax/swap-place-in-region)
+(global-set-key (kbd "M-,") 'storax/swap-place-in-region)
 
 (provide 'init-basic)
 ;;; init-basic.el ends here

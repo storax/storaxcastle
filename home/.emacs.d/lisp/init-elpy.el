@@ -144,6 +144,11 @@ TEST is a single test function or nil to test all."
 (define-key elpy-mode-map (kbd "C-c C-n") 'storax/next-error-wrapped)
 
 ;;----------------------------------------------------------------------------
+;; Key bindings
+;;----------------------------------------------------------------------------
+(defalias 'workon 'pyvenv-workon)
+
+;;----------------------------------------------------------------------------
 ;; Hooks
 ;;----------------------------------------------------------------------------
 (add-hook 'python-mode-hook 'hs-minor-mode)
