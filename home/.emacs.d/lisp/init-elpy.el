@@ -19,13 +19,13 @@
 
 ;; Only use these modules
 (setq elpy-modules '(elpy-module-sane-defaults
+		     elpy-module-company
 		     elpy-module-eldoc
 		     elpy-module-highlight-indentation
 		     elpy-module-pyvenv
 		     elpy-module-yasnippet))
 
-(setq elpy-rpc-backend "jedi")
-
+(setq elpy-rpc-backend "rope")
 
 ;;----------------------------------------------------------------------------
 ;;Python indent the right way
