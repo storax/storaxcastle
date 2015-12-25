@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'cl-lib)
 (require 'url)
 (require 'json)
 (require 'helm)
@@ -26,6 +27,21 @@
 
 (defvar storax/spotify-connected nil
   "Have we connected?")
+
+(cl-defun storax/helm-marked-candidates (&key with-wildcard)
+  "Return marked candidates of current source if any.
+
+When key WITH-WILDCARD is specified try to expand a wilcard if some."
+  (with-current-buffer helm-buffer
+    (let ((candidates
+	   (cl-loop with current-src = (helm-get-current-source)
+		    for (source . real) in (reverse helm-marked-candidates)
+		    when (equal (assq 'name source) (assq 'name current-src))
+		    append (helm--compute-marked real source with-wildcard)
+		    into cands
+		    finally return cands)))
+      (helm-log "Marked candidates = %S" candidates)
+      candidates)))
 
 (defun storax/start-spotify ()
   "Start spotify."
@@ -53,10 +69,12 @@
   "Get the Spotify app to play the TRACK.
 
 If marked tracks add them to a playlist."
-  (let ((tracks (helm-marked-candidates)))
-    (if tracks
-	(storax/spotify-add-tracks tracks)
-      (spotify-play-track (alist-get 'href track)))))
+  (let ((marked (storax/helm-marked-candidates))
+	(selection (nth 0 (helm-marked-candidates))))
+    (message "%s %s" marked (alist-get 'href selection))
+    (if marked
+	(storax/spotify-add-tracks marked)
+      (spotify-play-track (alist-get 'href selection)))))
 
 (defun storax/spotify-play-track-hash (track)
   "Get the Spotify app to play the TRACK."
@@ -133,7 +151,7 @@ If marked tracks add them to a playlist."
 				(alist-get 'name artist))
 			      (alist-get 'artists track)))
 	(popularity (string-to-number (alist-get 'popularity track))))
-    (format "%s%s%s (%2dm%2ds)\n%s - %s"
+    (format "%s%s%s %2dm %2ds\n%s - %s"
 	    (propertize track-name 'face '(:foreground "orange"))
 	    (make-string (- fill-column (length track-name) 10) 32)
 	    (spotify-popularity-bar (* popularity 100))
@@ -150,7 +168,7 @@ If marked tracks add them to a playlist."
 				(gethash 'name artist))
 			      (gethash 'artists track)))
 	(popularity (gethash 'popularity track)))
-    (format "%s%s%s (%2dm%2ds)\n%s - %s"
+    (format "%s%s%s %2dm %2ds\n%s - %s"
 	    (propertize track-name 'face '(:foreground "orange"))
 	    (make-string (- fill-column (length track-name) 10) 32)
 	    (spotify-popularity-bar popularity)
