@@ -62,6 +62,7 @@
 (global-set-key (kbd "C-c C-t") 'comment-or-uncomment-region)
 (when window-system
   (global-unset-key "\C-z")) ; iconify-or-deiconify-frame (C-x C-z)
+(global-set-key (kbd "C-M-d") 'delete-pair)
 
 (provide 'init-basic)
 ;;; init-basic.el ends here
