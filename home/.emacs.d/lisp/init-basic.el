@@ -79,8 +79,8 @@ If a region is active this acts like swap places."
 (global-set-key (kbd "C-c C-t") 'comment-or-uncomment-region)
 (when window-system
   (global-unset-key "\C-z")) ; iconify-or-deiconify-frame (C-x C-z)
-(global-set-key (kbd "M-.") 'storax/swap-place-in-region)
-(global-set-key (kbd "M-,") 'storax/swap-place-in-region)
+(global-set-key (kbd "C-M-.") 'storax/swap-place-in-region)
+(global-set-key (kbd "C-M-,") 'storax/swap-place-in-region)
 
 (provide 'init-basic)
 ;;; init-basic.el ends here
