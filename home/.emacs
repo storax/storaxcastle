@@ -90,6 +90,7 @@
 (require 'init-powerline)
 (require 'init-latex)
 (require 'init-compilation)
+(require 'init-visual-regexp-steroids)
 ;(require 'init-minimap)
 (require 'init-spotify-el)
 (require 'init-wanderlust)
