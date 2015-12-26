@@ -75,6 +75,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(avy-lead-face ((t (:background "SeaGreen4" :foreground "white" :inverse-video nil))))
+ '(avy-lead-face-0 ((t (:background "DarkOrange3" :foreground "white" :inverse-video nil))))
+ '(avy-lead-face-1 ((t (:background "SkyBlue4" :foreground "white"))))
+ '(avy-lead-face-2 ((t (:background "firebrick3" :foreground "white"))))
  '(font-latex-sectioning-5-face ((t (:inherit fixed-pitch :foreground "#CC9393" :weight bold))))
  '(mode-line ((t (:background "#2B2B2B" :foreground "#8FB28F" :box nil :overline "dim gray"))))
  '(mode-line-inactive ((t (:background "#383838" :foreground "#5F7F5F" :box nil :overline "dim gray"))))
