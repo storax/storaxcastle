@@ -175,6 +175,7 @@ COLOR1 is the color to apply."
 (eval-after-load "subword" '(diminish 'subword-mode))
 (eval-after-load "projectile" '(diminish 'projectile-mode))
 (eval-after-load "spotify.el" '(diminish 'spotify-remote-mode))
+(eval-after-load "beacon" '(diminish 'beacon-mode))
 
 ;;----------------------------------------------------------------------------
 ;; Custom theme with flycheck color
