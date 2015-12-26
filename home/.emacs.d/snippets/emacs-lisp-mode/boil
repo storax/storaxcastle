@@ -9,5 +9,7 @@
 
 ;;; Code:
 
+$0
+
 (provide \'$1)
 ;;; $1 ends here
