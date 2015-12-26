@@ -99,6 +99,7 @@
 (require-package 'sx)
 (require-package 'yaml-mode)
 (require-package 'free-keys)
+(require-package 'rainbow-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
