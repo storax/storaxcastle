@@ -29,7 +29,7 @@
       helm-ff-file-name-history-use-recentf t
       helm-dabbrev-cycle-threshold 5
       helm-kill-ring-threshold 1
-      helm-candidate-number-limit nil
+      helm-candidate-number-limit 400
 )
 
 ;;----------------------------------------------------------------------------
