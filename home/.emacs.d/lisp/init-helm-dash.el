@@ -7,9 +7,26 @@
 (require 'helm-dash)
 
 (setq storax/docsets-to-install '("Ansible"
+				  "Bash"
 				  "Boost"
+				  "C"
+				  "C++"
+				  "CMake"
+				  "Chef"
+				  "Common_Lisp"
+				  "Django"
+				  "Docker"
+				  "ElasticSearch"
+				  "Emacs_Lisp"
+				  "Flask"
+				  "Jinja"
+				  "LaTeX"
+				  "PostgreSQL"
 				  "Python_2"
-				  "Python_3"))
+				  "Python_3"
+				  "Qt"
+				  "SQLAlchemy"
+				  "Vagrant"))
 
 (defun storax/dash-install-set (docset)
   "Install the DOCSET if it does not exist already."
