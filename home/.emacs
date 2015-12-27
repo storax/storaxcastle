@@ -105,6 +105,7 @@
 (require-package 'yaml-mode)
 (require-package 'free-keys)
 (require-package 'rainbow-mode)
+(require-package 'dired+)
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
