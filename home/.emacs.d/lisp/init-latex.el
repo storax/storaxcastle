@@ -6,7 +6,7 @@
 
 ;;; Code:
 (require-package 'auctex)
-
+(require-package 'pdf-tools)
 (pdf-tools-install)
 
 ;;; Latex PDF mode
