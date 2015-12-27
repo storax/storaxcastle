@@ -28,7 +28,6 @@
 				    "Vagrant"))
 
 (defvar storax/user-docsets-to-install '("Alembic"
-					 "Emacs"
 					 "Packer"
 					 "PyMel"
 					 "Requests"
@@ -44,9 +43,9 @@
 			       "~"))
       (helm-dash-install-docset docset))))
 
-(defun storax/dash-install-user-set (docset)
+(defun storax/dash-install-user-set (docset &optional escaped)
   "Install the user DOCSET if it does not exist already."
-  (let ((name-escaped (replace-regexp-in-string "_" " " docset)))
+  (let ((name-escaped (or escaped (replace-regexp-in-string "_" " " docset))))
     (unless (file-exists-p
 	     (expand-file-name (concat (file-name-as-directory ".docsets")
 				       (concat name-escaped ".docset"))
@@ -58,6 +57,7 @@
 (dolist (docset storax/user-docsets-to-install)
   (storax/dash-install-user-set docset))
 (storax/dash-install-set "Qt_4" "Qt")
+(storax/dash-install-user-set "Emacs" "emacs")
 
 (provide 'init-helm-dash)
 ;;; init-helm-dash ends here
