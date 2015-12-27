@@ -85,5 +85,4 @@
  '(powerline-inactive1 ((t (:inherit mode-line-inactive :background "#4F4F4F" :foreground "#7F9F7F"))))
  '(powerline-inactive2 ((t (:inherit mode-line-inactive :background "#6F6F6F" :foreground "#9FC29F"))))
  '(region ((t (:background "#222222"))))
- '(scroll-bar ((t (:background "#545450" :foreground "#3F3F3F"))))
- '(vhl/default-face ((t (:background "PaleTurquoise4")))))
+ '(scroll-bar ((t (:background "#545450" :foreground "#3F3F3F")))))
