@@ -24,8 +24,6 @@
 				    "PostgreSQL"
 				    "Python_2"
 				    "Python_3"
-				    "Qt_4"
-				    "Qt_5"
 				    "SQLAlchemy"
 				    "Vagrant"))
 
@@ -37,9 +35,9 @@
 					 "Sphinx"))
 
 
-(defun storax/dash-install-set (docset)
+(defun storax/dash-install-set (docset &optional escaped)
   "Install the DOCSET if it does not exist already."
-  (let ((name-escaped (replace-regexp-in-string "_" " " docset)))
+  (let ((name-escaped (or escaped (replace-regexp-in-string "_" " " docset))))
     (unless (file-exists-p
 	     (expand-file-name (concat (file-name-as-directory ".docsets")
 				       (concat name-escaped ".docset"))
@@ -59,6 +57,7 @@
   (storax/dash-install-set docset))
 (dolist (docset storax/user-docsets-to-install)
   (storax/dash-install-user-set docset))
+(storax/dash-install-set "Qt_4" "Qt")
 
 (provide 'init-helm-dash)
 ;;; init-helm-dash ends here
