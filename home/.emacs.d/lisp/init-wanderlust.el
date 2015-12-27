@@ -3,6 +3,9 @@
 ;;; Commentary:
 
 ;;; Code:
+(require-package 'apel)
+(require-package 'flim)
+(require-package 'semi)
 (require-package 'wanderlust)
 
 ;; autoload configuration
