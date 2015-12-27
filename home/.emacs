@@ -103,6 +103,7 @@
 (require-package 'xkcd)
 (require-package 'sx)
 (require-package 'yaml-mode)
+(require-package 'json-mode)
 (require-package 'free-keys)
 (require-package 'rainbow-mode)
 (require-package 'dired+)
