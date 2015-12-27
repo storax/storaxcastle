@@ -92,6 +92,7 @@
 (require 'init-compilation)
 (require 'init-helm-dash)
 (require 'init-visual-regexp-steroids)
+(require 'init-volatile-highlights)
 (require 'init-beacon)
 ;(require 'init-minimap)
 (require 'init-spotify-el)
