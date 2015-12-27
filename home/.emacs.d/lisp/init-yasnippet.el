@@ -4,8 +4,7 @@
 
 ;;; Code:
 
-(add-to-list 'load-path (expand-file-name "yasnippet" user-emacs-directory))
-
+(require-package 'yasnippet)
 (require 'yasnippet)
 (yas-global-mode 1)
 (setq yas-indent-line nil)

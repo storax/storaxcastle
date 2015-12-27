@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-(add-to-list 'load-path (expand-file-name "avy" user-emacs-directory))
+(require-package 'avy)
 (require 'avy)
 (define-key global-map (kbd "C-c SPC") 'avy-goto-word-1)
 (define-key global-map (kbd "C-c c SPC") 'avy-goto-char)

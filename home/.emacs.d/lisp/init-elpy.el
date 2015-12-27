@@ -4,8 +4,7 @@
 
 ;;; Code:
 ;; Use Git version
-(add-to-list 'load-path (expand-file-name "elpy" user-emacs-directory))
-
+(require-package 'elpy)
 ;;----------------------------------------------------------------------------
 ;; Install requirements manually
 ;;----------------------------------------------------------------------------

@@ -3,9 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-(add-to-list 'load-path (expand-file-name "avy" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "ace-window" user-emacs-directory))
-(require 'avy)
+(require-package 'ace-window)
 (require 'ace-window)
 
 (global-set-key (kbd "C-z") 'ace-window)

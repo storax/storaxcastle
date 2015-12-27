@@ -7,10 +7,8 @@
 ;;
 
 ;;; Code:
-(add-to-list 'load-path (expand-file-name "helm" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "helm-swoop" user-emacs-directory))
-
-(require-package 'async)
+(require-package 'helm)
+(require-package 'helm-swoop)
 (require 'helm-config)
 
 ;;----------------------------------------------------------------------------

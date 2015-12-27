@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-(add-to-list 'load-path (expand-file-name "helm-dash" user-emacs-directory))
+(require-package 'helm-dash)
 (require 'helm-dash)
 
 (defvar storax/docsets-to-install '("Ansible"
