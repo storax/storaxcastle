@@ -59,5 +59,17 @@
 (storax/dash-install-set "Qt_4" "Qt")
 (storax/dash-install-user-set "Emacs" "emacs")
 
+(setq helm-dash-common-docsets '("Bash"
+				 "Common Lisp"
+				 "Emacs Lisp"
+				 "Packer"
+				 "Python 2"
+				 "Python 3"
+				 "Qt"
+				 "Requests"
+				 "Sphinx"
+				 "Vagrant"
+				 "emacs"))
+
 (provide 'init-helm-dash)
 ;;; init-helm-dash ends here
