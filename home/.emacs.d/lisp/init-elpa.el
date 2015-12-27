@@ -9,13 +9,9 @@
 ;; Standard package repositories
 ;;----------------------------------------------------------------------------
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-;; We include the org repository for completeness, but don't normally
-;; use it.
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-
+             '("org" . "http://orgmode.org/elpa/"))
 ;;----------------------------------------------------------------------------
 ;; On-demand installation of packages
 ;;----------------------------------------------------------------------------
