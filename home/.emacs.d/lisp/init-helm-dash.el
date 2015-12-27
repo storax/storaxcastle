@@ -29,7 +29,12 @@
 				    "SQLAlchemy"
 				    "Vagrant"))
 
-(defvar storax/user-docsets-to-install '("Emacs"))
+(defvar storax/user-docsets-to-install '("Alembic"
+					 "Emacs"
+					 "Packer"
+					 "PyMel"
+					 "Requests"
+					 "Sphinx"))
 
 
 (defun storax/dash-install-set (docset)
