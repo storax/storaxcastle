@@ -49,6 +49,7 @@
 				(cons "xml" storax/icon-xml)
 				(cons "html" storax/icon-xml)
 				(cons "htm" storax/icon-xml)
+				(cons "el" (storax/create-helm-icon "~/.emacs.d/icons/file-el.svg"))
 				(cons "rb" (storax/create-helm-icon "~/.emacs.d/icons/file-ruby.svg"))
 				(cons "md" (storax/create-helm-icon "~/.emacs.d/icons/file-md.svg"))
 				(cons "sh" storax/icon-shell))
