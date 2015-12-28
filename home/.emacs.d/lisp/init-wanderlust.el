@@ -69,7 +69,5 @@ Then open summary and save the window configuration to w"
   (if storax/wl-window-config-register
       (window-configuration-to-register storax/wl-window-config-register)))
 
-(defalias 'storax/wlr 'email)
-
 (provide 'init-wanderlust)
 ;;; init-wanderlust.el ends here
