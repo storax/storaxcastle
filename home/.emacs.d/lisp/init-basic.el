@@ -7,23 +7,19 @@
 ;;----------------------------------------------------------------------------
 ;; Custom Variables
 ;;----------------------------------------------------------------------------
-;; Softer scolling
-(setq scroll-margin 7
+;
+(set-scroll-bar-mode 'right)
+(setq scroll-margin 7 ; Softer scolling
       scroll-step 1
       scroll-conservatively 10000
-      scroll-preserve-screen-position 1)
-(set-scroll-bar-mode 'right)
-;; Tab with 4 spaces, no tabs
-(setq tab-width 4
-      indent-tabs-mode nil)
-
-;; No backup files
-(setq make-backup-files nil)
-
-;; When following sysmlinks always go to the destination
-(setq vc-follow-symlinks t)
-(setq require-final-newline t)
-(setq undo-limit 10000)
+      scroll-preserve-screen-position 1
+      tab-width 4 ; Tab with 4 spaces, no tabs
+      indent-tabs-mode nil
+      make-backup-files nil ; No backup files
+      auto-save-default nil
+      vc-follow-symlinks t ; When following sysmlinks always go to the destination
+      require-final-newline t
+      undo-limit 10000)
 
 ;; String doesnt require to escape all the stuff
 (require 're-builder)
