@@ -10,7 +10,7 @@
 (require-package 'helm)
 (require-package 'helm-swoop)
 (require 'helm-config)
-
+(require 'helm-icons)
 ;;----------------------------------------------------------------------------
 ;; Helm Variables
 ;;----------------------------------------------------------------------------
