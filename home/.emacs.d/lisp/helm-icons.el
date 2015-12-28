@@ -20,6 +20,7 @@
 (defconst storax/icon-archive (storax/create-helm-icon "~/.emacs.d/icons/file-archive.svg"))
 (defconst storax/icon-config (storax/create-helm-icon "~/.emacs.d/icons/file-config.svg"))
 (defconst storax/icon-cpp (storax/create-helm-icon "~/.emacs.d/icons/file-cpp.svg"))
+(defconst storax/icon-image (storax/create-helm-icon "~/.emacs.d/icons/file-image.svg"))
 
 (defvar storax/helm-icons (list (cons "py" (storax/create-helm-icon "~/.emacs.d/icons/file-py.svg"))
 				(cons "/" (storax/create-helm-icon "~/.emacs.d/icons/file-folder.svg"))
@@ -36,7 +37,13 @@
 				(cons "coffee" (storax/create-helm-icon "~/.emacs.d/icons/file-coffee.svg"))
 				(cons "css" (storax/create-helm-icon "~/.emacs.d/icons/file-css.svg"))
 				(cons "qss" (storax/create-helm-icon "~/.emacs.d/icons/file-qss.svg"))
-				(cons "js" (storax/create-helm-icon "~/.emacs.d/icons/file-js.svg")))
+				(cons "js" (storax/create-helm-icon "~/.emacs.d/icons/file-js.svg"))
+				(cons "jpg" storax/icon-image)
+				(cons "jpeg" storax/icon-image)
+				(cons "png" storax/icon-image)
+				(cons "gif" storax/icon-image)
+				(cons "svg" storax/icon-image)
+				(cons "tiff" storax/icon-image))
   "Icons for helm find file")
 
 (defun storax/icon-for-file (file)
