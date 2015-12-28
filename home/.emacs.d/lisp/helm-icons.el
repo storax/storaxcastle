@@ -68,7 +68,7 @@
   (let* ((boring (funcall old-function file))
 	 (disp (car boring)))
     (if disp
-	(cons (concat (storax/icon-for-file file) disp) file)
+	(cons (concat (storax/icon-for-file file) " " disp) file)
       boring)))
 
 (advice-add #'helm-ff-filter-candidate-one-by-one :around #'storax/add-icons-to-files)
