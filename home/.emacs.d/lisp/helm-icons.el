@@ -21,6 +21,8 @@
 (defconst storax/icon-config (storax/create-helm-icon "~/.emacs.d/icons/file-config.svg"))
 (defconst storax/icon-cpp (storax/create-helm-icon "~/.emacs.d/icons/file-cpp.svg"))
 (defconst storax/icon-image (storax/create-helm-icon "~/.emacs.d/icons/file-image.svg"))
+(defconst storax/icon-xml (storax/create-helm-icon "~/.emacs.d/icons/file-xml.svg"))
+(defconst storax/icon-shell (storax/create-helm-icon "~/.emacs.d/icons/file-shell.svg"))
 
 (defvar storax/helm-icons (list (cons "py" (storax/create-helm-icon "~/.emacs.d/icons/file-py.svg"))
 				(cons "/" (storax/create-helm-icon "~/.emacs.d/icons/file-folder.svg"))
@@ -43,14 +45,20 @@
 				(cons "png" storax/icon-image)
 				(cons "gif" storax/icon-image)
 				(cons "svg" storax/icon-image)
-				(cons "tiff" storax/icon-image))
+				(cons "tiff" storax/icon-image)
+				(cons "xml" storax/icon-xml)
+				(cons "html" storax/icon-xml)
+				(cons "htm" storax/icon-xml)
+				(cons "rb" (storax/create-helm-icon "~/.emacs.d/icons/file-ruby.svg"))
+				(cons "md" (storax/create-helm-icon "~/.emacs.d/icons/file-md.svg"))
+				(cons "sh" storax/icon-shell))
   "Icons for helm find file")
 
 (defun storax/icon-for-file (file)
   "Return a string with an icon display property for FILE."
   (let ((icon (if (file-directory-p file)
 		  (cdr (assoc "/" storax/helm-icons))
-		(cdr (assoc (file-name-extension file) storax/helm-icons)))))
+		(cdr (assoc-string (file-name-extension file) storax/helm-icons)))))
     (if icon
 	icon
       storax/icon-file)))
