@@ -44,6 +44,7 @@
      ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
      ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
      ("latexmk" "latexmk -pdflatex='pdflatex -file-line-error -synctex=1' -pdf -interaction=nonstopmode %t" TeX-run-command t t :help "Run latexmk command"))))
+ '(avy-background t)
  '(custom-safe-themes
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "f5eb916f6bd4e743206913e6f28051249de8ccfd070eae47b5bde31ee813d55f" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
@@ -75,10 +76,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(avy-lead-face ((t (:background "SeaGreen4" :foreground "white" :inverse-video nil))))
- '(avy-lead-face-0 ((t (:background "DarkOrange3" :foreground "white" :inverse-video nil))))
- '(avy-lead-face-1 ((t (:background "SkyBlue4" :foreground "white"))))
- '(avy-lead-face-2 ((t (:background "firebrick3" :foreground "white"))))
+ '(avy-background-face ((t (:background "#3F3F3F" :foreground "#757565" :inverse-video nil))))
+ '(avy-lead-face ((t (:background "#E8BF6A" :foreground "black" :inverse-video nil))))
+ '(avy-lead-face-0 ((t (:background "#C45837" :foreground "white" :inverse-video nil))))
+ '(avy-lead-face-1 ((t (:background "#6D9CBE" :foreground "black"))))
+ '(avy-lead-face-2 ((t (:background "#B4C973" :foreground "black"))))
  '(font-latex-sectioning-5-face ((t (:inherit fixed-pitch :foreground "#CC9393" :weight bold))))
  '(mode-line ((t (:background "#2B2B2B" :foreground "#8FB28F" :box nil :overline "dim gray"))))
  '(mode-line-inactive ((t (:background "#383838" :foreground "#5F7F5F" :box nil :overline "dim gray"))))
