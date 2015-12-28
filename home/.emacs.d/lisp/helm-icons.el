@@ -16,8 +16,21 @@
 		 (insert-file-contents path) (buffer-string))
 	       nil t :ascent acc :mask 'heuristic)))
 
+(defconst storax/icon-archive (storax/create-helm-icon "~/.emacs.d/icons/file-archive.svg"))
+(defconst storax/icon-config (storax/create-helm-icon "~/.emacs.d/icons/file-config.svg"))
+(defconst storax/icon-cpp (storax/create-helm-icon "~/.emacs.d/icons/file-cpp.svg"))
+
 (defvar storax/helm-icons (list (cons "py" (storax/create-helm-icon "~/.emacs.d/icons/file-py.svg"))
-				(cons "/" (storax/create-helm-icon "~/.emacs.d/icons/file-folder.svg")))
+				(cons "/" (storax/create-helm-icon "~/.emacs.d/icons/file-folder.svg"))
+				(cons "zip" storax/icon-archive)
+				(cons "gz" storax/icon-archive)
+				(cons "whl" storax/icon-archive)
+				(cons "json" (storax/create-helm-icon "~/.emacs.d/icons/file-json.svg"))
+				(cons "rst" (storax/create-helm-icon "~/.emacs.d/icons/file-rst.svg"))
+				(cons "ini" storax/icon-config)
+				(cons "cfg" storax/icon-config)
+				(cons "cpp" storax/icon-cpp)
+				(cons "hpp" storax/icon-cpp))
   "Icons for helm find file")
 
 (defun storax/icon-for-file (file)
