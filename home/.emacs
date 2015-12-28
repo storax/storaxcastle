@@ -92,6 +92,7 @@
 (require 'init-markdown-mode)
 (require 'init-compilation)
 (require 'init-helm-dash)
+(require 'init-shell-pop)
 (require 'init-visual-regexp-steroids)
 (require 'init-beacon)
 ;(require 'init-minimap)
