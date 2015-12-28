@@ -27,7 +27,7 @@
 		(cdr (assoc (file-name-extension file) storax/helm-icons)))))
     (if icon
 	icon
-      "   ")))
+      "  ")))
 
 (defun storax/add-icons-to-files (old-function file)
   "Add to candidates of OLD-FUNCTION an icon for each FILE according to the type."
