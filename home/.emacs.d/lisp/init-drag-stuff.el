@@ -5,6 +5,7 @@
 ;; Use M-up and M-down to move line or region
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'drag-stuff)
 
 (require 'drag-stuff)

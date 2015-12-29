@@ -1,3 +1,10 @@
+;;; init-utils --- Useful stuff
+
+;;; Commentary:
+
+;;; Code:
+(require 'tramp)
+
 (if (fboundp 'with-eval-after-load)
     (defalias 'after-load 'with-eval-after-load)
   (defmacro after-load (feature &rest body)
@@ -6,6 +13,19 @@
     `(eval-after-load ,feature
        '(progn ,@body))))
 
+;;----------------------------------------------------------------------------
+;; Handier way to access items
+;;----------------------------------------------------------------------------
+(unless (fboundp 'alist-get) ;;25.1
+  (defun alist-get (key alist &optional default remove)
+    "Get the value associated to KEY in ALIST.
+
+DEFAULT is the value to return if KEY is not found in ALIST.
+REMOVE, if non-nil, means that when setting this element, we should
+remove the entry if the new value is `eql' to DEFAULT."
+    (ignore remove) ;;Silence byte-compiler.
+    (let ((x (assq key alist)))
+      (if x (cdr x) default))))
 
 ;;----------------------------------------------------------------------------
 ;; Handier way to add modes to auto-mode-alist
@@ -14,7 +34,6 @@
   "Add entries to `auto-mode-alist' to use `MODE' for all given file `PATTERNS'."
   (dolist (pattern patterns)
     (add-to-list 'auto-mode-alist (cons pattern mode))))
-
 
 ;;----------------------------------------------------------------------------
 ;; String utilities missing from core emacs
@@ -33,7 +52,6 @@
   "Remove trailing whitespace from `STR'."
   (replace-regexp-in-string "[ \t\n]+$" "" str))
 
-
 ;;----------------------------------------------------------------------------
 ;; Find the directory containing a given library
 ;;----------------------------------------------------------------------------
@@ -41,7 +59,6 @@
 (defun sanityinc/directory-of-library (library-name)
   "Return the directory in which the `LIBRARY-NAME' load file is found."
   (file-name-as-directory (file-name-directory (find-library-name library-name))))
-
 
 ;;----------------------------------------------------------------------------
 ;; Delete the current file
@@ -54,7 +71,6 @@
                              (file-name-nondirectory buffer-file-name)))
     (delete-file (buffer-file-name))
     (kill-this-buffer)))
-
 
 ;;----------------------------------------------------------------------------
 ;; Rename the current file
@@ -89,9 +105,10 @@
 ;; Edit the dotemacs file
 ;;----------------------------------------------------------------------------
 (defun edit-dotemacs ()
+  "Edit .emacs."
   (interactive)
   (find-file-existing user-init-file)
-  (widen)
-  (helm-imenu))
+  (widen))
 
 (provide 'init-utils)
+;;; init-utils ends here

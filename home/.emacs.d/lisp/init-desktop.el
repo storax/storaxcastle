@@ -4,7 +4,9 @@
 
 ;;; Code:
 (require 'desktop)
+
 (desktop-save-mode 1)
+
 (defun storax/desktop-save ()
   "Save the current desktop to desktop-dirname."
   (interactive)

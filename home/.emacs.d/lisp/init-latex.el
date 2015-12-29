@@ -5,12 +5,14 @@
 ;; Why not org-mode? Shut up! At least not MS-Word.
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'auctex)
 (require-package 'pdf-tools)
+(require 'tex)
+(require 'tex-mode)
 (pdf-tools-install)
 
 ;;; Latex PDF mode
-(require 'tex)
 (TeX-global-PDF-mode t)
 (setq TeX-source-correlate-start-server t)
 
@@ -29,10 +31,10 @@
   "Apply latex key bindings.
 
 Why is this a function? And used in a hook?"
-  (define-key LaTeX-mode-map (kbd "C-' C-a") 'latex-ae)
-  (define-key LaTeX-mode-map (kbd "C-' C-o") 'latex-oe)
-  (define-key LaTeX-mode-map (kbd "C-' C-u") 'latex-ue)
-  (define-key LaTeX-mode-map (kbd "C-' C-s") 'latex-ss)
+  (define-key latex-mode-map (kbd "C-' C-a") 'latex-ae)
+  (define-key latex-mode-map (kbd "C-' C-o") 'latex-oe)
+  (define-key latex-mode-map (kbd "C-' C-u") 'latex-ue)
+  (define-key latex-mode-map (kbd "C-' C-s") 'latex-ss)
 )
 
 ;;----------------------------------------------------------------------------

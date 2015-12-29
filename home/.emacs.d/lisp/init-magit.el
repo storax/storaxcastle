@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'magit)
 (require-package 'magit-gitflow)
 (require 'magit)

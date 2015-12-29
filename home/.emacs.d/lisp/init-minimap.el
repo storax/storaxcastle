@@ -5,7 +5,7 @@
 ;; useless
 
 ;;; Code:
-
+(require 'init-elpa)
 (require-package 'minimap)
 (require 'minimap)
 

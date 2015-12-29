@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'helm-dash)
 (require 'helm-dash)
 

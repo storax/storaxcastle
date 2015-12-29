@@ -6,8 +6,9 @@
 
 ;;; Code:
 (defun ignore-error-wrapper (fn)
-  "Funtion return new function that ignore errors.
-   The function wraps a function with `ignore-errors' macro."
+  "Return new function to ignore errors of FN.
+
+The function wraps a function with `ignore-errors' macro."
   (let ((fn fn))
     `(lambda ()
       (interactive)

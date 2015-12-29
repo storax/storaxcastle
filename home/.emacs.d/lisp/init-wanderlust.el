@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'apel)
 (require-package 'flim)
 (require-package 'semi)

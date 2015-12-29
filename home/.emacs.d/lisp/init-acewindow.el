@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'ace-window)
 (require 'ace-window)
 

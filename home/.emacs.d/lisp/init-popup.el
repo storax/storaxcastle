@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'popup)
 (require 'popup)
 (define-key popup-menu-keymap (kbd "M-n") 'popup-next)

@@ -3,8 +3,8 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'flycheck)
-
 (require 'compile)
 (require 'flycheck)
 

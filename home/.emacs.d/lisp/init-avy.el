@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'avy)
 (require 'avy)
 (define-key global-map (kbd "C-c SPC") 'avy-goto-word-1)

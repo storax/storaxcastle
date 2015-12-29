@@ -3,7 +3,8 @@
 ;;; Commentary:
 
 ;;; Code:
-;; Use Git version
+
+(require 'init-elpa)
 (require-package 'elpy)
 ;;----------------------------------------------------------------------------
 ;; Install requirements manually

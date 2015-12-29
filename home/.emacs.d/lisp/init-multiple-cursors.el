@@ -1,8 +1,11 @@
 ;;; init-multiple-cursors -- Configure Multiple Cursors
 
-;;; Commentary: Cool stuff but a little bit much for the brain
+;;; Commentary:
+
+;; Cool stuff but a little bit much for the brain
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'multiple-cursors)
 (require 'multiple-cursors)
 

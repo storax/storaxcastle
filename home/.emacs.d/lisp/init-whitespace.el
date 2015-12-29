@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-
+(require 'init-elpa)
 (require-package 'whitespace-cleanup-mode)
 
 (defun storax/trailing-whitespace ()

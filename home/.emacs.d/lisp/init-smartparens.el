@@ -3,8 +3,9 @@
 ;;; Commentary:
 
 ;;; Code:
-
+(require 'init-elpa)
 (require-package 'smartparens)
+(require 'smartparens)
 
 (smartparens-global-mode 1)
 (show-smartparens-global-mode 1)
@@ -30,7 +31,7 @@ If a region is active this acts like swap places."
 
 (defun storax/min-offset (pair p)
   "Get minimum offset to either beginning or end or PAIR from P."
-  (min (abs (- p (getf pair :beg))) (abs (- p (getf pair :end)))))
+  (min (abs (- p (plist-get pair 'beg))) (abs (- p (plist-get pair 'end)))))
 
 (defun storax/closer-pair (pair1 pair2 p)
   "Return one of PAIR1 or PAIR2 which is closer to P."
@@ -48,8 +49,8 @@ If a region is active this acts like swap places."
     (if (and next previous)
 	(let* ((p (point))
 	 (closest (storax/closer-pair next previous p))
-	 (beg (getf closest :beg))
-	 (end (getf closest :end)))
+	 (beg (plist-get closest 'beg))
+	 (end (plist-get closest 'end)))
 	  (if (> (abs (- p beg)) (abs (- p end)))
 	      (if (>= p end)
 		  (goto-char beg)

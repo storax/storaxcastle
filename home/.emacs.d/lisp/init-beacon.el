@@ -3,9 +3,10 @@
 ;;; Commentary:
 
 ;;; Code:
-
+(require 'init-elpa)
 (require-package 'beacon)
 
+(require 'beacon)
 (beacon-mode 1)
 (setq beacon-size 30
       beacon-blink-delay 0.1

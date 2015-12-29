@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+(require 'init-utils)
 
 (defun storax/imenu-elisp-sections ()
   "Set settings to display sections in imenu for elisp mode."

@@ -7,9 +7,11 @@
 ;;
 
 ;;; Code:
+(require 'init-elpa)
 (require-package 'helm)
 (require-package 'helm-swoop)
 (require 'helm-config)
+(require 'helm-ring)
 (require 'helm-icons)
 ;;----------------------------------------------------------------------------
 ;; Helm Variables
@@ -25,7 +27,6 @@
 (setq helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
       helm-ff-file-name-history-use-recentf t
-      helm-dabbrev-cycle-threshold 5
       helm-kill-ring-threshold 1
       helm-candidate-number-limit 400
 )

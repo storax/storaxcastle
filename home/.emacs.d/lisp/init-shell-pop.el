@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-
+(require 'init-elpa)
 (require-package 'shell-pop)
 (require 'shell-pop)
 

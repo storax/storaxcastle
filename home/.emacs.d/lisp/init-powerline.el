@@ -4,9 +4,12 @@
 
 ;;; Code:
 (require 'cl-lib)
+(require 'init-elpa)
+(require 'init-magit)
+(require 'init-spotify-el)
+(require 'pyvenv)
 (require-package 'powerline)
 (require 'powerline)
-
 
 ;;----------------------------------------------------------------------------
 ;; Face customization
