@@ -8,7 +8,7 @@
 (require 'cl-lib)
 (require 'helm-files)
 
-(cl-defun storax/create-helm-icon (path &optional (acc 85) (text " "))
+(cl-defun storax/create-helm-icon (path &optional (acc 80) (text "  "))
   "Create an icon for a specific filetype"
   (propertize text 'display
 	      (create-image
