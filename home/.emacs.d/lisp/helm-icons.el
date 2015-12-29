@@ -35,6 +35,7 @@
 				(cons "txt" (storax/create-helm-icon "~/.emacs.d/icons/file-txt.svg"))
 				(cons "ini" storax/icon-config)
 				(cons "cfg" storax/icon-config)
+				(cons "conf" storax/icon-config)
 				(cons "cpp" storax/icon-cpp)
 				(cons "hpp" storax/icon-cpp)
 				(cons "h" storax/icon-file)
