@@ -23,6 +23,7 @@
 (defconst storax/icon-image (storax/create-helm-icon "~/.emacs.d/icons/file-image.svg"))
 (defconst storax/icon-xml (storax/create-helm-icon "~/.emacs.d/icons/file-xml.svg"))
 (defconst storax/icon-shell (storax/create-helm-icon "~/.emacs.d/icons/file-shell.svg"))
+(defconst storax/icon-yaml (storax/create-helm-icon "~/.emacs.d/icons/file-yaml.svg"))
 
 (defvar storax/helm-icons (list (cons "py" (storax/create-helm-icon "~/.emacs.d/icons/file-py.svg"))
 				(cons "/" (storax/create-helm-icon "~/.emacs.d/icons/file-folder.svg"))
@@ -31,6 +32,7 @@
 				(cons "whl" storax/icon-archive)
 				(cons "json" (storax/create-helm-icon "~/.emacs.d/icons/file-json.svg"))
 				(cons "rst" (storax/create-helm-icon "~/.emacs.d/icons/file-rst.svg"))
+				(cons "txt" (storax/create-helm-icon "~/.emacs.d/icons/file-txt.svg"))
 				(cons "ini" storax/icon-config)
 				(cons "cfg" storax/icon-config)
 				(cons "cpp" storax/icon-cpp)
@@ -52,7 +54,9 @@
 				(cons "el" (storax/create-helm-icon "~/.emacs.d/icons/file-el.svg"))
 				(cons "rb" (storax/create-helm-icon "~/.emacs.d/icons/file-ruby.svg"))
 				(cons "md" (storax/create-helm-icon "~/.emacs.d/icons/file-md.svg"))
-				(cons "sh" storax/icon-shell))
+				(cons "sh" storax/icon-shell)
+				(cons "yaml" storax/icon-yaml)
+				(cons "yml" storax/icon-yaml))
   "Icons for helm find file")
 
 (defun storax/icon-for-file (file)
