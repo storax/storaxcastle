@@ -69,5 +69,19 @@
 (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
 
+;;----------------------------------------------------------------------------
+;; Skip the first . and .. in helm-find-files
+;;----------------------------------------------------------------------------
+
+(defun storax/helm-skip-dots (old-func &rest args)
+  "Skip . and .. initially in helm-find-files.  First call OLD-FUNC with ARGS."
+  (apply old-func args)
+  (let ((sel (helm-get-selection)))
+    (if (and (stringp sel) (string-match "/\\.$" sel))
+	       (helm-next-line 2))))
+
+(advice-add #'helm-preselect :around #'storax/helm-skip-dots)
+(advice-add #'helm-ff-move-to-first-real-candidate :around #'storax/helm-skip-dots)
+
 (provide 'init-helm)
 ;;; init-helm ends here
