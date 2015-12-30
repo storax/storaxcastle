@@ -193,7 +193,9 @@ COLOR1 is the color to apply."
 			  (mode-line (if active 'mode-line 'mode-line-inactive))
 			  (face1 (if active 'powerline-active1 'powerline-inactive1))
 			  (face2 (if active
-				     (cond ((flycheck-has-current-errors-p 'error)
+				     (cond ((or
+					     (flycheck-has-current-errors-p 'error)
+					     (and rng-error-count (not (zerop rng-error-count))))
 					  'flycheck-color-mode-line-error-face-active)
 					 ((flycheck-has-current-errors-p 'warning)
 					  'flycheck-color-mode-line-warning-face-active)
@@ -202,7 +204,9 @@ COLOR1 is the color to apply."
 					 ((flycheck-running-p)
 					  'powerline-active2)
 					 ('powerline-active2))
-				   (cond ((flycheck-has-current-errors-p 'error)
+				   (cond ((or
+					   (flycheck-has-current-errors-p 'error)
+					   (and rng-error-count (not (zerop rng-error-count))))
 					  'flycheck-color-mode-line-error-face-inactive)
 					 ((flycheck-has-current-errors-p 'warning)
 					  'flycheck-color-mode-line-warning-face-inactive)
