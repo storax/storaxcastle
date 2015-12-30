@@ -199,15 +199,44 @@ Either region, word at point or nothing."
       (buffer-substring (region-beginning) (region-end))
     (word-at-point)))
 
+(defun storax/translate--buffer-replace-region (beg end rep)
+  "Replace text in BUFFER in region (BEG END) with REP."
+  (unless (string-equal (buffer-substring beg end) rep)
+    (save-excursion
+      (goto-char end)
+      (insert rep)
+      (delete-region beg end))))
+
+(defun storax/translate-replace (trans)
+  "Replace the current region or word at point with TRANS."
+  (if (region-active-p)
+      (storax/translate--buffer-replace-region
+       (region-beginning)
+       (region-end)
+       trans)
+    (let ((bounds (bounds-of-thing-at-point 'word)))
+      (storax/translate--buffer-replace-region
+       (car bounds) (cdr bounds) trans))))
+
+(defun storax/translate-helm-translation-actions (actions trans)
+  "Return a list of ACTIONS for TRANS."
+  '((,(format "Insert \"%s\" at point." % trans)
+     . insert)
+    (,(format "Replace current region or word with \"%s\"" % trans)
+     . storax/translate-replace)))
+
 (defun storax/translate-helm-select-translation (parsed)
-  (let ((sources `((name . ,(format "Translations for \"%s\"" (car parsed)))
-		   (candidates . ,(nth 3 parsed)))))
+  "Select a translation from PARSED via helm."
+  (let ((sources `((name . ,(format "Translations for \"%s\"." (car parsed)))
+		   (candidates . ,(nth 3 parsed))
+		   (action-transformer . storax/translate-helm-translation-actions))))
     (helm
      :sources '(sources))))
 
 (defun storax/translate-helm-actions (actions parsed)
   "Return a list of ACTIONS for PARSED dict entry."
-  `((,(format "What is parsed: %s" parsed) . storax/translate-helm-select-translation)))
+  `((,(format "Select translations for: \"%s\"" (car parsed))
+     . storax/translate-helm-select-translation)))
 
 (defvar storax/translate-helm-source
   '((name . "Translate")
