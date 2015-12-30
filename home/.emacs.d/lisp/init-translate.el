@@ -189,7 +189,7 @@ TRANSLATIONS is a list of possible translations."
   "Fetch entries in english dict for helm pattern."
   (let ((parsed (storax/translate-fetch storax/translate-database helm-pattern)))
     (mapcar (lambda (p)
-	      (cons (apply 'storax/translate-format p) (car p))) parsed)))
+	      (cons (apply 'storax/translate-format p) p)) parsed)))
 
 (defun storax/translate-input ()
   "Return a suitable input.
@@ -199,13 +199,24 @@ Either region, word at point or nothing."
       (buffer-substring (region-beginning) (region-end))
     (word-at-point)))
 
+(defun storax/translate-helm-select-translation (parsed)
+  (let ((sources `((name . ,(format "Translations for \"%s\"" (car parsed)))
+		   (candidates . ,(nth 3 parsed)))))
+    (helm
+     :sources '(sources))))
+
+(defun storax/translate-helm-actions (actions parsed)
+  "Return a list of ACTIONS for PARSED dict entry."
+  `((,(format "What is parsed: %s" parsed) . storax/translate-helm-select-translation)))
+
 (defvar storax/translate-helm-source
   '((name . "Translate")
     (multiline)
     (volatile)
     (delayed)
     (requires-pattern . 2)
-    (candidates-process . storax/translate-helm-fetch)))
+    (candidates-process . storax/translate-helm-fetch)
+    (action-transformer . storax/translate-helm-actions)))
 
 (defvar storax/translate-helm-select-history nil
   "History of selected databases.")
