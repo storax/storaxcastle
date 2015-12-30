@@ -33,10 +33,12 @@
 (defconst storax/icon-css (storax/create-icon "~/.emacs.d/icons/file-css.svg"))
 (defconst storax/icon-js (storax/create-icon "~/.emacs.d/icons/file-js.svg"))
 (defconst storax/icon-el (storax/create-icon "~/.emacs.d/icons/file-el.svg"))
+(defconst storax/icon-cl (storax/create-icon "~/.emacs.d/icons/file-cl.svg"))
 (defconst storax/icon-ruby (storax/create-icon "~/.emacs.d/icons/file-ruby.svg"))
 (defconst storax/icon-md (storax/create-icon "~/.emacs.d/icons/file-md.svg"))
 (defconst storax/icon-java (storax/create-icon "~/.emacs.d/icons/file-java.svg"))
 (defconst storax/icon-help (storax/create-icon "~/.emacs.d/icons/file-help.svg"))
+(defconst storax/icon-mail (storax/create-icon "~/.emacs.d/icons/file-mail.svg"))
 
 (provide 'storax-icons)
 ;;; storax-icons ends here
