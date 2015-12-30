@@ -33,6 +33,9 @@
   "Face for translations."
   :group 'storax/translate)
 
+(defvar storax/translate-database "all"
+  "The current database.")
+
 (defvar storax/translate-result-regexp
   "\\(From \\(.*?\\):
 
@@ -96,9 +99,9 @@ TRANSLATIONS is a list of possible translations."
     (unless (get-buffer-window buf 0)
       (pop-to-buffer buf nil t))))
 
-(defun storax/translate-helm-fetch-deu-eng ()
+(defun storax/translate-helm-fetch ()
   "Fetch entries in english dict for helm pattern."
-  (let ((parsed (storax/translate-fetch "fd-deu-eng" helm-pattern)))
+  (let ((parsed (storax/translate-fetch storax/translate-database helm-pattern)))
     (mapcar (lambda (p)
 	      (cons (apply 'storax/translate-format p) (car p))) parsed)))
 
@@ -110,19 +113,20 @@ Either region, word at point or nothing."
       (buffer-substring (region-beginning) (region-end))
     (word-at-point)))
 
-(defvar storax/translate-helm-source-deu-eng
+(defvar storax/translate-helm-source
   '((name . "Translate")
     (multiline)
     (volatile)
     (delayed)
     (requires-pattern . 2)
-    (candidates-process . storax/translate-helm-fetch-deu-eng)))
+    (candidates-process . storax/translate-helm-fetch)))
 
 (defun storax/translate-helm-deu-eng ()
   "Translate with helm interface."
   (interactive)
+  (setq storax/translate-database "fd-deu-eng")
   (helm
-   :sources '(storax/translate-helm-source-deu-eng)
+   :sources '(storax/translate-helm-source)
    :buffer "*Translate*"
    :promt "German -> English:"
    :input (storax/translate-input)))
