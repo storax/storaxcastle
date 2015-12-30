@@ -45,7 +45,15 @@ Text will be replaced with ICON and add an optional PREFIX and SUFFIX."
    '("magit-process" magit-process-mode-hook storax/icon-git "Process ")
    '("magit" magit-merge-review-mode-hook storax/icon-git "Merge Review ")
    '("magit-log" magit-cherry-mode-hook storax/icon-git storax/icon-cherry)
-   ))
+   '("magit-popup" magit-popup-mode-hook storax/icon-git "Popup ")
+   '("magit-log" magit-log-mode-hook storax/icon-git "Log ")
+   '("magit-stash" magit-stash-mode-hook storax/icon-git "Stash ")
+   '("magit-stash" magit-stashes-mode-hook storax/icon-git "Stashes ")
+   '("magit-log" magit-reflog-mode-hook storax/icon-git "Reflog ")
+   '("magit" magit-blob-mode-hook storax/icon-git "Blob ")
+   '("magit" magit-refs-mode-hook storax/icon-git "Refs ")
+   '("magit" magit-file-mode-hook storax/icon-git "File ")
+   '("magit-blame" magit-blame-mode-hook storax/icon-git "Blame ")))
 
 (defun storax/add-major-mode-icon-hooks ()
   "Call 'storax/major-mode-icon' for each args in 'storax/major-mode-icon-list'."
