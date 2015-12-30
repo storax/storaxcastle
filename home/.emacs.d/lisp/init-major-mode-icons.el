@@ -22,9 +22,17 @@ Text will be replaced with ICON and add an optional PREFIX and SUFFIX."
    '("python" python-mode-hook storax/icon-python)
    '("sh-script" sh-mode-hook storax/icon-shell)
    '("nxml-mode" nxml-mode-hook storax/icon-xml)
+   '("ruby-mode" ruby-mode-hook storax/icon-ruby)
+   '("json-mode" json-mode-hook storax/icon-json)
+   '("help-mode" help-mode-hook storax/icon-help)
+   '("cc-mode" java-mode-hook storax/icon-java)
    '("cc-mode" c++-mode-hook storax/icon-cpp)
    '("css-mode" css-mode-hook storax/icon-css)
-   '("arc-mode" archive-mode-hook storax/icon-archive)))
+   '("arc-mode" archive-mode-hook storax/icon-archive)
+   '("yaml-mode" yaml-mode-hook storax/icon-yaml)
+   '("js" js-mode-hook storax/icon-js)
+   '("sgml-mode" html-mode-hook storax/icon-xml "HTML")
+   '("tar-mode" tar-mode-hook storax/icon-archive)))
 
 (defun storax/add-major-mode-icon-hooks ()
   "Call 'storax/major-mode-icon' for each args in 'storax/major-mode-icon-list'."
