@@ -20,6 +20,11 @@
       require-final-newline t
       undo-limit 10000)
 
+(defun storax/alternative-scrolling ()
+  "Use scrolling suited for terminals."
+  (setq scroll-margin 0))
+(add-hook 'term-mode-hook 'storax/alternative-scrolling)
+
 ;; String doesnt require to escape all the stuff
 (require 're-builder)
 (setq reb-re-syntax 'string)
