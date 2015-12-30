@@ -216,7 +216,7 @@ Either region, word at point or nothing."
   (helm
    :sources '(storax/translate-helm-select-source)
    :buffer "*Dictionary Databases*"
-   :promt "Database"
+   :prompt "Database: "
    :history storax/translate-helm-select-history
    :preselect (car (rassoc storax/translate-database storax/translate-database-list))))
 
@@ -226,7 +226,7 @@ Either region, word at point or nothing."
   (helm
    :sources '(storax/translate-helm-source)
    :buffer "*Translate*"
-   :promt "German -> English:"
+   :prompt "Translate: "
    :input (storax/translate-input)))
 
 (provide 'init-translate)
