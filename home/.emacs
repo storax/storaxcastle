@@ -96,6 +96,7 @@
 (require 'init-shell-pop)
 (require 'init-visual-regexp-steroids)
 (require 'init-beacon)
+(require 'init-major-mode-icons)
 ;(require 'init-minimap)
 (require 'init-spotify-el)
 (require 'init-wanderlust)
