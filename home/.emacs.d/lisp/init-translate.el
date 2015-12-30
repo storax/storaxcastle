@@ -113,6 +113,15 @@
    )
   "List of dict databases.")
 
+(defvar storax/translate-database-common-list
+  (list
+   `("German-English FreeDict Dictionary ver. 0.3.3" . "fd-deu-eng")
+   `("English-German FreeDict Dictionary ver. 0.3.5" . "fd-eng-deu")
+   `("Translating Dictionaries" . "trans")
+   `("All Dictionaries (English-Only and Translating)" . "all")
+   )
+  "List of common dict databases.")
+
 (defvar storax/translate-result-regexp
   "\\(From \\(.*?\\):
 
@@ -210,12 +219,27 @@ Either region, word at point or nothing."
     (candidates . storax/translate-database-list)
     (action-transformer . storax/translate-helm-select-actions)))
 
-(defun storax/translate-helm-select ()
-  "Select database first then translate something."
-  (interactive)
+(defvar storax/translate-helm-select-source-common
+  '((name . "Dictionary Databases")
+    (candidates . storax/translate-database-common-list)
+    (action-transformer . storax/translate-helm-select-actions)))
+
+(defun storax/translate-helm-select (arg)
+  "Select database first then translate something.
+
+If ARG is non-nil choose form all databases.
+Else use only the 'storax/translate-database-common-list'."
+  (interactive "P")
+  (if arg
+      (helm
+       :sources '(storax/translate-helm-select-source)
+       :buffer "*Dictionary Databases*"
+       :prompt "Database: "
+       :history storax/translate-helm-select-history
+       :preselect (car (rassoc storax/translate-database storax/translate-database-list))))
   (helm
-   :sources '(storax/translate-helm-select-source)
-   :buffer "*Dictionary Databases*"
+   :sources '(storax/translate-helm-select-source-common)
+   :buffer "*Dictionary Database*"
    :prompt "Database: "
    :history storax/translate-helm-select-history
    :preselect (car (rassoc storax/translate-database storax/translate-database-list))))
@@ -229,5 +253,6 @@ Either region, word at point or nothing."
    :prompt "Translate: "
    :input (storax/translate-input)))
 
+(global-set-key (kbd "C-c d") 'storax/translate-helm-select)
 (provide 'init-translate)
 ;;; init-translate ends here
