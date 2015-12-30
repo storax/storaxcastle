@@ -10,7 +10,7 @@
 (require 'pyvenv)
 (require-package 'powerline)
 (require 'powerline)
-
+(require 'rng-valid)
 ;;----------------------------------------------------------------------------
 ;; Face customization
 ;;----------------------------------------------------------------------------
