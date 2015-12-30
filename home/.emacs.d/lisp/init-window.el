@@ -6,8 +6,7 @@
 
 ;; No spashscreen, scratch message and default python mode
 (setq inhibit-splash-screen t
-      initial-scratch-message nil
-      initial-major-mode 'python-mode)
+      initial-scratch-message nil)
 
 ;; Hide tool and menu bar
 (when window-system
