@@ -203,7 +203,7 @@ Either region, word at point or nothing."
 
 (defun storax/translate-helm-select-actions (actions db)
   "Return a list of helm ACTIONS for this DB."
-    `((,(format "Use %s as Database" db) . (lambda (&rest args) (storax/translate-helm ,db)))))
+    `((,(format "Use %s as Database" db) . (lambda (&rest args) (setq storax/translate-database ,db) (storax/translate-helm)))))
 
 (defvar storax/translate-helm-select-source
   '((name . "Dictionary Databases")
@@ -219,11 +219,9 @@ Either region, word at point or nothing."
    :promt "Database"
    :history storax/translate-helm-select-history))
 
-
-(defun storax/translate-helm (database)
-  "Translate with DATABASE."
-  (interactive (concat "s" (mapconcat #'identity storax/translate-database-list "\n")))
-  (setq storax/translate-database database)
+(defun storax/translate-helm ()
+  "Translate with helm."
+  (interactive)
   (helm
    :sources '(storax/translate-helm-source)
    :buffer "*Translate*"
