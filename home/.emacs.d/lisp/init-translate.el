@@ -5,6 +5,7 @@
 ;;; Code:
 (require 'cl-lib)
 (require 'init-utils)
+(require 'helm)
 
 (defgroup storax/translate nil
   "Customization group for storax/tranlate."
@@ -68,19 +69,53 @@ TRANSLATIONS is a list of possible translations."
 	  (propertize entry 'face 'storax/translate-entry-face)
 	  (if phonetic (propertize (format " /%s/" phonetic) 'face 'storax/translate-phonetic-face) "")
 	  (if meta (propertize (format " <%s>" meta) 'face 'storax/translate-meta-face) "")
-   (propertize (mapconcat #'identity translations "; ") 'face '(:inherti 'font-lock-doc-face))))
+   (propertize (mapconcat #'identity translations "; ") 'face '(:inherit font-lock-doc-face))))
+
+(defun storax/translate--transform-format (key value)
+  "Transform KEY and VALUE, then format result."
+  (apply 'storax/translate-format (storax/translate-transform key value)))
+
+(defun storax/translate-fetch (database query)
+  "Fetch entries in DATABASE for QUERY and return transformed result."
+  (let* ((output (shell-command-to-string (format "/usr/bin/dict -d %s %s" database query)))
+	 (defs (sanityinc/string-all-matches storax/translate-result-regexp output 3))
+	 (exps (sanityinc/string-all-matches storax/translate-result-regexp output 4)))
+    (cl-mapcar #'storax/translate-transform defs exps)))
 
 (defun storax/translate (database query)
   "Translate with DATABASE the given QUERY."
-  (let* ((output (shell-command-to-string (format "/usr/bin/dict -d %s %s" database query)))
-	 (defs (sanityinc/string-all-matches storax/translate-result-regexp output 3))
-	 (exps (sanityinc/string-all-matches storax/translate-result-regexp output 4))
+  (let* ((parsed (storax/translate-fetch database query))
 	 (buf (get-buffer-create "Translation")))
     (with-current-buffer buf
       (erase-buffer)
-      (insert (mapconcat 'identity (cl-mapcar #'storax/translate-format defs exps) "\n\n")))
+      (insert
+       (mapconcat 'identity
+		  (cl-mapcar #'(lambda (args) (apply 'storax/translate-format args)) parsed)
+		  "\n\n")))
     (unless (get-buffer-window buf 0)
       (pop-to-buffer buf nil t))))
+
+(defun storax/translate-helm-fetch-deu-eng ()
+  "Fetch entries in english dict for helm pattern."
+  (let ((parsed (storax/translate-fetch "fd-deu-eng" helm-pattern)))
+    (mapcar (lambda (p)
+	      (cons (apply 'storax/translate-format p) (car p))) parsed)))
+
+(defvar storax/translate-helm-source-deu-eng
+  '((name . "Translate")
+    (multiline)
+    (volatile)
+    (delayed)
+    (requires-pattern . 2)
+    (candidates-process . storax/translate-helm-fetch-deu-eng)))
+
+(defun storax/translate-helm-deu-eng ()
+  "Translate with helm interface."
+  (interactive)
+  (helm
+   :sources '(storax/translate-helm-source-deu-eng)
+   :buffer "*Translate*"
+   :promt "German -> English:"))
 
 (provide 'init-translate)
 ;;; init-translate ends here
