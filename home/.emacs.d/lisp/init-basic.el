@@ -35,6 +35,7 @@
 ;; Builtin Auto Modes
 ;;----------------------------------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("\\.qss$" . css-mode))
 
 ;;----------------------------------------------------------------------------
 ;; Aliases
