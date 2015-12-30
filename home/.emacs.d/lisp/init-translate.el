@@ -217,7 +217,8 @@ Either region, word at point or nothing."
    :sources '(storax/translate-helm-select-source)
    :buffer "*Dictionary Databases*"
    :promt "Database"
-   :history storax/translate-helm-select-history))
+   :history storax/translate-helm-select-history
+   :preselect (car (rassoc storax/translate-database storax/translate-database-list))))
 
 (defun storax/translate-helm ()
   "Translate with helm."
