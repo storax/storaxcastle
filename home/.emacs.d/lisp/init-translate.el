@@ -36,6 +36,83 @@
 (defvar storax/translate-database "all"
   "The current database.")
 
+(defvar storax/translate-database-list
+  (list
+   `("The Collaborative International Dictionary of English v.0.48" . "gcide")
+   `("WordNet (r) 3.0 (2006)" . "wn")
+   `("Moby Thesaurus II by Grady Ward, 1.0" . "moby-thesaurus")
+   `("The Elements (07Nov00)" . "elements")
+   `("V.E.R.A. -- Virtual Entity of Relevant Acronyms (January 2014)" . "vera")
+   `("The Jargon File (version 4.4.7, 29 Dec 2003)" . "jargon")
+   `("The Free On-line Dictionary of Computing (20 July 2014)" . "foldoc")
+   `("Easton's 1897 Bible Dictionary" . "easton")
+   `("Hitchcock's Bible Names Dictionary (late 1800's)" . "hitchcock")
+   `("Bouvier's Law Dictionary, Revised 6th Ed (1856)" . "bouvier")
+   `("The Devil's Dictionary (1881-1906)" . "devil")
+   `("CIA World Factbook 2002" . "world02")
+   `("U.S. Gazetteer Counties (2000)" . "gaz2k-counties")
+   `("U.S. Gazetteer Places (2000)" . "gaz2k-places")
+   `("U.S. Gazetteer Zip Code Tabulation Areas (2000)" . "gaz2k-zips")
+   `("Turkish-English FreeDict Dictionary ver. 0.2.1" . "fd-tur-eng")
+   `("Portuguese-German FreeDict Dictionary ver. 0.1.1" . "fd-por-deu")
+   `("Dutch-English Freedict Dictionary ver. 0.1.3" . "fd-nld-eng")
+   `("English-Arabic FreeDict Dictionary ver. 0.6.2" . "fd-eng-ara")
+   `("Spanish-English FreeDict Dictionary ver. 0.1.1" . "fd-spa-eng")
+   `("English-Hungarian FreeDict Dictionary ver. 0.1" . "fd-eng-hun")
+   `("Italian-English FreeDict Dictionary ver. 0.1.1" . "fd-ita-eng")
+   `("Welsh-English Freedict dictionary" . "fd-wel-eng")
+   `("English-Dutch FreeDict Dictionary ver. 0.1.1" . "fd-eng-nld")
+   `("French-English FreeDict Dictionary ver. 0.3.4" . "fd-fra-eng")
+   `("Turkish-German FreeDict Dictionary ver. 0.1.1" . "fd-tur-deu")
+   `("Swedish-English FreeDict Dictionary ver. 0.1.1" . "fd-swe-eng")
+   `("Nederlands-French FreeDict Dictionary ver. 0.1.1" . "fd-nld-fra")
+   `("English-Swahili xFried/FreeDict Dictionary" . "fd-eng-swa")
+   `("German-Dutch FreeDict Dictionary ver. 0.1.1" . "fd-deu-nld")
+   `("French-German FreeDict Dictionary ver. 0.1.1" . "fd-fra-deu")
+   `("English-Croatian Freedict Dictionary" . "fd-eng-cro")
+   `("English-Italian FreeDict Dictionary ver. 0.1.1" . "fd-eng-ita")
+   `("English-Latin FreeDict Dictionary ver. 0.1.1" . "fd-eng-lat")
+   `("Latin-English FreeDict Dictionary ver. 0.1.1" . "fd-lat-eng")
+   `("French-Dutch FreeDict Dictionary ver. 0.1.2" . "fd-fra-nld")
+   `("Italian-German FreeDict Dictionary ver. 0.1.1" . "fd-ita-deu")
+   `("English-Hindi FreeDict Dictionary ver. 1.5.1" . "fd-eng-hin")
+   `("German-English FreeDict Dictionary ver. 0.3.3" . "fd-deu-eng")
+   `("Portuguese-English FreeDict Dictionary ver. 0.1.1" . "fd-por-eng")
+   `("Latin - German FreeDict dictionary ver. 0.4" . "fd-lat-deu")
+   `("Japanese-German FreeDict Dictionary ver. 0.1.1" . "fd-jpn-deu")
+   `("English-German FreeDict Dictionary ver. 0.3.5" . "fd-eng-deu")
+   `("English-Serbo-Croat Freedict dictionary" . "fd-eng-scr")
+   `("English-Romanian FreeDict Dictionary ver. 0.6.1" . "fd-eng-rom")
+   `("Irish-English Freedict dictionary" . "fd-iri-eng")
+   `("Czech-English Freedict dictionary" . "fd-cze-eng")
+   `("Serbo-Croat-English Freedict dictionary" . "fd-scr-eng")
+   `("English-Czech fdicts/FreeDict Dictionary" . "fd-eng-cze")
+   `("English-Russian FreeDict Dictionary ver. 0.3" . "fd-eng-rus")
+   `("Afrikaans-German FreeDict Dictionary ver. 0.3" . "fd-afr-deu")
+   `("English-Portuguese FreeDict Dictionary ver. 0.2.2" . "fd-eng-por")
+   `("Hungarian-English FreeDict Dictionary ver. 0.3" . "fd-hun-eng")
+   `("English-Swedish FreeDict Dictionary ver. 0.1.1" . "fd-eng-swe")
+   `("German-Italian FreeDict Dictionary ver. 0.1.1" . "fd-deu-ita")
+   `("Croatian-English Freedict Dictionary" . "fd-cro-eng")
+   `("Danish-English FreeDict Dictionary ver. 0.2.1" . "fd-dan-eng")
+   `("English-Turkish FreeDict Dictionary ver. 0.2.1" . "fd-eng-tur")
+   `("English-Spanish FreeDict Dictionary ver. 0.2.1" . "fd-eng-spa")
+   `("Dutch-German FreeDict Dictionary ver. 0.1.1" . "fd-nld-deu")
+   `("German-Portuguese FreeDict Dictionary ver. 0.2.1" . "fd-deu-por")
+   `("Swahili-English xFried/FreeDict Dictionary" . "fd-swa-eng")
+   `("English-Hindi Freedict Dictionary [reverse index]" . "fd-hin-eng")
+   `("German-French FreeDict Dictionary ver. 0.3.1" . "fd-deu-fra")
+   `("English-French FreeDict Dictionary ver. 0.1.4" . "fd-eng-fra")
+   `("Slovak-English Freedict dictionary" . "fd-slo-eng")
+   `("Scottish Gaelic-German FreeDict Dictionary ver. 0.1.1" . "fd-gla-deu")
+   `("English-Welsh Freedict dictionary" . "fd-eng-wel")
+   `("English-Irish Freedict dictionary" . "fd-eng-iri")
+   `("English Monolingual Dictionaries" . "english")
+   `("Translating Dictionaries" . "trans")
+   `("All Dictionaries (English-Only and Translating)" . "all")
+   )
+  "List of dict databases.")
+
 (defvar storax/translate-result-regexp
   "\\(From \\(.*?\\):
 
@@ -121,10 +198,32 @@ Either region, word at point or nothing."
     (requires-pattern . 2)
     (candidates-process . storax/translate-helm-fetch)))
 
-(defun storax/translate-helm-deu-eng ()
-  "Translate with helm interface."
+(defvar storax/translate-helm-select-history nil
+  "History of selected databases.")
+
+(defun storax/translate-helm-select-actions (actions db)
+  "Return a list of helm ACTIONS for this DB."
+    `((,(format "Use %s as Database" db) . (lambda (&rest args) (storax/translate-helm ,db)))))
+
+(defvar storax/translate-helm-select-source
+  '((name . "Dictionary Databases")
+    (candidates . storax/translate-database-list)
+    (action-transformer . storax/translate-helm-select-actions)))
+
+(defun storax/translate-helm-select ()
+  "Select database first then translate something."
   (interactive)
-  (setq storax/translate-database "fd-deu-eng")
+  (helm
+   :sources '(storax/translate-helm-select-source)
+   :buffer "*Dictionary Databases*"
+   :promt "Database"
+   :history storax/translate-helm-select-history))
+
+
+(defun storax/translate-helm (database)
+  "Translate with DATABASE."
+  (interactive (concat "s" (mapconcat #'identity storax/translate-database-list "\n")))
+  (setq storax/translate-database database)
   (helm
    :sources '(storax/translate-helm-source)
    :buffer "*Translate*"
