@@ -53,7 +53,10 @@ Text will be replaced with ICON and add an optional PREFIX and SUFFIX."
    '("magit" magit-blob-mode-hook storax/icon-git "Blob ")
    '("magit" magit-refs-mode-hook storax/icon-git "Refs ")
    '("magit" magit-file-mode-hook storax/icon-git "File ")
-   '("magit-blame" magit-blame-mode-hook storax/icon-git "Blame ")))
+   '("magit-blame" magit-blame-mode-hook storax/icon-git "Blame ")
+   '("text-mode" text-mode-hook storax/icon-txt)
+   '("simple" messages-buffer-mode-hook storax/icon-log)
+   '("elpy-refactor" elpy-refactor-mode-hook storax/icon-python "Refactor ")))
 
 (defun storax/add-major-mode-icon-hooks ()
   "Call 'storax/major-mode-icon' for each args in 'storax/major-mode-icon-list'."
@@ -61,6 +64,8 @@ Text will be replaced with ICON and add an optional PREFIX and SUFFIX."
     (apply 'storax/major-mode-icon e)))
 
 (storax/add-major-mode-icon-hooks)
+;; Also apply to current messages buffer
+(with-current-buffer "*Messages*" (setq mode-name storax/icon-log))
 
 (provide 'init-major-mode-icons)
 ;;; init-major-mode-icons ends here
