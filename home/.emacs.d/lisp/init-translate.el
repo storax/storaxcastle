@@ -4,6 +4,7 @@
 
 ;;; Code:
 (require 'cl-lib)
+(require 'thingatpt)
 (require 'init-utils)
 (require 'helm)
 
@@ -101,6 +102,14 @@ TRANSLATIONS is a list of possible translations."
     (mapcar (lambda (p)
 	      (cons (apply 'storax/translate-format p) (car p))) parsed)))
 
+(defun storax/translate-input ()
+  "Return a suitable input.
+
+Either region, word at point or nothing."
+  (if (region-active-p)
+      (buffer-substring (region-beginning) (region-end))
+    (word-at-point)))
+
 (defvar storax/translate-helm-source-deu-eng
   '((name . "Translate")
     (multiline)
@@ -115,7 +124,8 @@ TRANSLATIONS is a list of possible translations."
   (helm
    :sources '(storax/translate-helm-source-deu-eng)
    :buffer "*Translate*"
-   :promt "German -> English:"))
+   :promt "German -> English:"
+   :input (storax/translate-input)))
 
 (provide 'init-translate)
 ;;; init-translate ends here
