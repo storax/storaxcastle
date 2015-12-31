@@ -42,7 +42,7 @@ Text will be replaced with ICON and add an optional PREFIX and SUFFIX."
    '("pdf-view" pdf-view-mode-hook storax/icon-pdf)
    '("magit" magit-status-mode-hook storax/icon-git)
    '("magit-diff" magit-diff-mode-hook storax/icon-git storax/icon-diff)
-   '("magit-diff" magit-revision-mode-hook storax/icon-git "Revision ")
+   '("magit-diff" magit-revision-mode-hook storax/icon-git storax/icon-git-commit)
    '("magit-process" magit-process-mode-hook storax/icon-git storax/icon-archive)
    '("magit" magit-merge-preview-mode-hook storax/icon-git storax/icon-git-merge)
    '("magit-log" magit-cherry-mode-hook storax/icon-git storax/icon-cherry)
