@@ -207,21 +207,31 @@ Either region, word at point or nothing."
       (insert rep)
       (delete-region beg end))))
 
+(defun storax/translate-insert (trans)
+  "Insert TRANS."
+  (let ((p (storax/translate-match
+	    "\\([^()<\\[]+[^ /()<\\[]\\)"
+	    trans 1)))
+    (insert p)))
+
 (defun storax/translate-replace (trans)
   "Replace the current region or word at point with TRANS."
-  (if (region-active-p)
-      (storax/translate--buffer-replace-region
-       (region-beginning)
-       (region-end)
-       trans)
-    (let ((bounds (bounds-of-thing-at-point 'word)))
-      (storax/translate--buffer-replace-region
-       (car bounds) (cdr bounds) trans))))
+  (let ((p (storax/translate-match
+	    "\\([^()<\\[]+[^ /()<\\[]\\)"
+	    trans 1)))
+    (if (region-active-p)
+	(storax/translate--buffer-replace-region
+	 (region-beginning)
+	 (region-end)
+	 p)
+      (let ((bounds (bounds-of-thing-at-point 'word)))
+	(storax/translate--buffer-replace-region
+	 (car bounds) (cdr bounds) p)))))
 
 (defun storax/translate-helm-translation-actions (actions trans)
   "Return a list of ACTIONS for TRANS."
   '((,(format "Insert \"%s\" at point." % trans)
-     . insert)
+     . storax/translate-insert)
     (,(format "Replace current region or word with \"%s\"" % trans)
      . storax/translate-replace)))
 
