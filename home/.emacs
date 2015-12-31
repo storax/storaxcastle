@@ -98,7 +98,7 @@
 (require 'init-beacon)
 (require 'init-major-mode-icons)
 ;(require 'init-minimap)
-;(require 'init-translate)
+(require 'init-translate)
 (require 'init-spotify-el)
 (require 'init-wanderlust)
 (require-package 'git-timemachine)
