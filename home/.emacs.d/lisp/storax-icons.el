@@ -40,6 +40,7 @@
 (defconst storax/icon-help (storax/create-icon "~/.emacs.d/icons/file-help.svg"))
 (defconst storax/icon-mail (storax/create-icon "~/.emacs.d/icons/file-mail.svg"))
 (defconst storax/icon-git (storax/create-icon "~/.emacs.d/icons/file-git.svg"))
+(defconst storax/icon-diff (storax/create-icon "~/.emacs.d/icons/file-git-diff.svg"))
 (defconst storax/icon-cherry (storax/create-icon "~/.emacs.d/icons/file-cherry.svg"))
 (defconst storax/icon-wheel (storax/create-icon "~/.emacs.d/icons/file-wheel.svg"))
 (defconst storax/icon-log (storax/create-icon "~/.emacs.d/icons/file-log.svg"))
