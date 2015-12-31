@@ -52,6 +52,7 @@
    `("md" . ,storax/icon-md)
    `("sh" . ,storax/icon-shell)
    `("db" . ,storax/icon-db)
+   `("sql" . ,storax/icon-sql)
    `("yaml" . ,storax/icon-yaml)
    `("yml" . ,storax/icon-yaml))
   "Icons for helm find file.")

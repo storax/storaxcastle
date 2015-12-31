@@ -57,6 +57,7 @@ Text will be replaced with ICON and add an optional PREFIX and SUFFIX."
    '("magit-blame" magit-blame-mode-hook storax/icon-git "Blame ")
    '("text-mode" text-mode-hook storax/icon-txt)
    '("simple" messages-buffer-mode-hook storax/icon-log)
+   '("sql" sql-mode-hook storax/icon-sql)
    '("elpy-refactor" elpy-refactor-mode-hook storax/icon-python "Refactor ")))
 
 (defun storax/add-major-mode-icon-hooks ()
