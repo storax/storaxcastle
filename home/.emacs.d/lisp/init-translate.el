@@ -147,7 +147,7 @@ PHONETIC is the phonetic notation of ENTRY.
 META is a string with comma seperated attributes
 like n for noun or fem for female.
 TRANSLATIONS is a list of possible translations."
-  (let ((entry (storax/translate-match "^\\([^/<]+[^ /<]\\)" key 1))
+  (let ((entry (storax/translate-match "^\\([^/<\\[]+[^ /<\\[]\\)" key 1))
 	(phonetic (storax/translate-match "/\\(.+\\)/" key 1))
 	(meta (storax/translate-match "<\\(.+\\)>" key 1))
 	(translations (split-string value "; ")))
