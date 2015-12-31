@@ -33,7 +33,7 @@
   "Face for translations."
   :group 'storax/translate)
 
-(defvar storax/translate-database "all"
+(defvar storax/translate-database "fd-eng-deu"
   "The current database.")
 
 (defvar storax/translate-database-list
