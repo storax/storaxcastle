@@ -47,7 +47,7 @@ Text will be replaced with ICON and add an optional PREFIX and SUFFIX."
    '("magit" magit-merge-preview-mode-hook storax/icon-git storax/icon-git-merge)
    '("magit-log" magit-cherry-mode-hook storax/icon-git storax/icon-cherry)
    '("magit-popup" magit-popup-mode-hook storax/icon-git "Popup ")
-   '("magit-log" magit-log-mode-hook storax/icon-git "Log ")
+   '("magit-log" magit-log-mode-hook storax/icon-git storax/icon-log)
    '("magit-stash" magit-stash-mode-hook storax/icon-git "Stash ")
    '("magit-stash" magit-stashes-mode-hook storax/icon-git "Stashes ")
    '("magit-log" magit-reflog-mode-hook storax/icon-git "Reflog ")
