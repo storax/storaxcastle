@@ -43,6 +43,7 @@
 (defconst storax/icon-cherry (storax/create-icon "~/.emacs.d/icons/file-cherry.svg"))
 (defconst storax/icon-wheel (storax/create-icon "~/.emacs.d/icons/file-wheel.svg"))
 (defconst storax/icon-log (storax/create-icon "~/.emacs.d/icons/file-log.svg"))
+(defconst storax/icon-db (storax/create-icon "~/.emacs.d/icons/file-db.svg"))
 
 (provide 'storax-icons)
 ;;; storax-icons ends here

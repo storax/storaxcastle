@@ -51,6 +51,7 @@
    `("rb" . ,storax/icon-ruby)
    `("md" . ,storax/icon-md)
    `("sh" . ,storax/icon-shell)
+   `("db" . ,storax/icon-db)
    `("yaml" . ,storax/icon-yaml)
    `("yml" . ,storax/icon-yaml))
   "Icons for helm find file.")
