@@ -43,7 +43,7 @@ Text will be replaced with ICON and add an optional PREFIX and SUFFIX."
    '("magit" magit-status-mode-hook storax/icon-git)
    '("magit-diff" magit-diff-mode-hook storax/icon-git storax/icon-diff)
    '("magit-diff" magit-revision-mode-hook storax/icon-git storax/icon-git-commit)
-   '("magit-process" magit-process-mode-hook storax/icon-git storax/icon-archive)
+   '("magit-process" magit-process-mode-hook storax/icon-git storax/icon-config)
    '("magit" magit-merge-preview-mode-hook storax/icon-git storax/icon-git-merge)
    '("magit-log" magit-cherry-mode-hook storax/icon-git storax/icon-cherry)
    '("magit-popup" magit-popup-mode-hook storax/icon-git "Popup ")
