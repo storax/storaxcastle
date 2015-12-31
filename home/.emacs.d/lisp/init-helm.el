@@ -78,7 +78,10 @@
   (apply old-func args)
   (let ((sel (helm-get-selection)))
     (if (and (stringp sel) (string-match "/\\.$" sel))
-	       (helm-next-line 2))))
+	(helm-next-line 2)))
+  (let ((sel (helm-get-selection))) ; if we reached .. move back
+    (if (and (stringp sel) (string-match "/\\.\\.$" sel))
+	(helm-previous-line 1))))
 
 (advice-add #'helm-preselect :around #'storax/helm-skip-dots)
 (advice-add #'helm-ff-move-to-first-real-candidate :around #'storax/helm-skip-dots)
