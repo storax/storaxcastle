@@ -28,6 +28,10 @@
 
 (setq elpy-rpc-backend "rope")
 
+;; Use ipython if available
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython"))
+
 ;;----------------------------------------------------------------------------
 ;;Python indent the right way
 ;;----------------------------------------------------------------------------
