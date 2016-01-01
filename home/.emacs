@@ -87,6 +87,7 @@
 (require 'init-projectile)
 (require 'init-elpy)
 (require 'init-helm-company)
+(require 'init-orgmode)
 (require 'init-magit)
 (require 'init-powerline)
 (require 'init-latex)

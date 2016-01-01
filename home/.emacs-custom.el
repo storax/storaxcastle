@@ -73,6 +73,13 @@
  '(magit-push-arguments (quote ("--set-upstream")))
  '(minimap-recenter-type (quote free))
  '(minimap-window-location (quote right))
+ '(org-agenda-files (quote ("~/Documents/org/Umzug.org")))
+ '(shell-pop-default-directory nil)
+ '(shell-pop-full-span t)
+ '(shell-pop-shell-type (quote ("multi-term" "*zsh*" (lambda nil (multi-term)))))
+ '(shell-pop-universal-key "<f10>")
+ '(shell-pop-window-position "bottom")
+ '(shell-pop-window-size 60)
  '(yas-fallback-behavior (quote call-other-command)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
