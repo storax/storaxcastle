@@ -86,6 +86,7 @@
 (require 'init-flycheck)
 (require 'init-projectile)
 (require 'init-elpy)
+(require 'init-helm-company)
 (require 'init-magit)
 (require 'init-powerline)
 (require 'init-latex)
