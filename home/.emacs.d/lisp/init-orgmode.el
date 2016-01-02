@@ -6,6 +6,7 @@
 
 (require 'init-elpa)
 (require-package 'org)
+(require-package 'org-plus-contrib)
 (require-package 'orgbox)
 (require 'orgbox)
 
