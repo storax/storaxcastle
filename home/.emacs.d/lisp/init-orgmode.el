@@ -5,6 +5,7 @@
 ;;; Code:
 
 (require 'init-elpa)
+(require-package 'org)
 (require-package 'orgbox)
 (require 'orgbox)
 
