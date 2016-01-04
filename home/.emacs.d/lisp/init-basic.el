@@ -35,6 +35,7 @@
 (global-hl-line-mode t)
 (global-subword-mode 1)
 (global-linum-mode 1)
+(savehist-mode 1)
 
 ;;----------------------------------------------------------------------------
 ;; Builtin Auto Modes
