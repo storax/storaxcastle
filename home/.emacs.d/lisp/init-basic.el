@@ -16,6 +16,7 @@
       indent-tabs-mode nil
       make-backup-files nil ; No backup files
       auto-save-default nil
+      create-lockfiles nil
       vc-follow-symlinks t ; When following sysmlinks always go to the destination
       require-final-newline t
       undo-limit 10000)
