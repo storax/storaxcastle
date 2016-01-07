@@ -112,6 +112,8 @@
 (require-package 'free-keys)
 (require-package 'rainbow-mode)
 (require-package 'dired+)
+(require-package 'font-lock+)
+(require 'font-lock+)
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient

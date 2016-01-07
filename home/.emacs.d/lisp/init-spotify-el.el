@@ -49,7 +49,8 @@ When key WITH-WILDCARD is specified try to expand a wilcard if some."
   (interactive)
   (let ((process-connection-type nil))
     (async-shell-command "pgrep \"spotify\" > /dev/null || spotify &; exit 0"))
-  (storax/spotify-connect))
+  (storax/spotify-connect)
+  (kill-buffer "*Async Shell Command*"))
 
 (defun storax/spotify-connect ()
   "Start a new Spotify session."
