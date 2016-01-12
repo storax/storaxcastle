@@ -74,9 +74,6 @@
  '(minimap-recenter-type (quote free))
  '(minimap-window-location (quote right))
  '(org-agenda-files (quote ("~/Documents/org/Umzug.org")))
- '(org-todo-keywords
-   (quote
-    ((sequence "TODO" "DONE" "STARTED" "PAUSED" "CANCELED"))))
  '(shell-pop-default-directory nil)
  '(shell-pop-full-span t)
  '(shell-pop-shell-type (quote ("multi-term" "*zsh*" (lambda nil (multi-term)))))

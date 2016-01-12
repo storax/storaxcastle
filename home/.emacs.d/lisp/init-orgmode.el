@@ -10,6 +10,10 @@
 (require-package 'orgbox)
 (require 'org)
 
+(setq org-todo-keywords
+      '((sequence "TODO" "STARTED" "PAUSED" "|" "DONE" "CANCELED"))
+      org-default-notes-file (concat org-directory "/notes.org"))
+
 (unless (file-exists-p org-directory)
   (make-directory org-directory))
 (setq org-default-notes-file (concat org-directory "/notes.org"))
