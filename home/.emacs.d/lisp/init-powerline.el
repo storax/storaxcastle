@@ -179,6 +179,7 @@ COLOR1 is the color to apply."
 (eval-after-load "projectile" '(diminish 'projectile-mode))
 (eval-after-load "spotify.el" '(diminish 'spotify-remote-mode))
 (eval-after-load "beacon" '(diminish 'beacon-mode))
+(eval-after-load "git-gutter" '(diminish 'git-gutter-mode))
 
 ;;----------------------------------------------------------------------------
 ;; Custom theme with flycheck color
