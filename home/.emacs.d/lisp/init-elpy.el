@@ -14,7 +14,7 @@
 (require-package 'highlight-indentation)
 (require-package 'pyvenv)
 (require-package 'projectile)
-(require-package 'electric-operator-mode)
+(require-package 'electric-operator)
 (require 'projectile)
 (require 'elpy)
 (elpy-enable)
