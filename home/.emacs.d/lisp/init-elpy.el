@@ -14,6 +14,7 @@
 (require-package 'highlight-indentation)
 (require-package 'pyvenv)
 (require-package 'projectile)
+(require-package 'electric-operator-mode)
 (require 'projectile)
 (require 'elpy)
 (elpy-enable)
@@ -187,6 +188,7 @@ TEST is a single test function or nil to test all."
 ;; Hooks
 ;;----------------------------------------------------------------------------
 (add-hook 'python-mode-hook 'hs-minor-mode)
+(add-hook 'python-mode-hook #'electric-operator-mode)
 
 (provide 'init-elpy)
 ;;; init-elpy ends here
