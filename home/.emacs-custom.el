@@ -52,6 +52,7 @@
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "f5eb916f6bd4e743206913e6f28051249de8ccfd070eae47b5bde31ee813d55f" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|plstore\\)")
+ '(diff-hl-fringe-bmp-function (quote diff-hl-fringe-bmp-from-type))
  '(flymake-allowed-file-name-masks
    (quote
     (("\\.py\\'" elpy-flymake-python-init)
@@ -92,6 +93,9 @@
  '(avy-lead-face-0 ((t (:background "#C45837" :foreground "white" :inverse-video nil))))
  '(avy-lead-face-1 ((t (:background "#6D9CBE" :foreground "black"))))
  '(avy-lead-face-2 ((t (:background "#B4C973" :foreground "black"))))
+ '(diff-hl-change ((t (:background "#4F4F4F" :foreground "#6CA0A3"))))
+ '(diff-hl-delete ((t (:background "#4F4F4F" :foreground "#DCA3A3"))))
+ '(diff-hl-insert ((t (:background "#4F4F4F" :foreground "#8FB28F"))))
  '(font-latex-sectioning-5-face ((t (:inherit fixed-pitch :foreground "#CC9393" :weight bold))))
  '(git-gutter:modified ((t (:background "#DC8CC3" :foreground "#3F3F3F" :weight bold))))
  '(mode-line ((t (:background "#2B2B2B" :foreground "#8FB28F" :box nil :overline "dim gray"))))
