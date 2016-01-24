@@ -3,7 +3,25 @@
 ;;; Commentary:
 
 ;;; Code:
-(require-package 'diff-hl)
+(require-package 'fringe-helper)
+(require 'fringe-helper)
+
+(fringe-helper-define 'storax/asterisk-mark nil
+  "...X...."
+  "X..X..X."
+  ".X.X.X.."
+  "..XXX..."
+  "..XXX..."
+  ".X.X.X.."
+  "X..X..X."
+  "...X....")
+
+(defun storax/diff-hl-fringe-bmp-from-type (type _pos)
+  (cl-case type
+    (unknown 'question-mark)
+    (change 'storax/asterisk-mark)
+    (ignored 'diff-hl-bmp-i)
+    (t (intern (format "diff-hl-bmp-%s" type)))))
 
 (defadvice diff-hl-mode (after storax/diff-hl-fix-magit activate)
   "Fix nesting error by removing the hook."
