@@ -98,7 +98,7 @@
 (require 'init-shell-pop)
 (require 'init-visual-regexp-steroids)
 (require 'init-beacon)
-(require 'init-gitgutter)
+(require 'init-diff-hl)
 (require 'init-major-mode-icons)
 ;(require 'init-minimap)
 (require 'init-translate)
