@@ -26,10 +26,13 @@
 (defadvice diff-hl-mode (after storax/diff-hl-fix-magit activate)
   "Fix nesting error by removing the hook."
   (when diff-hl-mode
-      (remove-hook 'magit-revert-buffer-hook 'diff-hl-update)))
+    (remove-hook 'magit-revert-buffer-hook 'diff-hl-update)))
 
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
+
+(advice-remove 'vc-git-working-revision
+	       'diff-hl-flydiff/vc-git-working-revision)
 
 (provide 'init-diff-hl)
 ;;; init-diff-hl.el ends here
