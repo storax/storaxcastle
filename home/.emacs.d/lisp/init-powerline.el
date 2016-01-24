@@ -124,13 +124,17 @@ COLOR1 is the color to apply."
 (defun storax/vc-git-working-revision (file)
   "Git-specific version of `vc-working-revision'."
   (let* (process-file-side-effects
-         (str (vc-git--run-command-string nil "symbolic-ref" "HEAD")))
+         (str (vc-git--run-command-string nil "symbolic-ref" "HEAD"))
+	 parsed)
     (vc-file-setprop file 'vc-git-detached (null str))
-    (if str
-        (if (string-match "^\\(refs/heads/\\)?\\(.+\\)$" str)
-            (match-string 2 str)
-          str)
-      (vc-git--rev-parse "HEAD"))))
+    (setq parsed
+	  (if str
+	      (if (string-match "^\\(refs/heads/\\)?\\(.+\\)$" str)
+		  (match-string 2 str)
+		str)
+	    (vc-git--rev-parse "HEAD")))
+    (setq deactivate-mark nil)
+    parsed))
 
 (defpowerline storax/powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
