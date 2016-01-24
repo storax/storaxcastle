@@ -121,6 +121,17 @@ COLOR1 is the color to apply."
 ;;----------------------------------------------------------------------------
 ;; Custom Version Control indicator
 ;;----------------------------------------------------------------------------
+(defun storax/vc-git-working-revision (file)
+  "Git-specific version of `vc-working-revision'."
+  (let* (process-file-side-effects
+         (str (vc-git--run-command-string nil "symbolic-ref" "HEAD")))
+    (vc-file-setprop file 'vc-git-detached (null str))
+    (if str
+        (if (string-match "^\\(refs/heads/\\)?\\(.+\\)$" str)
+            (match-string 2 str)
+          str)
+      (vc-git--rev-parse "HEAD"))))
+
 (defpowerline storax/powerline-vc
   (when (and (buffer-file-name (current-buffer)) vc-mode)
     (if window-system
@@ -128,7 +139,7 @@ COLOR1 is the color to apply."
 	(when backend
 	  (if (string= backend "Git")
 	      (format " %s %s" (char-to-string #xf020)
-		      (vc-working-revision (buffer-file-name (current-buffer)) backend))
+		      (storax/vc-git-working-revision (buffer-file-name (current-buffer))))
 	    (format " %s:%s" backend
 		    (vc-working-revision (buffer-file-name (current-buffer)) backend)))))
       (format-mode-line '(vc-mode vc-mode)))))

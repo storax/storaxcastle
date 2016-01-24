@@ -31,8 +31,5 @@
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
 
-(advice-remove 'vc-git-working-revision
-	       'diff-hl-flydiff/vc-git-working-revision)
-
 (provide 'init-diff-hl)
 ;;; init-diff-hl.el ends here
