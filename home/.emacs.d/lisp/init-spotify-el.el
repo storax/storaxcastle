@@ -142,24 +142,6 @@ If marked tracks add them to a playlist."
   (spotify-api-call "GET"
 		    (format "/me/playlists?limit=%d" spotify-api-search-limit)))
 
-(defun storax/spotify-format-track (track)
-  "Given a TRACK, return a formatted string suitable for display."
-  (let ((track-name   (alist-get 'name track))
-	(track-length (alist-get 'length track))
-	(album-name   (alist-get 'name (alist-get 'album track)))
-	(artist-names (mapcar (lambda (artist)
-				(alist-get 'name artist))
-			      (alist-get 'artists track)))
-	(popularity (string-to-number (alist-get 'popularity track))))
-    (format "%s%s%s %2dm %2ds\n%s - %s"
-	    (propertize track-name 'face '(:foreground "orange"))
-	    (make-string (if (< (- fill-column (length track-name)) 1) 1
-			   (- fill-column (length track-name))) 32)
-	    (spotify-popularity-bar (* popularity 100))
-	    (/ track-length 60) (mod track-length 60)
-	    (propertize (mapconcat 'identity artist-names "/") 'face '(:foreground "#FFDEAD"))
-	    album-name)))
-
 (defun storax/spotify-format-track-hash (track)
   "Given a TRACK, return a formatted string suitable for display."
   (let ((track-name   (gethash 'name track))
