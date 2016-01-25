@@ -84,7 +84,7 @@ If marked tracks add them to a playlist."
 
 (defun storax/spotify-play-track-album (track)
   "Get the Spotify app to play the album of TRACK."
-  (spotify-play-track (alist-get 'href (alist-get 'album track))))
+  (spotify-play-track (gethash 'href (gethash 'album track))))
 
 (defun storax/spotify-play-playlist (playlist)
   "Get the Spotify app to play the PLAYLIST."
@@ -200,12 +200,6 @@ If marked tracks add them to a playlist."
   "Return a formatted list."
   (storax/spotify-my-playlists-formatted))
 
-(defun storax/spotify-helm-actions-for-track (actions track)
-  "Return a list of helm ACTIONS available for this TRACK."
-  `((,(format "Play Track - %s" (alist-get 'name track)) . storax/spotify-play-or-add-track)
-    (,(format "Play Album - %s" (alist-get 'name '(alist-get 'album track))) . storax/spotify-play-track-album)
-    ("Show Track Metadata" . pp)))
-
 (defun storax/spotify-helm-actions-for-track-hash (actions track)
   "Return a list of helm ACTIONS available for this TRACK."
   `((,(format "Play Track - %s" (gethash 'name track)) . storax/spotify-play-track-hash)
@@ -226,7 +220,7 @@ If marked tracks add them to a playlist."
     (multiline)
     (requires-pattern . 2)
     (candidates-process . storax/spotify-helm-search-tracks)
-    (action-transformer . storax/spotify-helm-actions-for-track)))
+    (action-transformer . storax/spotify-helm-actions-for-track-hash)))
 
 ;;;###autoload
 (defun storax/spotify-helm-tracks()
