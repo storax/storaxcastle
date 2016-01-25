@@ -13,6 +13,10 @@
 		 (insert-file-contents path) (buffer-string))
 	       nil t :ascent asc :mask 'heuristic)))
 
+(cl-defun storax/create-img (path &optional (text "  "))
+  "Return string with icon at PATH displayed with ascent ASC and TEXT."
+  (propertize text 'display (create-image path 'png)))
+
 (defconst storax/icon-file (storax/create-icon "~/.emacs.d/icons/file-file.svg"))
 (defconst storax/icon-archive (storax/create-icon "~/.emacs.d/icons/file-archive.svg"))
 (defconst storax/icon-config (storax/create-icon "~/.emacs.d/icons/file-config.svg"))
