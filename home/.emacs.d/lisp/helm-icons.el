@@ -66,13 +66,11 @@
 	icon
       storax/icon-file)))
 
-(defun storax/add-icons-to-files (old-function file)
-  "Add to candidates of OLD-FUNCTION an icon for each FILE according to the type."
-  (let* ((boring (funcall old-function file))
-	 (disp (car boring)))
-    (if disp
-	(cons (concat " " (storax/icon-for-file file) " " disp) file)
-      boring)))
+(defun storax/add-icons-to-files (oldfunc file)
+  "Add icons to the candidates of OLDFUNC called with REQUIRE-MATCH."
+  (let ((oldval (funcall oldfunc file)))
+    (if oldval
+	(cons (concat " " (storax/icon-for-file (car oldval)) " " (car oldval)) (cdr oldval)))))
 
 (advice-add #'helm-ff-filter-candidate-one-by-one :around #'storax/add-icons-to-files)
 
