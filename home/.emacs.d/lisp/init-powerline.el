@@ -7,6 +7,7 @@
 (require 'init-elpa)
 (require 'init-magit)
 (require 'init-spotify-el)
+(require 'storax-icons)
 (require 'pyvenv)
 (require-package 'powerline)
 (require 'powerline)
@@ -79,9 +80,6 @@ COLOR1 is the color to apply."
 (cl-defun storax/powerline-picture (text img &optional (acc 85))
   (storax/powerline-wrap-picture text (storax/dz-create-image-plain img acc)))
 
-;(defun storax/powerline-png (text img)
-;  (storax/powerline-wrap-picture text (find-image `((:type png :file ,img :ascent 85)))))
-
 ;; Icons
 (defvar storax/github-mark-data (storax/string-from-file "~/.emacs.d/icons/mark-github.svg"))
 (defvar storax/bitbucket-mark-data (storax/string-from-file "~/.emacs.d/icons/mark-bitbucket.svg"))
@@ -92,8 +90,8 @@ COLOR1 is the color to apply."
 (defvar storax/wl-verify-success-img (storax/string-from-file "~/.emacs.d/icons/wl-verify-success.svg"))
 (defvar storax/wl-verify-fail-img (storax/string-from-file "~/.emacs.d/icons/wl-verify-fail.svg"))
 (defvar storax/spotify-data (storax/string-from-file "~/.emacs.d/icons/spotify.svg"))
-;(defvar storax/snowflake-left (powerline-png "  " "~/.emacs.d/icons/snowflake-left.png"))
-;(defvar storax/snowflake-right (powerline-png "  " "~/.emacs.d/icons/snowflake-right.png"))
+;;(defvar storax/snowflake-left (storax/create-img "~/.emacs.d/icons/snowflake-left.png" "    "))
+;;(defvar storax/snowflake-right (storax/create-img "~/.emacs.d/icons/snowflake-right.png" "    "))
 
 ;;----------------------------------------------------------------------------
 ;; Display bitbucket or github logo
