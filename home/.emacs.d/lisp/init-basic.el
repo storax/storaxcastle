@@ -78,6 +78,11 @@
 (add-hook 'minibuffer-setup-hook #'storax/infinite-gc)
 (add-hook 'minibuffer-exit-hook #'storax/default-gc)
 
+;;----------------------------------------------------------------------------
+;; Unkillable Scratch Buffer
+;;----------------------------------------------------------------------------
+(require-package 'unkillable-scratch)
+(unkillable-scratch 1)
 
 (provide 'init-basic)
 ;;; init-basic.el ends here
