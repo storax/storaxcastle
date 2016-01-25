@@ -127,11 +127,9 @@ If marked tracks add them to a playlist."
 
 (defun storax/spotify-track-search (search-term)
   "Search spotify for SEARCH-TERM, returning the results as a Lisp structure."
-  (let ((a-url (format "http://ws.spotify.com/search/1/track.json?q=%s" search-term)))
-    (with-current-buffer
-	(url-retrieve-synchronously a-url)
-      (goto-char url-http-end-of-headers)
-      (json-read))))
+  (spotify-api-call "GET"
+		    (format "/search?q=%s&type=track&limit=%d&market=from_token"
+		     (url-hexify-string search-term) spotify-api-search-limit)))
 
 (defun storax/spotify-playlist-search (search-term)
   "Search spotify for SEARCH-TERM, returning the results as a Lisp structure."
@@ -193,8 +191,8 @@ If marked tracks add them to a playlist."
 (defun storax/spotify-track-search-formatted (search-term)
   "Search tracks with SEARCH-TERM and format the result."
   (mapcar (lambda (track)
-	    (cons (storax/spotify-format-track track) track))
-	  (alist-get 'tracks (storax/spotify-track-search search-term))))
+	    (cons (storax/spotify-format-track-hash track) track))
+	  (gethash 'items (gethash 'tracks (storax/spotify-track-search search-term)))))
 
 (defun storax/spotify-playlist-search-formatted (search-term)
   "Search playlists with SEARCH-TERM and format the result."
