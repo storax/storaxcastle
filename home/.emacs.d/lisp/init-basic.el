@@ -65,5 +65,19 @@
   (global-unset-key "\C-z")) ; iconify-or-deiconify-frame (C-x C-z)
 (global-set-key (kbd "C-M-d") 'delete-pair)
 
+;;----------------------------------------------------------------------------
+;; Garbage Collection tweaking
+;;----------------------------------------------------------------------------
+;; Found here: http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
+(defun storax/infinite-gc ()
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun storax/default-gc ()
+  (setq gc-cons-threshold 800000))
+
+(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+
+
 (provide 'init-basic)
 ;;; init-basic.el ends here

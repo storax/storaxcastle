@@ -38,11 +38,11 @@
 ;;----------------------------------------------------------------------------
 ;; Temporarily reduce garbage collection during startup
 ;;----------------------------------------------------------------------------
-(defconst storax/initial-gc-cons-threshold gc-cons-threshold
+(defconst storax/gc-cons-threshold (* 20 1000 1000)
   "Initial value of `gc-cons-threshold' at start-up time.")
 (setq gc-cons-threshold (* 128 1024 1024))
 (add-hook 'after-init-hook
-          (lambda () (setq gc-cons-threshold storax/initial-gc-cons-threshold)))
+          (lambda () (setq gc-cons-threshold storax/gc-cons-threshold)))
 
 ;;----------------------------------------------------------------------------
 ;; Bootstrapping config
