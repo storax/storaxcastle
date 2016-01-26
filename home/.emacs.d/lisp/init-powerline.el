@@ -92,6 +92,10 @@ COLOR1 is the color to apply."
 (defvar storax/spotify-data (storax/string-from-file "~/.emacs.d/icons/spotify.svg"))
 ;;(defvar storax/snowflake-left (storax/create-img "~/.emacs.d/icons/snowflake-left.png" "    "))
 ;;(defvar storax/snowflake-right (storax/create-img "~/.emacs.d/icons/snowflake-right.png" "    "))
+(defvar storax/mpc-right (storax/create-img "~/.emacs.d/icons/mpc-right.png" "   "))
+(defvar storax/mpc-left (storax/create-img "~/.emacs.d/icons/mpc-left.png" "  "))
+(defvar storax/mpc-left-with-text
+  (storax/create-img "~/.emacs.d/icons/mpc-left-with-text.png" "        "))
 
 ;;----------------------------------------------------------------------------
 ;; Display bitbucket or github logo
@@ -235,7 +239,7 @@ COLOR1 is the color to apply."
 			  (separator-right (intern (format "powerline-%s-%s"
 							   (powerline-current-separator)
 							   (cdr powerline-default-separator-dir))))
-			  (lhs (list storax/aqua-left-mesh
+			  (lhs (list storax/mpc-left-with-text
 				     (powerline-raw "%*" nil 'l)
 				     (powerline-buffer-size nil 'l)
 				     (powerline-buffer-id nil 'l)
@@ -255,7 +259,7 @@ COLOR1 is the color to apply."
 				     (funcall separator-right face1 mode-line)
 				     (powerline-raw " ")
 				     (powerline-raw "%6p" nil 'r)
-				     storax/aqua-right-mesh))
+				     storax/mpc-right))
 			  (center (list (powerline-raw " " face1)
 					(funcall separator-left face1 face2)
 					(when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
