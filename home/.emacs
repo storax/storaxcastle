@@ -104,6 +104,7 @@
 (require 'init-translate)
 (require 'init-spotify-el)
 (require 'init-wanderlust)
+(require 'init-fill-column-indicator)
 (require-package 'git-timemachine)
 (require-package 'multi-term)
 (require-package 'org)
