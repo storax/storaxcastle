@@ -1,4 +1,4 @@
-;;; init-fill-column-inicator --- Show the "soon-someone's-gonna-pep8ify-me-zone"
+;;; init-fill-column-indicator --- Show the "soon-someone's-gonna-pep8ify-me-zone"
 
 ;;; Commentary:
 
@@ -12,5 +12,5 @@
 
 (add-hook 'python-mode-hook 'fci-mode)
 
-(provide 'init-fill-column-inicator)
-;;; init-fill-column-inicator ends here
+(provide 'init-fill-column-indicator)
+;;; init-fill-column-indicator ends here
