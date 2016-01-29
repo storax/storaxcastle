@@ -4,11 +4,13 @@
 
 ;;; Code:
 (require 'init-elpa)
-(require-package 'google-translage)
+(require-package 'google-translate)
 (require 'google-translate)
-(require 'google-translate-default-ui)
+(require 'google-translate-smooth-ui)
 
-(global-set-key (kbd "C-c d") 'google-translate-at-point)
-(global-set-key (kbd "C-c D") 'google-translate-query-translate)
+(setq google-translate-translation-directions-alist
+      '(("en" . "de") ("de" . "en")))
+
+(global-set-key (kbd "C-c d") 'google-translate-smooth-translate)
 (provide 'init-translate)
 ;;; init-translate ends here
