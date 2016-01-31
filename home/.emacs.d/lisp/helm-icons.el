@@ -70,7 +70,7 @@
   "Add icons to the candidates of OLDFUNC called with REQUIRE-MATCH."
   (let ((oldval (funcall oldfunc file)))
     (if oldval
-	(cons (concat (storax/icon-for-file (car oldval)) " " (car oldval)) (cdr oldval)))))
+	(cons (concat (storax/icon-for-file (cdr oldval)) " " (car oldval)) (cdr oldval)))))
 
 ;; Fix checking the text property, if the first display property is our icon
 (defun helm-confirm-and-exit-minibuffer ()
