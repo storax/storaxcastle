@@ -15,6 +15,7 @@
 (require-package 'pyvenv)
 (require-package 'projectile)
 (require-package 'electric-operator)
+(require-package 'helm)
 (require 'projectile)
 (require 'elpy)
 (elpy-enable)
@@ -164,6 +165,7 @@ TEST is a single test function or nil to test all."
 			     (pyvenv-workon-home)
 			     name))))
 
+(require 'helm-regexp)
 (defun storax/python-helm-occur ()
   "Preconfigured helm for Occur."
   (interactive)
