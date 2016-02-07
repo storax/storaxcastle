@@ -164,6 +164,30 @@ TEST is a single test function or nil to test all."
 			     (pyvenv-workon-home)
 			     name))))
 
+(defun storax/python-helm-occur ()
+  "Preconfigured helm for Occur."
+  (interactive)
+  (helm-occur-init-source)
+  (let ((bufs (list (buffer-name (current-buffer)))))
+    (helm-attrset 'follow 1 helm-source-occur)
+    (helm-attrset 'follow 1 helm-source-moccur)
+    (helm-attrset 'moccur-buffers bufs helm-source-occur)
+    (helm-set-local-variable 'helm-multi-occur-buffer-list bufs)
+    (helm-set-local-variable
+     'helm-multi-occur-buffer-tick
+     (cl-loop for b in bufs
+              collect (buffer-chars-modified-tick (get-buffer b)))))
+  (helm :sources 'helm-source-occur
+        :buffer "*helm occur*"
+        :history 'helm-occur-history
+	:input "^[[:space:]]*\\(def\\|class\\)[[:space:]] "
+        :preselect (and (memq 'helm-source-occur helm-sources-using-default-as-input)
+                        (format "%s:%d:" (regexp-quote (buffer-name))
+                                (line-number-at-pos (point))))
+        :truncate-lines helm-moccur-truncate-lines))
+
+(define-key elpy-mode-map (kbd "C-c C-o") 'python-helm-occur)
+
 ;;----------------------------------------------------------------------------
 ;; Key bindings
 ;;----------------------------------------------------------------------------
