@@ -1,7 +1,6 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-bindkey -e
 
 zstyle :compinstall filename '~/.zshrc'
 
@@ -12,10 +11,14 @@ zstyle :compinstall filename '~/.zshrc'
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 source ~/.zsh/colors.zsh
-source ~/.zsh/setopt.zsh
 source ~/.zsh/export.zsh
 source ~/.zsh/antigen.zsh
+source ~/.zsh/setopt.zsh
 source ~/.zsh/prompt.zsh
 source ~/.zsh/completion.zsh
+source ~/.zsh/alias.zsh
+source ~/.zsh/bindkey.zsh
+source ~/.zsh/functions.zsh
 source ~/.zsh/pyenv.zsh
+source ~/.zsh/extensions/z/z.sh
 [ -f ~/.aliases ] && source ~/.aliases

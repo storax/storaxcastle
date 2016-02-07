@@ -22,7 +22,7 @@ setopt always_to_end # When completing from the middle of a word, move the curso
 setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
 setopt complete_in_word # Allow completion from within a word/phrase
 
-setopt menu_complete # autoselect the first completion entry
+setopt menucomplete # autoselect the first completion entry
 
 # ===== Correction
 setopt correct # spelling correction for commands
