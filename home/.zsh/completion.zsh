@@ -1,5 +1,6 @@
 # folder of all of your autocomplete functions
-fpath=(~/.zsh-completions $fpath)
+fpath=(~/.zsh/completions $fpath)
+autoload -U ~/.zsh/completions*(:t)
 
 autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
