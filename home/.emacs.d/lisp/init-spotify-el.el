@@ -41,7 +41,6 @@ When key WITH-WILDCARD is specified try to expand a wilcard if some."
 		    append (helm--compute-marked real source with-wildcard)
 		    into cands
 		    finally return cands)))
-      (helm-log "Marked candidates = %S" candidates)
       candidates)))
 
 (defun storax/start-spotify ()
@@ -73,10 +72,9 @@ When key WITH-WILDCARD is specified try to expand a wilcard if some."
 If marked tracks add them to a playlist."
   (let ((marked (storax/helm-marked-candidates))
 	(selection (nth 0 (helm-marked-candidates))))
-    (message "%s %s" marked (alist-get 'href selection))
     (if marked
 	(storax/spotify-add-tracks marked)
-      (spotify-play-track (alist-get 'href selection)))))
+      (storax/spotify-play-track-hash selection))))
 
 (defun storax/spotify-play-track-hash (track)
   "Get the Spotify app to play the TRACK."
@@ -113,7 +111,7 @@ If marked tracks add them to a playlist."
 
 (defun storax/spotify-add-tracks (tracks)
   "Show playlists and add TRACKS to them."
-  (let ((uristr (mapconcat (lambda (track) (alist-get 'href track)) tracks ",")))
+  (let ((uristr (mapconcat (lambda (track) (gethash 'href track)) tracks ",")))
     (helm :sources '((name . "Spotify")
 		     (multiline)
 		     (candidates-process . storax/spotify-helm-get-my-playlists)
@@ -202,7 +200,7 @@ If marked tracks add them to a playlist."
 
 (defun storax/spotify-helm-actions-for-track-hash (actions track)
   "Return a list of helm ACTIONS available for this TRACK."
-  `((,(format "Play Track - %s" (gethash 'name track)) . storax/spotify-play-track-hash)
+  `((,(format "Play Track - %s" (gethash 'name track)) . storax/spotify-play-or-add-track)
     (,(format "Play Album - %s" (gethash 'name (gethash 'album track))) . storax/spotify-play-track-album)
     ("Show Track Metadata" . pp)))
 
