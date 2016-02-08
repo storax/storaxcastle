@@ -4,6 +4,12 @@ setopt auto_cd # If you type foo, and it isn't a command, and it is a directory 
 # ===== Expansion and Globbing
 setopt extended_glob # treat #, ~, and ^ as part of patterns for filename generation
 
+# All unquoted arguments of the form 'anything=expression'
+# appearing after the command name have filename expansion
+# (that is, where expression has a leading '~' or '=')
+# performed on expression as if it were a parameter assignment.
+setopt magic_equals_subst
+
 # ===== History
 setopt append_history # Allow multiple terminal sessions to all append to one zsh command history
 setopt extended_history # save timestamp of command and duration
@@ -26,7 +32,7 @@ setopt menucomplete # autoselect the first completion entry
 
 # ===== Correction
 setopt correct # spelling correction for commands
-setopt correctall # spelling correction for arguments
+#setopt correctall # spelling correction for arguments
 
 # ===== Prompt
 setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
