@@ -8,7 +8,7 @@ setopt extended_glob # treat #, ~, and ^ as part of patterns for filename genera
 # appearing after the command name have filename expansion
 # (that is, where expression has a leading '~' or '=')
 # performed on expression as if it were a parameter assignment.
-setopt magic_equals_subst
+setopt magic_equal_subst
 
 # ===== History
 setopt append_history # Allow multiple terminal sessions to all append to one zsh command history
