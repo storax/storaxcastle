@@ -9,6 +9,8 @@
 (require-package 'org-plus-contrib)
 (require-package 'orgbox)
 (require 'org)
+(require 'orgbox)
+(require 'org-source-link)
 
 (setq org-todo-keywords
       '((sequence "TODO" "STARTED" "PAUSED" "|" "DONE" "CANCELED"))
@@ -18,7 +20,7 @@
   (make-directory org-directory))
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
-(require 'orgbox)
+(global-set-key (kbd "C-c C-u") 'storax/org-insert-source-link)
 
 (provide 'init-orgmode)
 ;;; init-orgmode ends here
