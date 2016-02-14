@@ -20,7 +20,13 @@ _prm_subcommands=(
 
 __prjs_list ()
 {
-    _wanted prjs expl 'Projects' compadd $(`whence prm` list)
+    local prjs
+    prjs=$(`whence prm` list)
+    if [[ $prjs == "No projects exist" ]]; then
+       _message "No project exists" && return 1;
+    else
+        _wanted prjs expl 'Projects' compadd $prjs;
+    fi
 }
 
 __prm_newold ()
