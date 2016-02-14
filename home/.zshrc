@@ -20,4 +20,5 @@ source ~/.zsh/alias.zsh
 source ~/.zsh/bindkey.zsh
 source ~/.zsh/functions.zsh
 source ~/.zsh/pyenv.zsh
+source ~/.zsh/zaw.zsh
 [ -f ~/.aliases ] && source ~/.aliases

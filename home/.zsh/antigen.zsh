@@ -25,6 +25,7 @@ antigen bundle python
 antigen bundle sudo
 antigen bundle vagrant
 antigen bundle z
+antigen bundle zsh-users/zaw
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
