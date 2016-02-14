@@ -66,18 +66,18 @@
 	(setq selectedbuf
 	      (completing-read
 	       "Choose buffer to insert link: "
-	       orgbufs nil t (car storax/org-source-link-file-hist)
+	       orgbufs nil t nil
 	       'storax/org-source-link-file-hist))
       (setq selectedbuf (car orgbufs)))
-    (display-buffer selectedbuf)
-    (with-current-buffer selectedbuf
+    (switch-to-buffer-other-window selectedbuf)
       (goto-char (point-max))
       (unless (eq (point) (line-beginning-position))
 	(newline))
       (org-insert-heading)
       (insert (org-make-link-string
 	       (format "file:%s::%s" fullfile lineno)
-	       (format "%s:%s" srcfile linestr))))))
+	       (format "%s:%s" srcfile linestr)))
+      (insert "\n")))
 
 (provide 'org-source-link)
 ;;; org-source-link ends here
