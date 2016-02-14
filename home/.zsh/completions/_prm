@@ -1,0 +1,77 @@
+#compdef prm
+
+typeset -A opt_args
+local curcontext="$curcontext" context state state_descr line
+
+local expl
+local -a prjs
+
+local -a _prm_subcommands
+_prm_subcommands=(
+    'active:List active project instances'
+    'add:Add project(s)'
+    'copy:Copt project'
+    'edit:Edit project(s)'
+    'list:List all projects'
+    'remove:Remove project(s)'
+    'rename:Rename project'
+    'start:Start project'
+    'stop:Stop project')
+
+__prjs_list ()
+{
+    _wanted prjs expl 'Projects' compadd $(`whence prm` list)
+}
+
+__prm_newold ()
+{
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+
+    _arguments -C \
+        ':old:->old' \
+        '*::new:->new'
+
+   case $state in
+       (old)
+         __prjs_list
+       ;;
+
+       (new)
+         _message "Choose new project name."
+       ;;
+    esac
+}
+
+
+_arguments -C \
+    ':command:->command' \
+    '*::options:->options' \
+  && return 0
+
+case $state in
+  (command)
+    _describe -t commands "prm subcommand" _prm_subcommands
+  ;;
+
+  (options)
+    case $line[1] in
+      (edit|remove|start)
+        _arguments ':projects:__prjs_list'
+      ;;
+
+      (copy|rename)
+        __prm_newold
+      ;;
+
+      (add)
+        _message "Choose new project name(s)."
+      ;;
+
+      (active|list|stop)
+        _message "no more arguments"
+    esac
+  ;;
+esac
+
+return 1
