@@ -8,7 +8,7 @@ del sys
 alias p_ for k in sorted(%1.keys()): print("%s%-15s= %-80.80s" % ("%2",k,repr(%1[k])))
 
 # Print the instance variables of a thing.
-alias pi p_ %1.__dict__ %1.
+alias pi p_ dir(%1) %1.
 
 # Print the instance variables of self.
 alias ps pi self
