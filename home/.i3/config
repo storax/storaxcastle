@@ -155,3 +155,10 @@ exec --no-startup-id synclient VertScrollDelta=-108
 # Make quake float
 for_window [instance="guake"] floating enable
 exec --no-startup-id guake
+
+# Disable ibus hotkey
+exec --no-startup-id gsettings set org.freedesktop.ibus.general.hotkey triggers []
+
+# Use compton for composition (Opacity etc.)
+# -b is for daemonizing the process
+compton -b
