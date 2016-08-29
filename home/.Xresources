@@ -1,17 +1,34 @@
 Emacs*useXIM: false
 ! Using Xft
-URxvt*font:           xft:Inconsolata:size=11
+URxvt.font:           xft:Inconsolata:size=11
 !-*- Perl extensions -*-
 URxvt.perl-ext-common: default,selection-to-clipboard,pasta,matcher,keyboard-select
-URxvt.keysym.M-u:     perl:url-select:select_next
-URxvt.url-launcher:   /usr/bin/firefox
-URxvt.underlineURLs:  True
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.underlineURLs: True
 URxvt.matcher.button: 1 
-URxvt.keysym.M-Escape:perl:keyboard-select:activate
-URxvt.keysym.Control-Shift-V:     perl:pasta:paste
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.Control-Shift-V: perl:pasta:paste
 URxvt.clipboard.autocopy: true
 
-*background: #0f0f0f
+URxvt.buffered: true
+URxvt.fading: 15
+
+URxvt.scrollBar: false
+! do not scroll with output
+URxvt.scrollTtyOutput: false
+! scroll back to the bottom on keypress
+URxvt.scrollTtyKeypress: true
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+
+URxvt.background: rgba:0000/0000/0000/cccc
+
+URxvt.transparent: true
+URxvt.tintColor: white
+URxvt.shading: 60
+
+*background: #000000
 *foreground: #c8c8c8
 
 !black
