@@ -1,0 +1,40 @@
+Emacs*useXIM: false
+! Using Xft
+URxvt*font:           xft:Inconsolata:size=11
+!-*- Perl extensions -*-
+URxvt.perl-ext-common: default,selection-to-clipboard,pasta,matcher,keyboard-select
+URxvt.keysym.M-u:     perl:url-select:select_next
+URxvt.url-launcher:   /usr/bin/firefox
+URxvt.underlineURLs:  True
+URxvt.matcher.button: 1 
+URxvt.keysym.M-Escape:perl:keyboard-select:activate
+URxvt.keysym.Control-Shift-V:     perl:pasta:paste
+URxvt.clipboard.autocopy: true
+
+*background: #0f0f0f
+*foreground: #c8c8c8
+
+!black
+*color0:  #251f1f
+*color8:  #5e5e5e
+!red
+*color1:  #eb4509
+*color9:  #eb4509
+!green
+*color2:  #94e76b
+*color10: #95e76b
+!yellow
+*color3:  #ffac18
+*color11: #ffac18
+!blue
+*color4:  #46aede
+*color12: #46aede
+!magenta
+*color5:  #e32c57
+*color13: #e32c57
+!cyan
+*color6:  #d6dbac
+*color14: #d6dbac
+!white
+*color7:  #efefef
+*color15: #efefef
