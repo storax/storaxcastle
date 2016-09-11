@@ -116,10 +116,10 @@ ${font Liberation Sans:style=Bold:size=8}Remaining:  ${font}${color2}${font Libe
 # - DISK I/O - #
 ################
 ${font Liberation Sans:bold:size=14}${voffset 10}DISK I/O $hr${font}
-${voffset 6}${font Liberation Sans:style=Bold:size=8}Root Disk:$alignr${font}${font Liberation Sans:size=8}${color2}/dev/sda2 (${fs_size /})${font}${color}${font Liberation Sans:style=Bold:size=8}${alignr}
+${voffset 6}${font Liberation Sans:style=Bold:size=8}Root Disk:$alignr${font}${font Liberation Sans:size=8}${color2}/dev/sdb1 (${fs_size /})${font}${color}${font Liberation Sans:style=Bold:size=8}${alignr}
 Usage: $font${color2}${font Liberation Sans:size=8}$alignr${fs_used /}, ${fs_free /} free$font$color
-${voffset 2}${font Liberation Sans:style=Bold:size=8}Total I/O:  ${font}${font Liberation Sans:size=8}${color2}${alignr}${diskio sda}${font}${color}
-${voffset 2}${font Liberation Sans:style=Bold:size=8}Read I/O:  ${font}${font Liberation Sans:size=8}${color2}$alignr${diskio_read sda}
-${diskiograph_read sda 8,180 1793d0 ffffff}${font}${color}
-${voffset 0}${font Liberation Sans:style=Bold:size=8}Write I/O:  ${font}${font Liberation Sans:size=8}${color2}$alignr${diskio_write sda}
-${diskiograph_write sda 8,180 1793d0 ffffff}${font}${color}
+${voffset 2}${font Liberation Sans:style=Bold:size=8}Total I/O:  ${font}${font Liberation Sans:size=8}${color2}${alignr}${diskio sdb}${font}${color}
+${voffset 2}${font Liberation Sans:style=Bold:size=8}Read I/O:  ${font}${font Liberation Sans:size=8}${color2}$alignr${diskio_read sdb}
+${diskiograph_read sdb 8,180 1793d0 ffffff}${font}${color}
+${voffset 0}${font Liberation Sans:style=Bold:size=8}Write I/O:  ${font}${font Liberation Sans:size=8}${color2}$alignr${diskio_write sdb}
+${diskiograph_write sdb 8,180 1793d0 ffffff}${font}${color}
