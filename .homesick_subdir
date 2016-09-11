@@ -8,3 +8,4 @@
 .config/pip
 .ssh
 .i3
+.ncmpcpp
