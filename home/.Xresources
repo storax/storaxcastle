@@ -32,7 +32,7 @@ URxvt*xftAntialias: true
 *background: #3f3f3f
 *foreground: #dcdccc
 *cursorColor: #aaaaaa
-*colorUL: #366060
+*colorUL: #acd0d3
 *color0: #3f3f3f
 *color1: #cc9393
 *color2: #7f9f7f
