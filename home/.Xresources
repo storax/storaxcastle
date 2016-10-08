@@ -22,11 +22,13 @@ URxvt.scrollTtyKeypress: true
 URxvt.secondaryScreen: 1
 URxvt.secondaryScroll: 0
 
-!*background: rgba:0000/0000/0000/cccc
+URxvt*depth: 32
+URxvt*background: rgba:3f3f/3f3f/3f3f/c800
+!URxvt.background: #3f3f3f
 
-!*transparent: true
-URxvt.tintColor: white
-URxvt.shading: 60
+!URxvt*transparent: true
+!URxvt.tintColor: white
+!URxvt.shading: 20
 
 URxvt*xftAntialias: true
 *background: #3f3f3f
