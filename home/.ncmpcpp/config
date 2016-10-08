@@ -7,6 +7,8 @@ mpd_host = "127.0.0.1"
 mpd_port = "6600"
 mpd_music_dir = ~/music
 mpd_crossfade_time = 5
+
+song_status_format = {{$4%a$9 - }{%t}}|{%f}
 ##
 ## Note: You can specify third character which will
 ## be used to build 'empty' part of progressbar.
