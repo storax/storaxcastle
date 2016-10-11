@@ -23,12 +23,12 @@ URxvt.secondaryScreen: 1
 URxvt.secondaryScroll: 0
 
 URxvt*depth: 32
-URxvt*background: rgba:3f3f/3f3f/3f3f/e000
+!URxvt*background: rgba:3f3f/3f3f/3f3f/e000
 !URxvt.background: #3f3f3f
 
-!URxvt*transparent: true
-!URxvt.tintColor: white
-!URxvt.shading: 20
+URxvt*transparent: true
+URxvt.tintColor: #3f3f3f
+URxvt.shading: 114
 
 URxvt*xftAntialias: true
 *background: #3f3f3f
